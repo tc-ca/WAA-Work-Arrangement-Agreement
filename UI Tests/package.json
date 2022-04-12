@@ -1,0 +1,19 @@
+{
+  "name": "iwa.testing",
+  "version": "1.0.0",
+  "description": "IWA Testing",
+  "main": "index.j",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "ntlm-proxy": "start /min \"ntlm-proxy\" cmd /c node_modules\\.bin\\ntlm-proxy",
+    "cypress-ntlm": "npm run ntlm-proxy && (cypress-ntlm open & ntlm-proxy-exit)",
+    "cypress-open": "npm run ntlm-proxy && cypress-ntlm open && ntlm-proxy-exit",
+    "cypress-run": "npm run ntlm-proxy && cypress-ntlm run && ntlm-proxy-exit"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^8.0.0",
+    "cypress-ntlm-auth": "^2.3.0"
+  }
+}

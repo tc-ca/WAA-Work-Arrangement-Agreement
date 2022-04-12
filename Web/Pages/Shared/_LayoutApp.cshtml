@@ -1,0 +1,60 @@
+﻿@{
+    Layout = "_Layout.cshtml";
+    var lang = CultureInfo.CurrentCulture.Name.Contains("en") ? "en" : "fr";
+}
+
+@section Menu {
+    <div class="app-menu" data-testid="app-menu">
+        <div class="ui tiny borderless stackable menu">
+            <div id="topNavBar" class="ui container grid">
+                <div class="header item">
+                    <div class="ui header transition">
+                        <i class="circular inverted blue building icon"></i>
+                        <div class="content">
+                            <h1 class="ui small blue header" data-testid="app-header"><b>@Global.AppTitle</b></h1>
+                            <div class="sub header">
+                                @RenderSection("Breadcrumbs", required: true)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @if (!Context.Request.Path.Value.ToLower().Contains("/admin"))
+                {
+                <nav class="right menu">
+                    <h2 class="wb-inv">Menu</h2>
+                    <ul>
+                        <li>
+                            <a asp-route="@routeMap.GetRouteName("/Agreement/Index")" data-testid="navMyAgreement" class="item @((routeMap.IsCurrentPage(Context, "/Agreement/Index")) ? "active" : "")">
+                                <i class="large file alternate outline icon"></i> @Global.MyAgreement
+                            </a>
+                        </li>
+                        @{
+                            var employeesCount = ViewContext.HttpContext.Session.GetInt32("DirectReportsCount");
+                        }
+                        @if (employeesCount != null && employeesCount.Value > 0)
+                        {
+                            <li>
+                                <a asp-route="@routeMap.GetRouteName("/MyEmployees")" data-testid="navMyEmployees" class="item @(routeMap.IsCurrentPage(Context, "/MyEmployees", "/Agreement/Edit") ? "active" : "")">
+                                    <i class="large users icon"></i> @Global.MyTeamAgreement
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </nav>
+                }
+            </div>
+        </div>
+    </div>
+}
+
+@RenderBody()
+
+@section Styles {
+    @RenderSection("Styles", required: false)
+}
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}
+
+

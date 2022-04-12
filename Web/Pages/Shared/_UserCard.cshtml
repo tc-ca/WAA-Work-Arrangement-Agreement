@@ -1,0 +1,159 @@
+﻿@model TcUser
+
+
+<div class="ui fluid card user-details-card" data-testid="userDetails">
+    <div class="content">
+        <div class="udc-header">
+            <div class="udc-header-icon">
+                <i class="inverted udc-icon olive circular id card user icon"></i>
+            </div>
+            <div class="udc-header-text">
+                <div class="udc-header-text-title">
+                    <h2 class="ui small header">@Global.EmployeeInfo </h2>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <!--Name of employee -->
+        <p>
+            <strong>@Global.EmpName</strong>
+            <span data-testid="userDetails-name">
+                @if (String.IsNullOrEmpty(Model.FullName))
+                {
+                    @Global.NA
+                }
+                else
+                {
+                    @Model.FullName
+                }
+            </span>
+        </p>
+        <!--Title -->
+        <p>
+            <strong>@Global.EmpTitle</strong>
+            <span data-testid="userDetails-title">
+                @if (String.IsNullOrEmpty(Model.PositionNumber))
+                {
+                    @Global.NA
+                }
+                else
+                {
+                    <lang en="@Model.PositionEng" fr="@Model.PositionFra" />
+                }
+            </span>
+        </p>
+        <!--Classification-->
+        <p>
+            <strong>@Global.EmpClassification </strong>
+            <span data-testid="userDetails-level">
+                @Model.GroupAndLevel
+            </span>
+        </p>
+
+        <!--Branch-->
+        <p>
+            <strong>@Global.EmpBranch </strong>
+            <span data-testid="userDetails-branch">
+                @if (Model.Branch == null)
+                {
+                    @Global.NA
+                }
+                else
+                {
+                    <lang en="@Model.Branch.English" fr="@Model.Branch.French" />
+                }
+            </span>
+        </p>
+        <!--Directorate -->
+        <p>
+            <strong>@Global.EmpDirectorate </strong>
+            <span data-testid="userDetails-division">
+                @if (@Model.Directorate == null)
+                {
+                    @Global.NA
+                }
+                else
+                {
+                    <lang en="@Model.Directorate.English" fr="@Model.Directorate.French" />
+                }
+            </span>
+        </p>
+        <!--Reports to -->
+        <p>
+            <strong>@Global.EmpReportsTo </strong>
+            <span>
+                @Model.Manager?.ManagerGivenName @Model.Manager?.ManagerSurname
+            </span>
+        </p>
+        <!--Mobile -->
+        <p>
+            <strong>@Global.EmpMobile </strong>
+            <span data-testid="userDetails-phone">
+                @if (String.IsNullOrEmpty(Model.Telephone))
+                {
+                    @Global.NA
+                }
+                else
+                {
+                    @string.Format("{0:(###) ###-####}", long.Parse(Model.Telephone))
+                }
+            </span>
+        </p>
+        <!--Work Phone-->
+        <p>
+            <strong>@Global.EmpWorkPhone </strong>
+            <span data-testid="userDetails-phone">
+                @if (String.IsNullOrEmpty(Model.Telephone))
+                {
+                    @Global.NA
+                }
+                else
+                {
+                    @string.Format("{0:(###) ###-####}", long.Parse(Model.Telephone))
+                }
+            </span>
+        </p>
+        <!--Emergency Contact-->
+        <p>
+            <strong>@Global.EmpEmergencyContact </strong>
+            <span data-testid="userDetails-emergencyperson">
+                @if (string.IsNullOrWhiteSpace(Model.EmergencyContact.ContactName))
+                {
+                    @Global.NA
+                }
+                else
+                {
+                    @Model.EmergencyContact.ContactName
+                }
+            </span>
+        </p>
+        <!--Emergency Contact Number-->
+        <p>
+            <strong>@Global.EmpEmergencyContactNumber </strong>
+            <span data-testid="userDetails-emergencyphone">
+                @if (string.IsNullOrWhiteSpace(Model.EmergencyContact.Telephone))
+                {
+                    @Global.NA
+                }
+                else
+                {
+                    @Model.EmergencyContact.Telephone
+                }
+            </span>
+        </p>
+        @if (string.IsNullOrEmpty(Model.EmergencyContact.ContactName) || string.IsNullOrEmpty(Model.EmergencyContact.Telephone))
+        {
+            <div class="ui warning visible message small floating header">
+                <i class="inverted circular yellow warning icon"></i>
+                <div class="content">
+                    <div class="sub header">
+                        @Html.Raw(Global.UpdateEmergencyContactInfo)
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

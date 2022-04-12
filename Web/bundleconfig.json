@@ -1,0 +1,110 @@
+[
+  {
+    "outputFileName": "wwwroot/css/breadcrumbs.min.css",
+    "inputFiles": [
+      "wwwroot/css/breadcrumbs.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/messages.min.css",
+    "inputFiles": [
+      "wwwroot/css/messages.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/tiles.min.css",
+    "inputFiles": [
+      "wwwroot/css/tiles.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/site.min.css",
+    "inputFiles": [
+      "wwwroot/lib/jquery-ui/jquery-ui.css",
+      "wwwroot/css/rwa.css",
+      "wwwroot/css/agreement.css",
+      "wwwroot/lib/FUI/dist/semantic.css",
+      "wwwroot/lib/FUI/dist/components/calendar.css",
+      "wwwroot/lib/FUI/dist/components/message.css",
+      "wwwroot/lib/FUI/dist/components/list.css",
+      "wwwroot/lib/FUI/dist/components/divider.css",
+      "wwwroot/lib/FUI/fonts/fonts.css",
+      "wwwroot/lib/Toasts/snackbar.css",
+      "wwwroot/css/site.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/rwa.min.css",
+    "inputFiles": [
+      "wwwroot/css/rwa.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/agreement.min.css",
+    "inputFiles": [
+      "wwwroot/css/agreement.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/admin-data.min.css",
+    "inputFiles": [
+      "wwwroot/css/admin-data.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/splashfix.min.css",
+    "inputFiles": [
+      "wwwroot/css/splashfix.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/splashpage.min.css",
+    "inputFiles": [
+      "wwwroot/css/splashpage.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/theme.min.css",
+    "inputFiles": [
+      "wwwroot/css/theme.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/wet-boew.min.css",
+    "inputFiles": [
+      "wwwroot/css/wet-boew.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/site.min.js",
+    "inputFiles": [
+      "wwwroot/lib/jquery/dist/jquery.js",
+      "wwwroot/lib/jquery-ui/jquery-ui.js",
+      "wwwroot/lib/text-mask/textmask.js",
+      "wwwroot/lib/FUI/dist/semantic.js",
+      "wwwroot/lib/FUI/dist/components/calendar.js",
+      "wwwroot/js/polyfill.js",
+      "wwwroot/js/site.js",
+      "wwwroot/js/A11yDropdown.js",
+      "wwwroot/lib/Toasts/snackbar.js",
+      "wwwroot/lib/Toasts/Toasts.js",
+      "wwwroot/js/formValidation.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/agreementForm.min.js",
+    "inputFiles": [
+      "wwwroot/js/agreementForm.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  }
+]

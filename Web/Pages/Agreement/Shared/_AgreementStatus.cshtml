@@ -1,0 +1,45 @@
+﻿@model StatusModel
+@{
+    var color = "";
+    var status = "";
+    var icon = "";
+    if (Model.Status == "0")
+    {
+        color = "red";
+        status = Global.NotStarted;
+        icon = "exclamation triangle";
+    }
+    else if (Model.Status == "1")
+    {
+        color = "yellow";
+        status = Model.IsMgr ? Global.Reopened: Global.InProgress;
+        icon = "pencil";
+    }
+    else if (Model.Status == "2")
+    {
+        color = "blue";
+        status = Model.IsMgr ? Global.ForReview : Global.InReview;
+        icon = "user lock";
+    }
+    else if(Model.Status == "3")
+    {
+        color = "orange";
+        status = Global.Recommended;
+        icon = "tasks";
+    }
+    else if(Model.Status == "4")
+    {
+        color = "green";
+        status = Global.Approved;
+        icon = "check circle";
+    }
+    else
+    {
+        color = "orange";
+        status = Global.Denied;
+        icon = "ban";
+    }
+}
+
+
+<span class="ui basic @color label" data-testid="status-label"><i class="@color @icon icon"></i> @status</span>

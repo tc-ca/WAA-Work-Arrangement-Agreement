@@ -1,0 +1,83 @@
+﻿<button type="button" tabindex="0" class="ui mini tertiary grey icon button" id="helpBtn" data-testid="helpButton">
+    <i class="help circle icon"></i> @Global.btnSteps
+</button> 
+<span class="ui grey text"> | </span>
+
+<style>
+    .help.label:after {
+        content: '';
+        position: absolute;
+        height: 5px;
+        background-color: hsla(0,0%,68%,1);
+        width: 100%;
+        z-index: 0;
+        margin-top: 4px;
+        margin-left: 12px;
+    }
+
+    .last.help.label:after {
+        display: none;
+    }
+    .stepText {
+        color: black !important;
+    }
+</style>
+<div class="ui large modal helpModal" data-testid="helpModal" role="dialog">
+        <div class="ui segment">
+            <div class="ui padded centered grid">
+                <div class="sixteen wide center aligned column">
+                    <h2 class="ui large eader">
+                        @Global.StepTitle
+                    </h2>
+                </div>
+                <div class="four wide center aligned column">
+                    <div class="ui circular label stepText">@Global.Step2</div>
+                    <h3 class="ui green header">@Global.Employee</h3>
+                    <div class="ui green circular help label"></div>
+                    <h4 class="ui small green header">@Global.Step2Title</h4>
+                    <p class="muted">@Global.Step2Desc</p>
+                </div>
+                <div class="four wide center aligned column">
+                    <div class="ui circular label stepText">@Global.Step3</div>
+                    <h3 class="ui blue header">@Global.Step3Auth</h3>
+                    <div class="ui blue circular help label"></div>
+                    <h4 class="ui small blue header">@Global.Step3Title</h4>
+                    <p class="muted">@Global.Step3Desc</p>
+                </div>
+                <div class="four wide center aligned column">
+                    <div class="ui circular label stepText">@Global.Step4</div>
+                    <h3 class="ui purple header">@Global.Step4Auth</h3>
+                    <div class="ui purple circular last help label"></div>
+                    <h4 class="ui small purple header">@Global.Step4Title</h4>
+                    <p class="muted">@Global.Step4Desc</p>
+                </div>
+                <div class="sixteen wide center aligned column">
+                    <div class="ui basic  padded segment">
+                        <p>@Html.Raw(Global.CreateInstruction)</p>
+                        <p>@Html.Raw(Global.ReviewInstruction)</p>
+                        <p>@Html.Raw(Global.StepInfo)</p>
+                        <p>@Html.Raw(Global.HelpQuestions)</p>
+                    </div>
+                </div>
+                <div class="sixteen wide center aligned column">
+                    <button type="button" tabindex="0" class="ui closing labeled icon button" id="gotit" data-testid="managerHelp_close" onclick="$('.helpModal').modal('hide');">
+                        <i class="green check icon"></i> @Global.btnClose
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                                                                                      
+
+
+<script type="text/javascript" on-content-loaded="true">
+
+    $("#helpBtn").click(function () {
+        $(".helpModal").modal('show');
+    });
+    $(".helpModal").modal({
+        closable: true
+    });
+
+</script>

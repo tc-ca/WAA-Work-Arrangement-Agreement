@@ -1,0 +1,55 @@
+﻿@model Web.Pages.HomeModel
+
+@{ var status = Model.MyAgreement.AgreementId == 0 ? Model.ShowStartAgreement == true ? "0" : "1" : Model.MyAgreement.StatusCode; }
+
+
+<div id="content-2" data-testid="section-verifyyourinfo" class="ui transition hidden">
+    <div class="ui attached segment">
+        <div class="ui fully-centered grid">
+            <div class="twelve wide column">
+                <Heading icon="file alternate outline" headingLevel="2" primaryText="@Global.VerifyYourInfo" secondaryText="@Global.VerifyYourInfoTxt"></Heading>
+            </div>
+            <div class="four wide column">
+                <span class="right floated">
+                    <span class="ui small basic right pointing label">@Global.Status</span> <partial name="Shared/_AgreementStatus" model="new StatusModel() { Status = @status, IsMgr = false }" />
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="ui attached segment">
+        <div class="ui grid">
+            <div class="ui twelve wide column">
+
+                <partial name="_UserCard" model="@Model.EmpInfo" />
+
+                <div class="ui compact yellow segment">
+                    <div class="ui small floating header">
+                        <i class="inverted circular yellow warning icon"></i>
+                        <div class="content">
+                            @if (Model.EmpInfo.Manager?.ManagerId != null)
+                            {
+                                <strong>
+                                    @Global.WhenCompletedStep1
+                                    <span id="test">@Model.EmpInfo.Manager.ManagerGivenName @Model.EmpInfo.Manager.ManagerSurname.</span>
+                                </strong>
+                            }
+                            else
+                            {
+                                <span class="warning-text"><strong>@Global.SetUpSupervisor</strong></span>
+                                <a class="accessible-link" id="supervisor-update-btn" href="#" data-testid="supervisor-update-btn"><strong>@Global.UpdateYourSupervisor</strong></a>
+                            }
+
+                        <div class="sub header">
+                            @if (Model.EmpInfo.Manager?.ManagerId != null)
+                            {
+                                @Html.Raw(Global.WhenCompletedStep2)                          
+                                <p>@Html.Raw(Global.WhenCompletedStep3)</p>
+                            }
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

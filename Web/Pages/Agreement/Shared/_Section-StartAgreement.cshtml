@@ -1,0 +1,45 @@
+﻿@model Web.Pages.HomeModel
+@{ 
+    var status = Model.MyAgreement.AgreementId == 0 ? Model.ShowStartAgreement == true ? "0" : "1" : Model.MyAgreement.StatusCode;
+}
+<div id="content-1" data-testid="section-startagreement" class="ui transition">
+    <div class="ui attached segment">
+        <div class="ui fully-centered grid">
+            <div class="twelve wide column">
+                <Heading icon="file alternate outline" headingLevel="2" primaryText="@Global.CreateWorkArrangementAgreement" secondaryText="<strong>@ViewContext.HttpContext.Session.GetString("DisplayName")</strong>: @Global.CreateAgreementHere"></Heading>
+            </div>
+            <div class="four wide column">
+                <span class="right floated">
+                    <span class="ui small basic right pointing label">@Global.Status</span>
+                    <partial name="Shared/_AgreementStatus" model="new StatusModel() { Status = @status, IsMgr = false }" />
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="ui attached segment">
+        <p>@Global.IWAStepsAre</p>
+        <ol class="ui list">
+            <li> @Html.Raw(Global.IWAStep1)</li>
+            <li> @Html.Raw(Global.IWAStep2)</li>
+            <li> @Html.Raw(Global.IWAStep3)</li>
+            <li> @Html.Raw(Global.IWAStep4)</li>
+            <li> @Html.Raw(Global.IWAStep5)</li>
+            <li> @Html.Raw(Global.IWAStep6)</li>
+        </ol>
+
+
+        <div class="ui compact yellow segment">
+            <div class="ui small floating header">
+                <div class="content">
+                    <p><strong>@Global.PrivacyStatement </strong></p>
+                    <div class="sub header">
+                        <p>@Html.Raw(Global.PrivacyStatementDesc)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui center aligned basic segment @(Model.ShowStartAgreement ? "" : "hidden")">
+            <button class="ui primary load-indicator button" type="button" id="start" data-testid="agreement-start-btn">@Global.ContinueBtn</button>
+        </div>
+    </div>
+</div>

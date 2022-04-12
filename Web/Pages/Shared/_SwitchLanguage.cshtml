@@ -1,0 +1,38 @@
+﻿@using Microsoft.AspNetCore.Builder
+@using Microsoft.Extensions.Options
+
+@{
+    var routeData = new Dictionary<string, string>();
+
+    var path = ViewContext.HttpContext.Request.Path;
+
+    foreach (var r in ViewContext.RouteData.Values)
+    {
+        routeData.Add(r.Key, r.Value.ToString());
+    }
+
+    foreach (var qs in ViewContext.HttpContext.Request.Query)
+    {
+        routeData.Add(qs.Key, qs.Value);
+    }
+
+    string otherLanguage;
+    string otherLangAbbr;
+
+    if (CultureInfo.CurrentCulture.Name.Contains("en"))
+    {
+        otherLangAbbr = "fr";
+        otherLanguage = "Français";
+        routeData["culture"] = "fr";
+    }
+
+    else
+    {
+        otherLangAbbr = "en";
+        otherLanguage = "English";
+        routeData["culture"] = "en";
+    }
+}
+
+
+<a id="switch-language-btn" asp-route="@routeMap.GetOtherLanguageRouteName(path)" asp-all-route-data="@routeData" class="ui mini tertiary grey button" lang="@otherLangAbbr" data-testid="languageButton"><i class="globe icon"></i> @otherLanguage</a>

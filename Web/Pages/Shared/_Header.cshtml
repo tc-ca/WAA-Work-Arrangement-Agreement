@@ -1,0 +1,21 @@
+﻿<header>
+    <div id="wb-bnr" class="ui container">
+        <div class="ui two column grid">
+            <div class="column">
+                <div class="brand">
+                    <object style="height:35px" type="image/svg+xml" tabindex="-1" data="~/images/tc-@(Template.Language_2Char).svg"><span class="wb-inv">@Template.PSPC</span></object>
+                </div>
+                <a class="wb-sl skip-to-main-btn" href="#main_cont">@Resources.Template.SkipToMainContent</a>
+            </div>
+            <div class="right aligned column">
+                <nav>
+                    <h2 class="wb-inv">@Resources.Template.SecondaryMenu</h2>
+                    <partial name="_HelpModal" />
+                    <partial name="_SwitchLanguage" />
+                    <partial name="_AdminLink" />
+                </nav>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" id="lang" value="@Resources.Template.Language_2Char" />
+</header>

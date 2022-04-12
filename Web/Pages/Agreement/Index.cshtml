@@ -1,0 +1,135 @@
+﻿@page
+@model Web.Pages.HomeModel
+@{
+    ViewData["Title"] = Global.AppTitle;
+
+    @section Breadcrumbs {
+        <nav>
+            <h2 class="wb-inv">@Template.YouAreHere</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <span class="ui white text">@Global.MyAgreement</span>
+                </li>
+            </ol>
+        </nav>
+
+    }
+
+    var status = Model.MyAgreement.AgreementId == 0 ? Model.ShowStartAgreement == true ? "0" : "1" : Model.MyAgreement.StatusCode;
+}
+
+
+@section Styles {
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/agreement.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/css/agreement.min.css" asp-append-version="true" />
+    </environment>
+}
+
+
+<form class="ui form" id="my-agreement-form" asp-antiforgery="true" method="post" tabindex="0">
+
+    <div class="ui segments">
+        <input type="hidden" value="@Global.SingleErrorSummaryMessage" class="single-error-summary" />
+        <input type="hidden" value="@Global.MultipleErrorSummaryMessage" class="multiple-error-summary" />
+
+        <div asp-validation-summary="None" class="ui basic center aligned segment error-summary-display" style="display:none" data-testid="agreement-form-error-msg">
+            <div class="ui compact middle aligned grid">
+                <div class="one wide column">
+                    <i class="large exclamation triangle icon"></i>
+                </div>
+                <div class="fifteen wide left aligned column">
+                    <h3 class="ui header error-text"></h3>
+                    <div class="fifteen wide column error-message-list"></div>
+                </div>
+            </div>
+        </div>
+
+        @if (Model.EmpInfo?.UserId == null)
+        {
+            <partial name="Shared/_MissingADInfo" model="@ViewContext.HttpContext.Session.GetString("Username")" />
+        }
+        else
+        {
+
+            if (status == "1" || status == "0")
+            {
+                <input type="hidden" asp-for="@Model.MyAgreement.TcUserId" value="@(Model.MyAgreement.TcUserId ?? Model.EmpInfo.UserId)" />
+                <input type="hidden" asp-for="@Model.MyAgreement.TcUser.FullName" value="@(Model.MyAgreement.TcUser?.FullName ?? Model.EmpInfo.UserId)" />
+                <input type="hidden" asp-for="@Model.MyAgreement.AgreementId" />
+                <input type="hidden" asp-for="@Model.MyAgreement.StatusCode" />
+                <input type="hidden" asp-for="@Model.MyAgreement.EmergencyContactName" />
+                <input type="hidden" asp-for="@Model.MyAgreement.EmergencyContactPhone" />
+                <input type="hidden" asp-for="@Model.MyAgreement.ApproverId" />
+
+                <div class="wizard">
+                    @if (Model.ShowStartAgreement)
+                    {
+                        <partial name="Shared/_Section-StartAgreement" model="@Model" />
+                    }
+                    else
+                    {
+                        <partial name="Shared/_Section-StartAgreement" model="@Model" />
+                        <partial name="Shared/_Section-VerifyYourInfo" model="@Model" data-status="@status" />
+                        <partial name="Shared/_Section-WorkTypeSelection" model="@Model" />
+                        <partial name="Shared/_Section-WorkHomeAlone" model="@Model" />
+                        <partial name="Shared/_Section-OHS-Checklist" model="@Model" />
+                        <partial name="Shared/_Section-Terms" model="@Model" />
+
+                    }
+                    @if (Model.EmpInfo.Manager != null && !string.IsNullOrEmpty(Model.EmpInfo.Manager.ManagerId) && !Model.ShowStartAgreement)
+                    {
+                        <div class="ui attached secondary segment">
+                            <div class="ui fully-centered grid">
+                                <div class="twelve wide column">
+                                    <p>@Html.Raw(@Global.IssuesToLREmail)<a href="mailto:@Model.AdminEmail">@Model.AdminEmail</a></p>
+                                </div>
+                                <div class="four wide column">
+                                    @if (string.IsNullOrWhiteSpace(Model.EmpInfo.EmergencyContact.ContactName) || string.IsNullOrWhiteSpace(Model.EmpInfo.EmergencyContact.Telephone))
+                                    {
+                                        <button class="ui right floated tiny primary right labeled icon button disabled" id="next" type="button" data-testid="agreement-continue-btn">
+                                            <span id="next-btn-txt">@Global.ContinueBtn</span>
+                                            <i class="right chevron icon"></i>
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <button class="ui right floated tiny primary right labeled icon button" id="next" type="button" data-testid="agreement-continue-btn">
+                                            <span id="next-btn-txt">@Global.ContinueBtn</span>
+                                            <i class="right chevron icon"></i>
+                                        </button>
+                                    }
+
+                                    <button class="ui tiny grey icon button" id="previous" type="button" data-testid="agreement-prev-btn">
+                                        <i class="left chevron icon"></i>
+                                        @Global.PreviousBtn
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <partial name="Shared/_Section-Summary" model="@Model" />
+            }
+
+        }
+    </div>
+</form>
+
+
+<partial name="Shared/_UpdateManagerModal" model="@status" />
+
+
+@section Scripts {
+    <environment include="Development">
+        <script src="~/js/agreementForm.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/agreementForm.min.js"></script>
+    </environment>
+}

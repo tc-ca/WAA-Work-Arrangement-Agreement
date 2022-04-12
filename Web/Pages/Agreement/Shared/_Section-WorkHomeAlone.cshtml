@@ -1,0 +1,59 @@
+﻿@model Web.Pages.HomeModel
+@{ var status = Model.MyAgreement.AgreementId == 0 ? Model.ShowStartAgreement == true ? "0" : "1" : Model.MyAgreement.StatusCode; }
+
+
+<style type="text/css">
+    .legendRequired {
+        position: relative;
+    }
+</style>
+<div id="content-4" data-testid="section-terms" class="ui transition hidden">
+    <div class="ui attached segment">
+        <div class="ui fully-centered grid">
+            <div class="twelve wide column">
+                <Heading icon="file alternate outline" headinglevel="1" primaryText="@Global.AdditionalInformation" secondaryText=""></Heading>
+            </div>
+            <div class="four wide column">
+                <span class="right floated">
+                    <span class="ui small basic right pointing label">@Global.Status</span> <partial name="Shared/_AgreementStatus" model="new StatusModel() { Status = @status, IsMgr = false }" />
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="ui attached segment">
+        <h4 class="ui dividing header">@Global.DutyToAccommodate</h4>
+        <p>@Html.Raw(Global.DutyToAccommodateDesc1)</p>
+        <p>@Html.Raw(Global.DutyToAccommodateDesc2)</p>
+
+        <fieldset>
+            <legend class="legendRequired">@Global.DutyToAccommodate</legend>
+            <div class="grouped inline fieds">
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" id="DutyYes" value="1" asp-for="@Model.MyAgreement.IsAccommodateDuty" />
+                        <label for="@Model.MyAgreement.IsAccommodateDuty">
+                            <span class="a11y-label">@Global.Yes</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" id="DutyNo" value="0" asp-for="@Model.MyAgreement.IsAccommodateDuty" />
+                        <label for="@Model.MyAgreement.IsAccommodateDuty">
+                            <span class="a11y-label">@Global.No</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="ui attached segment">
+        <h4 class="ui dividing header">@Global.WorkingAlone</h4>
+        <p>
+            @Html.Raw(Global.WorkingAloneDesc1)
+        </p>
+        <p>
+            @Html.Raw(Global.WorkingAloneDesc2)
+        </p>
+    </div>
+</div>

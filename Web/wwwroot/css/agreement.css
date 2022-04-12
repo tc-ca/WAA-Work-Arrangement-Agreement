@@ -1,0 +1,26 @@
+﻿.wizard>div>.ui.segment:not(:first-of-type),
+.wizard>.ui.segment {
+    padding-left: 5rem !important;
+}
+
+#my-agreement-form:focus {
+    outline: none;
+}
+
+.form-buttons {
+    float: right;
+    text-align: right;
+}
+
+/* Agreement content 4 */
+.question-anchor {
+    position: absolute;
+    left: -3rem;
+}
+
+.complex-form-input {
+    position: relative;
+}
+#addresscol ul {
+    margin-top: 0 !important;
+}

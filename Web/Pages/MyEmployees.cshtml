@@ -1,0 +1,131 @@
+﻿@page
+@model Web.Pages.MyEmployeesModel
+@{
+    ViewData["Title"] = Global.AppTitle;
+
+    var datePattern = CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "en"
+        ? "MMM d, yyyy"
+        : "d MMM yyyy";
+
+    @section Breadcrumbs {
+        <nav>
+            <h2 class="wb-inv">@Template.YouAreHere</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a asp-route="@routeMap.GetRouteName("/Agreement/Index")"><span class="">@Global.Home</span></a> <i class="small white right chevron icon"></i>
+                </li>
+                <li>
+                    <span class="ui white text">@Global.MyTeamAgreement</span>
+                </li>
+            </ol>
+        </nav>
+    }
+}
+
+<form class="ui form" id="my-employees-form" method="post">
+    <div class="ui manager-form segments">
+        <div class="ui segment">
+            <Heading icon="users" headingLevel="2" primaryText=" @Global.MyTeam" secondaryText="@ViewContext.HttpContext.Session.GetString("DisplayName"): @Global.ReviewDirectReports"></Heading>
+        </div>
+
+        @if (Model.DirectReports.Count == 0 && Model.MyEmpsAgreements.Count == 0)
+        {
+            <div class="ui segment">
+                <div class="ui yellow icon message">
+                    <i class="info icon"></i>
+                    <div class="content">
+                        <p>@Global.NoDirectReports</p>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="ui padded blue segment">
+                <table class="ui very basic table">
+                    <thead>
+                    <thead>
+                        <tr>
+                            <th>@Global.Name</th>
+                            <th class="left aligned">@Global.Status</th>
+                            <th class="center aligned">@Global.AgreementReceived</th>
+                            <th class="center aligned">@Global.RecommendedTo</th>
+                            <th class="center aligned">@Global.ApprovedRejected</th>
+                            <th class="center aligned">@Global.ApprovedRejectedBy</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var emp in Model.DirectReports)
+                        {   /* display those users that are direct reports */
+                            var agreement = Model.MyEmpsAgreements.Where(x => x.TcUserId.ToLower() == emp.UserName.ToLower()).FirstOrDefault();
+                            var statuscode = agreement == null ? "0" : agreement.StatusCode;
+                            <tr data-testid="employee-row" data-username="@emp.UserName">
+                                <td>
+                                    @{
+                                        if (agreement!=null && int.Parse(agreement.StatusCode) > 1)
+                                        {
+                                            <a class="accessible-link" asp-route="@routeMap.GetRouteName("/Agreement/Edit")" asp-route-id="@agreement?.AgreementId" data-testid="edit-link">
+                                                @emp.FullName
+                                            </a>
+                                        }
+                                        else
+                                        { @emp.FullName }
+                                    }
+                                </td>
+                                <td class="left aligned"><partial name="Agreement/Shared/_AgreementStatus" model="new StatusModel() { Status = statuscode, IsMgr = true }" /></td>
+                                <td class="center aligned">@agreement?.LastUpdateDate.ToString(datePattern)</td>
+                                <td class="center aligned">@agreement?.Recommender?.FullName</td>
+                                <td class="center aligned">@agreement?.ApprovedRejectedDate?.ToString(datePattern)</td>
+                                <td class="center aligned">@agreement?.ApproveRejectedBy?.FullName</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+
+    @{ /* display those users with agreements that have been recommended to this mgr (not direct reports) */
+        var directList = Model.DirectReports.Select(x => x.UserName.ToLower()).ToList();
+        var recommended = Model.MyEmpsAgreements.Where(x => !directList.Contains(x.TcUserId.ToLower())).ToList();
+
+        if (recommended.Count > 0)
+        {
+        <div class="ui manager-form segments">
+            <div class="ui segment">
+                <Heading icon="purple signature" headingLevel="2" primaryText="@Global.RecommendedRequests" secondaryText=""></Heading>
+            </div>
+
+            <div class="ui padded purple segment">
+                <table class="ui very basic table">
+                    <thead>
+                    <thead>
+                        <tr>
+                            <th>@Global.Name</th>
+                            <th class="center aligned">@Global.Status</th>
+                            <th class="center aligned">@Global.AgreementReceived</th>
+                            <th class="center aligned">@Global.RecommendedTo</th>
+                            <th class="center aligned">@Global.ApprovedRejected</th>
+                            <th class="center aligned">@Global.ApprovedRejectedBy</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var rcd in recommended)
+                        {
+                            <tr data-testid="recommended-row" data-username="@rcd.TcUserId">
+                                <td><a asp-route="@routeMap.GetRouteName("/Agreement/Edit")" asp-route-id="@rcd.AgreementId" data-testid="recommended-link">@rcd.TcUser.FullName</a></td>
+                                <td class="center aligned"><partial name="Agreement/Shared/_AgreementStatus" model="new StatusModel() { Status = @rcd.StatusCode, IsMgr = true } " /></td>
+                                <td class="center aligned">@rcd.SubmittedDate.ToString(datePattern)</td>
+                                <td class="center aligned">@rcd.Recommender?.FullName</td>
+                                <td class="center aligned">@rcd.ApprovedRejectedDate?.ToString(datePattern)</td>
+                                <td class="center aligned">@rcd.ApproveRejectedBy?.FullName</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        }
+    }
+     
+</form>

@@ -1,0 +1,12 @@
+﻿@using Web.Pages.Components.Toast
+  
+@model List<ToastModel>
+
+<script type="text/javascript" on-content-loaded="true">
+    @foreach (var toast in Model)
+    {
+        <text>
+            Toast.CreateToast('@(toast.Style)', '@(toast.Header)', '@(toast.Message)');
+        </text>
+    }
+</script>

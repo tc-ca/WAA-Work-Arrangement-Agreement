@@ -1,0 +1,323 @@
+﻿/*@import url('../lib/FUI/dist/components/message.css');
+@import url('../lib/FUI/dist/components/list.css');
+@import url('../lib/FUI/dist/components/divider.css');*/
+
+.fields, .one.field {
+    margin: 0 -0.5em 1em !important;
+    float: left;
+}
+
+    .one.field .field {
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+    }
+
+.start-listitem {
+    margin-bottom: 8px;
+}
+
+.centered-btn {
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+.right.floated {
+    float: right;
+}
+
+.agreement-summary-row {
+    padding-bottom: 1.25rem;
+}
+
+.app-menu {
+    margin-bottom: 1rem;
+}
+
+    .app-menu > .menu {
+        border-left: 0 !important;
+        border-right: 0 !important;
+        border-radius: 0 !important;
+        box-shadow: none;
+    }
+
+    .app-menu.fixed {
+        box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15);
+    }
+
+    .app-menu .header.item {
+        padding-left: 0 !important;
+    }
+
+        .app-menu .header.item .bolt.icon {
+            border: 2px solid;
+            padding: 0.45em 0 !important;
+            transform: scale(0.75);
+            color: #ffff00 !important;
+        }
+
+    .app-menu .sub.header a {
+        color: #3878b7 !important;
+    }
+
+    .app-menu .ui.inverted.purple.menu {
+        background-color: #515 !important;
+    }
+
+    .app-menu > .ui.menu .ui.blue.header, .app-menu nav ol a {
+        color: #155687;
+    }
+
+    .app-menu > .ui.menu {
+        /*background-color: #FFE681 !important;
+        border-top: 1px solid rgba(0,0,0,0.2);
+        border-bottom: 1px solid rgba(0,0,0,0.2);
+        box-shadow: 1px 1px 0px rgb(0 0 0 / 5%) inset, 0px -1px 0px rgb(0 0 0 / 5%) inset;*/
+    }
+
+        .app-menu > .ui.menu .header > i.icon {
+            box-shadow: 0 -2px 0px hsl(206deg 73% 40%) inset, 0px 1px 0px #19659f inset, 0px 1px 3px #0c324f inset;
+        }
+
+    .app-menu .right.menu .item {
+        color: #155687 !important;
+    }
+
+        .app-menu .right.menu .item.active {
+            background-color: #e0f0fa !important;
+        }
+
+        .app-menu .right.menu .item:hover {
+            background: #edf6fc !important;
+            color: #416e86 !important;
+            cursor: pointer;
+        }
+
+.brand {
+    width: 50%;
+}
+
+.img-content {
+    text-align: center;
+    width: 100%;
+}
+
+.img {
+    text-align: center;
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+}
+
+.group-header {
+    background-color: #fcf2fc;
+    color: #767676;
+    text-align: center;
+    padding: 20px;
+}
+
+#wb-bnr .column {
+    padding: 0.25rem 0 0.125rem 0;
+}
+
+header {
+    background: #f9f9f9;
+}
+
+    header object {
+        height: 28px;
+        padding-top: 5px;
+    }
+
+    header nav a.button,
+    header nav button {
+        color: #595959 !important;
+    }
+
+
+/* Validation error stuff. */
+
+.req-message {
+    font-size: .85em !important;
+}
+
+#workplace-required-msg:focus {
+    box-shadow: 0 0 8px 2px #2185d0;
+}
+
+.error-text {
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+    color: white !important;
+}
+
+.ui.button.error-link {
+    color: white !important;
+}
+
+    .ui.button.error-link:hover {
+        box-shadow: none;
+    }
+
+.error-summary-display {
+    background-color: #a72020 !important;
+    color: white !important;
+    border-radius: 5px !important;
+    margin: 1em 5em 1em 5em !important;
+}
+
+.level4-manager-radio-btns {
+    margin-top: -50px !important;
+}
+
+
+
+/* udc card related */
+.udc-icon {
+    font-size: 1.25em;
+}
+
+.udc-header {
+    display: flex;
+    width: 100%;
+    flex: 1;
+    align-items: center;
+}
+
+.udc-header-icon {
+    width: 50px;
+}
+
+    .udc-header-icon i {
+        font-size: 1.65em !important;
+    }
+
+.udc-header-text {
+    flex: 1;
+}
+
+.udc-header-text {
+    margin-left: 0.5rem;
+}
+
+.udc-header-text-title {
+    font-size: 1.15em;
+}
+
+.abbreviated .udc-header-text-title {
+    font-size: 1em;
+}
+
+.udc-header-text-description {
+    color: #737373 !important;
+}
+
+.user-details-card .tertiary.button {
+    margin: 0 !important;
+}
+
+.user-details-card a {
+    border-bottom: 1px solid #4183C4;
+}
+
+ul.udc {
+    list-style: none;
+    padding: 0;
+}
+
+li.user-details-card:hover {
+    cursor: pointer;
+    z-index: 5;
+    background: #fff;
+    border: none;
+    -webkit-box-shadow: 0 1px 3px 0 #bcbdbd, 0 0 0 1px #d4d4d5;
+    box-shadow: 0 1px 3px 0 #bcbdbd, 0 0 0 1px #d4d4d5;
+    -webkit-transform: translateY(-3px);
+    transform: translateY(-3px);
+}
+
+.terms-note {
+    font-style: italic;
+    color: #a70000;
+    font-weight: bold;
+}
+
+/* a11y: increase contrast for links */
+.user-details-card a:not(.button) {
+    color: #1f72b1 !important;
+}
+
+    .user-details-card a:not(.button):hover {
+        color: #0091ff !important;
+    }
+
+/* hide content on mobile */
+@media (min-resolution: 190dpi) {
+    .udc-header-icon {
+        display: none !important;
+    }
+}
+
+.faded-blue.inverted.segment {
+    border-top: 1px solid #2185D0;
+    background-color: #f2f8fd;
+}
+
+
+.manager-form a {
+    text-decoration: underline !important;
+}
+
+
+.agreement-details p {
+    margin-bottom: 0.25rem !important;
+}
+
+.agreement-details ul {
+    margin: 0 !important;
+    padding-left: 1.25rem;
+}
+
+#no-addresses-msg {
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+}
+.uppercase {
+    text-transform: uppercase;
+}
+.capitalize {
+    text-transform: capitalize;
+}
+/* add asterisk for radio button */
+legend:after {
+    position: absolute; 
+    top: 0;
+    /* left: 100%; */
+    margin: -0.2em 0 0 0.2em;
+    content: '*';
+    color: #DB2828;
+    font-weight: bold;
+}
+
+fieldset .required.field > .checkbox:after {
+    content: '' !important;
+}
+
+
+/*Misc Accessibility*/
+
+a:not(.button) {
+    color: #3c79b4 !important;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+ol.breadcrumb a {
+    font-weight: bold;
+}
+
+ol.breadcrumb a:hover {
+    text-decoration: underline;
+}

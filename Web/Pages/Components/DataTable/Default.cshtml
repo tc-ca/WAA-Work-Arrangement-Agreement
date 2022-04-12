@@ -1,0 +1,502 @@
+﻿@using Web.Pages.Components.DataTable
+
+@model DataTableControlModel
+
+@* -------------------------- ------ ------------------------------------*@
+@* -------------------------- STYLES ------------------------------------*@
+<link href="~/lib/Tabulator/tabulator.min.css" rel="stylesheet">
+@*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabulator/4.8.4/css/materialize/tabulator_materialize.min.css" crossorigin="anonymous" />*@
+<link href="~/css/admin-data.css" rel="stylesheet" />
+
+@* -------------------------- ---- ------------------------------------*@
+@* -------------------------- HTML ------------------------------------*@
+
+<div class="ui basic very padded center aligned segment data-table-div">
+    <input type="hidden" id="table-entity" value="@Model.Entity" />
+    <input type="hidden" id="total-records" data-testid="total-records" value="@Model.RecordCount" />
+    <input type="hidden" id="can-delete-rows" value="@(String.IsNullOrEmpty(Model.DeleteApi) ? "false" : "true")" />
+
+    <div class="ui attached segments">
+        <div class="ui inverted table-purple segment">
+            <h2 class="ui header">@Model.Header</h2>
+            <p class="ui basic fitted center aligned segment required-fields-message">
+                <i class="info circle icon required-fields-icon"></i>
+                <span class="ui black text">@DataTableResources.RequiredFieldsAreMarkedWithAnAsterisk</span>
+                ( <abbr title="required"><i class="small red asterisk icon"></i></abbr>)
+            </p>
+            <div id="datatable">
+                <div class="ui segment" style="height: 300px">
+                    <div class="ui active inverted dimmer" data-testid="loader">
+                        <div class="ui text loader">Loading</div>
+                    </div>
+                    <p></p>
+                </div>
+            </div>
+            <div class="ui white text">
+                @DataTableResources.Displaying
+                <div class="recordcount-hidden recordcount-inline" id="filtered-records-display">
+                    <div class="recordcount-bold recordcount-inline" id="filtered-records" data-testid="filtered-records-display">45</div>
+                    @DataTableResources.Of
+                </div>
+                <div class="recordcount-bold recordcount-inline" data-testid="total-records-display">@Model.RecordCount</div>
+                @DataTableResources.Items
+            </div>
+        </div>
+        <div class="ui left aligned light-purple padded segment">
+            <div class="table-controls">
+
+                <button id="reviewchanges" data-testid="reviewBtn" class="ui small purple disabled transition button"><i class="clipboard icon"></i> @DataTableResources.ReviewChanges</button>
+                <span class="ui transition hidden" id="edit-buttons">
+                    <button id="back" data-testid="backBtn" class="ui small button"><i class="left chevron icon"></i>@DataTableResources.GoBack</button>
+                    <button id="savechanges" data-testid="saveBtn" class="ui small purple button"><i class="save icon"></i> @DataTableResources.SaveChanges</button>
+                    <button id="revertchanges" data-testid="revertBtn" class="ui small button"><i class="undo icon"></i> @DataTableResources.RevertAll</button>
+                </span>
+                <button id="addrow" data-testid="addRowBtn" class="ui right floated small button"><i class="plus icon"></i>@DataTableResources.AddRow</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@* -------------------------- SCRIPTS ------------------------------------*@
+
+
+@*<script type="text/javascript" on-content-loaded="true" src="~/lib/Tabulator/tabulator.min.js"></script>*@
+
+<environment include="Development">
+    <script type="text/javascript" on-content-loaded="true" src="~/lib/Tabulator/tabulator.js"></script>
+</environment>
+
+<environment exclude="Development">
+    <script type="text/javascript" on-content-loaded="true" src="~/lib/Tabulator/tabulator.min.js"></script>
+</environment>
+
+<script type="text/javascript" on-content-loaded="true">
+    $(document).ready(function () {
+
+        // machine config
+        // all possible states the UI can be in
+        var states = {
+            INIT: "init",
+            READY: "ready",
+            EDITING: "editing",
+            REVIEWING: "reviewing",
+            SAVING: "saving",
+            ERROR: "error",
+            SAVED: "saved"
+        };
+        // all possible actions the user/app can take
+        var actions = {
+            SHOW_DATA: "showtable",
+            EDIT_DATA: "edittable",
+            REVIEW_DATA: "reviewdata",
+            SAVE_DATA: "savedata",
+            SAVE_COMPLETED: "savecomplete",
+            SAVE_FAILED: "savefailed",
+            UNDO_DATA: "undodata",
+        };
+        // all possible transitions from each state
+        var transitions = {
+            [states.READY]: {
+                [actions.EDIT_DATA]: states.EDITING
+            },
+            [states.EDITING]: {
+                [actions.REVIEW_DATA]: states.REVIEWING
+            },
+            [states.REVIEWING]: {
+                [actions.SAVE_DATA]: states.SAVING,
+                [actions.UNDO_DATA]: states.READY,
+                [actions.EDIT_DATA]: states.EDITING
+            },
+            [states.SAVING]: {
+                [actions.SAVE_FAILED]: states.ERROR
+            }
+        };
+
+        var machine = undefined;
+        var machineConfig = {
+            currentState: states.READY, // intital state
+            // things we need to keep track of during the lifetime of the component
+            data: {
+                table: undefined,
+                addedRows: []
+            },
+            // code that runs when the machine is initialized
+            // here, include any code to setup the initial state of the UI including wiring up buttons to dispatch actions, etc.
+            initialize: function (dispatch) {
+                // make the dispatch function available for later
+                this.dispatch = dispatch;
+
+                // initialize tabulator
+                machineConfig.data.table = new Tabulator("#datatable", {
+                    height: "480px", // set height of table (in CSS or here), this enables the Virtual DOM and improves render speed dramatically (can be any valid css height value)
+                    layout: "fitDataFill",
+                    columns: processColumnDefs(@Html.Raw(Model.ColumnInfo)),
+                    addRowPos: "top",
+                    dataFiltered: function (filters, rows) {
+                        var totalRows = parseInt($('#total-records').val());
+                        if (rows.length === totalRows) {
+                            $('#filtered-records-display').addClass('recordcount-hidden');
+                        }
+                        else {
+                            $('#filtered-records').text(rows.length);
+                            $('#filtered-records-display').removeClass('recordcount-hidden');
+                        }
+                    },
+                    cellEdited: function (cell) {
+                        // if clicking delete row, do not style as edited.
+                        if (cell.getField() == 'DeleteRow') {
+                            dispatch(actions.EDIT_DATA);
+                        }
+
+                        // if row is locked due to deletion flag, prevent edits.
+                        else if (cell.getRow().getElement().classList.contains('locked-for-deletion')) {
+                            cell.restoreOldValue();
+                        }
+
+                        // for all other changes, style the cell as edited.
+                        else {
+                            var element = cell.getElement();
+                            $(element).addClass('edited-cell');
+                            dispatch(actions.EDIT_DATA);
+                        }
+                    },
+                    validationMode: "highlight",
+                });
+
+                //load sample data into the table
+                machineConfig.data.table.setData(@Html.Raw(Model.Data));
+
+                // == WIRE UI ==================================================   
+
+                $('.tooltip-icon').popup();
+
+                $('#addrow').on('click', function () {
+                    machineConfig.utilities.addRow();
+                });
+
+                $('#reviewchanges').click(function () {
+                    dispatch(actions.REVIEW_DATA);
+                });
+
+                $('#back').click(function () {
+                    dispatch(actions.EDIT_DATA);
+                });                
+
+                $('#savechanges').on('click', function () {
+                    var validation = machineConfig.data.table.validate();
+
+                    if (validation === true) {
+                        dispatch(actions.SAVE_DATA);
+                    }
+                    else {
+                        $('#savechanges').transition('shake');
+                        Toast.CreateToast('error', '', 'There are required fields missing. Please review cells outlined in red and fix them to continue.');
+                        //alert(validation.length);
+                    }
+                });
+
+                $('#revertchanges').on('click', function () {
+                    dispatch(actions.UNDO_DATA);
+                });
+            },
+            // methods that fire when a state is entered
+            onEnter: {
+                [states.READY]: function () {
+                    // undo data edits
+                    var editedData = machineConfig.data.table.getEditedCells();
+                    editedData.forEach((cell) => {
+                        cell.restoreOldValue();
+                        var element = cell.getElement();
+                        $(element).removeClass('edited-cell');
+                    });
+
+                    // undo rows flagged for deletion
+                    var deletedRows = machineConfig.utilities.getDeletedRows();
+                    deletedRows.forEach((row) => {
+                        row.getData().DeleteRow = false;
+                    });
+
+                    // remove any added rows
+                    machineConfig.data.addedRows.forEach((row) => {
+                        row.delete();
+                    });
+                    machineConfig.data.addedRows = [];
+
+                    // remove data filters
+                    machineConfig.data.table.clearCellEdited();
+                    machineConfig.data.table.clearFilter();
+                    machineConfig.data.table.clearHeaderFilter();
+                    machineConfig.data.table.redraw(true);
+
+                    // show correct UI buttons
+                    machineConfig.utilities.disableReviewButton();
+                },
+                [states.REVIEWING]: function () {
+                    // clear current filters
+                    machineConfig.data.table.clearFilter();
+                    machineConfig.data.table.clearHeaderFilter();
+
+                    // filter down to rows with edited cells and deleted rows
+                    var editedRowsData = machineConfig.utilities.getEditedRowsData();
+                    var deletedRowsData = machineConfig.utilities.getDeletedRowsData();
+                    var allPendingChanges = $.merge(editedRowsData, deletedRowsData);
+
+                    var customFilter = function (data, filterParams) {
+                        //data - the data for the row being filtered
+                        //filterParams - params object passed to the filter
+                        var hasEdits = allPendingChanges.filter(function (row) {
+                            return row.ID == data.ID
+                        });
+                        return hasEdits.length > 0; //must return a boolean, true if it passes the filter.
+                    }
+                    machineConfig.data.table.setFilter(customFilter);
+
+                    // show editing buttons
+                    $('#reviewchanges').transition({
+                        animation: 'fade',
+                        duration: 75,
+                        onComplete: function () {
+                            $('#edit-buttons').transition('fade');
+                        }
+                    });
+                },
+                [states.SAVING]: function () {
+                    // show table as loading
+                    $('#datatable').parents('.segment:first-child').addClass('loading');
+
+                    var editedRowsData = machineConfig.utilities.getEditedRowsData();
+                    var deletedRowData = machineConfig.utilities.getDeletedRowsData();
+
+                    if (editedRowsData.length > 0) {
+                        for (var i = 0; i < editedRowsData.length; i++) {
+                            if (editedRowsData[i].ID === 'NEW') {
+                                editedRowsData[i].ID = 0;
+                            }
+                        }
+
+                        var data = {
+                            "Entity": $('#table-entity').val(),
+                            "Records": JSON.stringify(editedRowsData)
+                        }
+
+                        // hit the api
+                        $.ajax({
+                            type: "POST",
+                            url: "@Model.SaveApi",
+                            data: data,
+                            success: function (response) {
+                                // if no rows updated, something went wrong!
+                                if (response.affectedRows == 0) {
+                                    $('#datatable').parents('.segment:first-child').removeClass('loading');
+                                    alert('Save post was successful but no changes were made.');
+                                    return;
+                                }
+                                else if (deletedRowData.length == 0) {
+                                    $('#datatable').parents('.segment:first-child').removeClass('loading');
+                                    location.reload();
+                                }
+                            },
+                            error: function () {
+                                // remove loading indicator
+                                $('#datatable').parents('.segment:first-child').removeClass('loading');
+                                alert('Save post failed.');
+                                return;
+                            }
+                        });
+                    }
+
+
+
+                    if (deletedRowData.length > 0) {
+                        var deletedIDs = [];
+                        deletedRowData.forEach((row) => {
+                            deletedIDs.push(row.ID);
+                        });
+
+                        var data = {
+                            "Entity": $('#table-entity').val(),
+                            "IDs": deletedIDs
+                        }
+
+                        $.ajax({
+                            type: "POST",
+                            url: "@Model.DeleteApi",
+                            data: data,
+                            success: function (response) {
+                                if (response.affectedRows == 0) {
+                                    $('#datatable').parents('.segment:first-child').removeClass('loading');
+                                    alert('Delete post was successful but no changes were made.');
+                                    return;
+                                }
+                                else {
+                                    machineConfig.utilities.removeDeletedRows();
+                                    $('#datatable').parents('.segment:first-child').removeClass('loading');
+                                    location.reload();
+                                }
+                            },
+                            error: function () {
+                                $('#datatable').parents('.segment:first-child').removeClass('loading');
+                                alert('Delete post failed.');
+                            }
+                        });
+                    }
+                },
+                [states.EDITING]: function () {
+                    machineConfig.utilities.enableReviewButton();
+                }
+            },
+            onExit: {
+                [states.REVIEWING]: function () {
+                    // fade out UI buttons
+                    $('#edit-buttons').transition({
+                        animation: 'fade',
+                        duration: 75,
+                        onComplete: function () {
+                            $('#reviewchanges').transition('fade');
+                        }
+                    });
+
+                    // reset table
+                    machineConfig.data.table.clearFilter();
+                    machineConfig.data.table.clearHeaderFilter();
+
+                }
+            },
+            // keep re-usable bits of code here
+            utilities: {
+                addRow: function () {
+                    machineConfig.data.table.addRow({}).then(function (row) {
+                        machineConfig.data.table.scrollToRow(row);
+                        machineConfig.data.table.scrollToColumn('ID', 'left', true);
+                        row.ID = 'NEW';
+                        row.getCell('ID').setValue(row.ID, true);
+                        machineConfig.data.addedRows.push(row);
+                    });
+                },
+                disableReviewButton: function () {
+                    $('#reviewchanges').addClass('disabled');
+                },
+                enableReviewButton: function () {
+                    $('#reviewchanges').removeClass('disabled');
+                },
+                getDeletedRows: function () {
+                    var deletedRows = machineConfig.data.table.getRows().filter(function (row) {
+                        return row.getData().DeleteRow == true;
+                    });
+                    return deletedRows;
+                },
+                getDeletedRowsData: function () {
+                    var deletedRows = machineConfig.utilities.getDeletedRows();
+                    var data = [];
+
+                    deletedRows.forEach((row) => {
+                        data.push(row.getData());
+                    });
+
+                    return data;
+                },
+                getEditedRowsData: function () {
+                    var data = [];
+
+                    var editedCells = machineConfig.data.table.getEditedCells();
+                    editedCells.forEach((entry) => {
+                        var row = entry._cell.row.data;
+                        if ($.inArray(row, data) === -1) {
+                            data.push(row);
+                        }
+                    });
+
+                    return data;
+                },
+                removeDeletedRows: function () {
+                    var deletedRows = machineConfig.utilities.getDeletedRows();
+                    deletedRows.forEach((row) => {
+                        row.delete();
+                    });
+                }
+            }
+        };
+
+        machine = createMachine(transitions, machineConfig);
+
+        function createMachine(transitions, config) {
+            var machine = config;
+
+            // make dispatch function available
+            machine.dispatch = function (action, params) {
+                currentState = machine.currentState;
+                nextState = transitions[currentState][action];
+
+                // if there is a valid state based on the action requested, transition to it
+                if (nextState) {
+                    //console.log("current", this.currentState, "next:", nextState, "action", action);
+                    //console.log('executing', "this.actions[" + nextState + "]()");
+                    //console.log('func:', machine.methods[nextState]);
+
+                    // execute onExit hook
+                    if (machine.onExit[currentState]) {
+                        machine.onExit[currentState](params);
+                    }
+
+                    // execute onEnter hook
+                    if (machine.onEnter[nextState]) {
+                        machine.onEnter[nextState](params);
+                    }
+                    // transition state
+                    machine.currentState = nextState;
+
+                    console.log('action', action, ': transition', currentState, '->', nextState);
+                }
+            }
+
+            machine.initialize(machine.dispatch);
+            window.machine = machine; // debug
+        }
+
+        function processColumnDefs(columns) {
+            if ($('#can-delete-rows').val() == 'true') {
+                var deleteRowColumn = {
+                    field: 'DeleteRow',
+                    hozAlign: 'center',
+                    headerSort: false,
+                    formatter: function (cell, formatterParams, onRendered) {
+                        var $row = $(cell.getRow().getElement());
+                        if (cell.getValue() == true) {
+                            $row.addClass('deleted-row');
+                            $row.addClass('locked-for-deletion');
+                            return '<i class="ui white trash icon tooltip-icon" data-content="@DataTableResources.CancelPendingDeletion"></i>';
+                        }
+                        else {
+                            $row.removeClass('deleted-row');
+                            $row.removeClass('locked-for-deletion');
+                            return '<i class="ui trash icon tooltip-icon" data-content="@DataTableResources.MarkForDeletion"></i>';
+                        }
+                    },
+                    cellClick: function (e, cell) {
+                        // toggle cell's value
+                        cell.setValue(!cell.getValue(), true);
+
+                        // if flagged for deletion, remove any other pending edits in this row
+                        if (cell.getValue() == true) {
+                            var cells = cell.getRow().getCells();
+                            cells.forEach((cell) => {
+                                var $element = $(cell.getElement());
+                                if ($element.hasClass('edited-cell')) {
+                                    cell.restoreOldValue();
+                                    $element.removeClass('edited-cell');
+                                }
+                            });
+                        }
+                    }
+                };
+
+                columns.push(deleteRowColumn);                
+            }
+
+            return columns;
+        }
+
+    });
+</script>

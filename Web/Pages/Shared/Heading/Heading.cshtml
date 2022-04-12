@@ -1,0 +1,32 @@
+﻿@model HeadingModel
+
+<div class="ui fully-centered app-header grid">
+    <div class="computer only column header-icon">
+        <i class="big blue @Model.Icon icon"></i>
+    </div>
+    <div class="fifteen wide column">
+        @{
+            var tagName = "h1";
+
+            switch (Model.HeadingLevel)
+            {
+                case 2:
+                    tagName = "h2";
+                    break;
+                case 3:
+                    tagName = "h3";
+                    break;
+            }
+        }
+        <@tagName class="ui medium header">
+            <span class="wb-inv">@Global.AppTitle - </span>
+            @Model.Primarytext
+        </@tagName>
+        @if (!string.IsNullOrEmpty(Model.Secondarytext))
+        {
+            <p class="sub header">
+                @Html.Raw(@Model.Secondarytext)
+            </p>
+        }
+    </div>
+</div>

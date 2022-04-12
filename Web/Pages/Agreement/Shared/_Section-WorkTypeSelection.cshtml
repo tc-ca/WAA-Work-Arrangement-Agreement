@@ -1,0 +1,354 @@
+﻿@model Web.Pages.HomeModel
+@{ 
+    var status = Model.MyAgreement.AgreementId == 0 ? Model.ShowStartAgreement == true ? "0" : "1" : Model.MyAgreement.StatusCode;
+}
+
+<style type="text/css">
+    .worktype {
+        float: left;
+        display: inline-block;
+        width: 600px;
+    }
+    .itemText {
+        font-weight: bold;
+    }
+
+    .legendRequired {
+        position: relative;
+    }
+    .calendarWidth {
+        width: auto;
+    }
+    .telework-type-ctrl {
+        padding-left: 2em;
+    }
+    .schedule_option {
+        height: 1em;
+    }
+
+    .schedule_Des {
+        padding-top: 1em;
+    }
+</style>
+
+<div id="content-3" data-testid="section-worktypeselection" class="ui transition hidden">
+    <div class="ui attached segment">
+        <div class="ui fully-centered grid">
+            <div class="twelve wide column">
+                <Heading icon="file alternate outline" headingLevel="2" primaryText="@Global.TeleworkAgreeArrangement" secondaryText=""></Heading>
+            </div>
+            <div class="four wide column">
+                <span class="right floated transition hidden status-display">
+                    <span class="ui small basic right pointing label">@Global.Status</span> <partial name="Shared/_AgreementStatus" model="new StatusModel() { Status = @status, IsMgr = false }" />
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui attached segment">
+       
+        <h4 class="ui dividing header">@Global.TeleworkType</h4>
+        <fieldset>
+            <legend class="legendRequired">@Global.SelectWorkType</legend>
+            <div class="grouped fields">
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" value="1" asp-for="@Model.MyAgreement.WorkTypeId" id="WorkTypeID_1" class="WorkType" data-testid="worktype-check-1" />
+                        <label for="WorkTypeID_1">
+                            <span class="a11y-label">
+                                <strong>@Resources.Global.TypeFulltimeOnSite</strong> @Resources.Global.TypeFulltimeOnSiteDesc
+                            </span>
+                        </label>
+                    </div>
+
+                </div>
+                <div class="ui form telework-type-ctrl " id="telework-addr-ctrl">
+                    <div class="inline field">
+                        <div class="ui checkbox" id="adhoc-cbx">
+                            <input type="checkbox" id="adhoc-addr" @(Model.hasAdHocTeleworkAddress ? "checked" : "") />
+                            <label>
+                                <span class="a11y-label">@Global.AdHocInfo</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="ui clearing"></div>
+                </div>
+
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" value="2" asp-for="@Model.MyAgreement.WorkTypeId" id="WorkTypeID_2" class="WorkType" data-testid="worktype-check-2" />
+                        <label for="WorkTypeID_2">
+                            <span class="a11y-label">
+                                <strong>@Global.TypeHybrid</strong>@Global.TypeHybridDesc
+                            </span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+        <div id="schedules-div">
+            <h4 class="ui dividing header">@Global.TeleworkSchedule2</h4>
+            <fieldset>
+                <legend class="legendRequired">@Global.TeleworkScheduleSubTitle</legend>
+                <div class="grouped inline fieds telework-type-ctrl">
+                    <div class="field schedule_option">
+                        <div class="ui radio checkbox">
+                            <input type="radio" value="1" id="tw_option1" asp-for="@Model.MyAgreement.HybridOptionId" />
+                            <label for="tw_option1"><strong><span class="a11y-label">@Global.ScheduleOption1</span></strong></label>
+                        </div>
+                    </div>
+                    <div class="field schedule_option">
+                        <div class="ui radio checkbox">
+                            <input type="radio" value="2" id="tw_option2" asp-for="@Model.MyAgreement.HybridOptionId" />
+                            <label for="tw_option2"><strong><span class="a11y-label">@Global.ScheduleOption2</span></strong></label>
+                        </div>
+                    </div>
+                    <div class="field schedule_option">
+                        <div class="ui radio checkbox">
+                            <input type="radio" value="3" id="tw_option3" asp-for="@Model.MyAgreement.HybridOptionId" />
+                            <label for="tw_option3"><strong><span class="a11y-label">@Global.ScheduleOption3</span></strong></label>
+                        </div>
+                    </div>
+                    <div class="field schedule_option">
+                        <div class="ui radio checkbox">
+                            <input type="radio" value="4" id="tw_option4" asp-for="@Model.MyAgreement.HybridOptionId" />
+                            <label for="tw_option4"><strong><span class="a11y-label">@Global.ScheduleOption4</span></strong></label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" value="5" id="tw_option5" asp-for="@Model.MyAgreement.HybridOptionId" />
+                            <label for="tw_option5"><span class="a11y-label">@Html.Raw(@Global.ScheduleOption5)</span></label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="schedule_Des">
+                <div class="field">
+                    <label>@Global.ScheduleCommentTitle <span style="color:#DB2828">*</span></label>
+                    <textarea rows="5" maxlength="750" id="variable-schedule-txt" asp-for="@Model.MyAgreement.VariableScheduleDetails"></textarea>
+                </div>
+            </div>
+
+
+            <!--
+        <div id="fixed-schedules-div" class="field">
+            <label>@Global.TeleworkScheduleSubTitle</label>
+            <div class="grouped fields telework-type-ctrl">
+                <div class="schedule_option">
+                    <div class="ui radio checkbox">
+
+                    </div>
+                </div>
+                <div class="field schedule_option">
+                    <div class="ui radio checkbox">
+
+                    </div>
+                </div>
+                <div class="field schedule_option">
+                    <div class="ui radio checkbox">
+
+                    </div>
+                </div>
+                <div class="field schedule_option">
+                    <div class="ui radio checkbox">
+
+                    </div>
+                </div>
+                <div class="field schedule_option">
+                    <div class="ui radio checkbox">
+
+                    </div>
+                </div>
+            </div>
+
+        </div> -->
+            <div class="ui clearing divider"></div>
+        </div>
+        <div class="ui warning visible message">
+            <i class="inverted circular yellow warning icon"></i><strong>@Global.Note</strong>
+            <ul class="ui bulleted list">
+                <li class="item itemText">@Global.TeleworkingDaysDesc1</li>
+                <li class="item itemText">@Global.TeleworkingDaysDesc2</li>
+                <li class="item itemText">@Global.TeleworkingDaysDesc3</li>
+                <li class="item itemText">@Global.TeleworkingDaysDesc4</li>
+            </ul>
+        </div>
+        <h4 class="ui  dividing header">@Global.TCDesignatedWorksite</h4>
+        <p><strong>@Global.TCDesignatedWorksiteDesc</strong></p>
+
+        <input type="hidden" id="geo-code" asp-for="@Model.WorkSiteGeoCode" />
+        <input type="hidden" id="user-geo-code" asp-for="@Model.EmpInfo.GeoCode" />
+        <input type="hidden" id="virtual-ind" asp-for="@Model.MyAgreement.IsVirtual" />
+        <input type="hidden" asp-for="@Model.AltWorkSiteList[0].AgreementId" />
+        <input type="hidden" asp-for="@Model.AltWorkSiteList[1].AgreementId" />
+        <div class="two fields">
+            <div class="field">
+                <label class="ui small header" asp-for="@Model.SelectedRegion">@Global.Region</label>
+                <select asp-for="@Model.SelectedRegion" asp-items="Model.Regions" class="ui fluid dropdown">
+                    <option value="-1">@Global.SelectRegion</option>
+                </select>
+            </div>
+            <div id="sites" class="field">
+                <label asp-for="@Model.MyAgreement.TcWorksiteId" class="ui small header">@Global.TCWorkSite</label>
+                <select id="worksites" asp-for="@Model.MyAgreement.TcWorksiteId" asp-items="Model.TcWorkSites" class="ui fluid dropdown">
+                    <option value="-1">@Global.SelectWorksite</option>
+                </select>
+            </div>
+        </div>
+        <div id="virtual-work-div" class="field" data-content="@Global.GEOCodeTooltip" data-variation="inverted very wide" data-position="bottom left">
+            <p class="warning-text">@Html.Raw(Global.GeoLocationInfo)</p>
+        </div>
+
+        <div class="ui clearing divider"></div>
+        <div id="addr_section">
+            <h4 class="ui dividing header">@Global.AlternateWorksite </h4>
+            <div class="ui form">
+                <div class="four fields">
+                    <div class="nine wide field">
+                        <label class="ui small header">@Global.Address</label>
+                        <input type="text" maxlength="300" id="a0Street" class="addr capitalize altAddr0" placeholder="Address 1" asp-for="@Model.AltWorkSiteList[0].AltWorkSiteAddrStreet">
+                    </div>
+                    <div class="three wide field">
+                        <label class="ui small header">@Global.City</label>
+                        <input type="text" maxlength="40" id="a0City" class="capitalize altAddr0" asp-for="@Model.AltWorkSiteList[0].AltWorkSiteAddrCity">
+                    </div>
+                    <div class="three wide field">
+                        <label class="ui small header">@Global.Province</label>
+                        <select class="ui fluid dropdown altAddr0" id="a0Province" asp-for="@Model.AltWorkSiteList[0].AltWorkSiteAddrProvince">
+                            <option value=""></option>
+                            <option value="AB">AB</option>
+                            <option value="BC">BC</option>
+                            <option value="NB">NB</option>
+                            <option value="NL">NL</option>
+                            <option value="NS">NS</option>
+                            <option value="NT">NT</option>
+                            <option value="NU">NU</option>
+                            <option value="MB">MB</option>
+                            <option value="ON">ON</option>
+                            <option value="PE">PE</option>
+                            <option value="QC">QC</option>
+                            <option value="SK">SK</option>
+                            <option value="YT">YT</option>
+                        </select>
+                    </div>
+                    <div class="three wide field">
+                        <label class="ui small header">@Global.Postcode</label>
+                        <input type="text" maxlength="7" id="a0Post" class="uppercase postcode altAddr0" asp-for="@Model.AltWorkSiteList[0].AltWorkSiteAddrPostal">
+                    </div>
+                </div>
+                <div class="four fields">
+                    <div class="nine wide field">
+                        <input type="text" maxlength="300" id="a1Street" class="addr capitalize altAddr1" placeholder="Address 2" asp-for="@Model.AltWorkSiteList[1].AltWorkSiteAddrStreet">
+                    </div>
+                    <div class="three wide field">
+                        <input type="text" maxlength="40" id="a1City" class="capitalize altAddr1" asp-for="@Model.AltWorkSiteList[1].AltWorkSiteAddrCity">
+                    </div>
+                    <div class="three wide field">
+                        <select class="ui fluid dropdown altAddr1" id="a0Province" asp-for="@Model.AltWorkSiteList[1].AltWorkSiteAddrProvince">
+                            <option value=""></option>
+                            <option value="AB">AB</option>
+                            <option value="BC">BC</option>
+                            <option value="NB">NB</option>
+                            <option value="NL">NL</option>
+                            <option value="NS">NS</option>
+                            <option value="NT">NT</option>
+                            <option value="NU">NU</option>
+                            <option value="MB">MB</option>
+                            <option value="ON">ON</option>
+                            <option value="PE">PE</option>
+                            <option value="QC">QC</option>
+                            <option value="SK">SK</option>
+                            <option value="YT">YT</option>
+                        </select>
+                    </div>
+                    <div class="three wide field">
+                        <input type="text" maxlength="7" id="a1Post" class="uppercase postcode altAddr1" asp-for="@Model.AltWorkSiteList[1].AltWorkSiteAddrPostal">
+                    </div>
+                </div>
+            </div>
+            <div class="ui clearing divider"></div>
+            <div id="telework-addr-section">
+                <h4 class="ui dividing header">@Global.TeleworkAddress</h4>
+
+                <div class="ui form" id="telework-addr-div">
+                    <div class="four fields">
+                        <div class="nine wide field">
+                            <label class="ui small header">@Global.Address</label>
+                            <input type="text" id="twStreet" maxlength="300" class="addr capitalize" asp-for="@Model.MyAgreement.TeleworkAddrStreet">
+                        </div>
+                        <div class="three wide field">
+                            <label class="ui small header">@Global.City</label>
+                            <input type="text" id="twCity" maxlength="40" class="capitalize" asp-for="@Model.MyAgreement.TeleworkAddrCity">
+                        </div>
+                        <div class="three wide field">
+                            <label class="ui small header">@Global.Province</label>
+                            <select class="ui fluid dropdown" id="twProvince" asp-for="@Model.MyAgreement.TeleworkAddrProvince">
+                                <option value=""></option>
+                                <option value="AB">AB</option>
+                                <option value="BC">BC</option>
+                                <option value="NB">NB</option>
+                                <option value="NL">NL</option>
+                                <option value="NS">NS</option>
+                                <option value="NT">NT</option>
+                                <option value="NU">NU</option>
+                                <option value="MB">MB</option>
+                                <option value="ON">ON</option>
+                                <option value="PE">PE</option>
+                                <option value="QC">QC</option>
+                                <option value="SK">SK</option>
+                                <option value="YT">YT</option>
+                            </select>
+                        </div>
+                        <div class="three wide field">
+                            <label class="ui small header">@Global.Postcode</label>
+                            <input type="text" id="twPost" maxlength="7" class="uppercase postcode" asp-for="@Model.MyAgreement.TeleworkAddrPostal">
+                        </div>
+                    </div>
+                </div>
+                <div class="ui clearing divider"></div>
+            </div>
+        </div>
+        <h4 class="ui dividing header">@Global.TeleworkPeriod</h4>
+        <div class="ui form">
+            <div class="one fields">
+                <div class="field">
+                    <label class="ui small header">@Global.StartDate</label>
+                    <div class="ui calendar" id="rangestart">
+                        <div class="ui input left icon">
+                            <i class="calendar icon"></i>
+                            <input type="text" id="startDate" placeholder="Start" asp-for="@Model.StartDate" />
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="ui small header">@Global.EndDate</label>
+                    <div class="ui calendar" id="rangeend">
+                        <div class="ui input left icon">
+                            <i class="calendar icon"></i>
+                            <input type="text" id="endDate" placeholder="End" asp-for="@Model.EndDate" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui clearing divider"></div>
+    </div>
+    <div class="ui modal altAddrWarning">
+        <div class="header">
+            <span class="a11y-label">@Global.IncompleteAltAddress</span>
+        </div>
+        <div class="image content">
+            <div class="description">
+                @Global.IncompleteAltAddressMsg
+            </div>
+        </div>
+        <div class="actions">
+            <div class="ui positive right labeled icon button">
+                OK
+                <i class="checkmark icon"></i>
+            </div>
+        </div>
+    </div>
+</div>

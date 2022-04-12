@@ -1,0 +1,95 @@
+﻿@model Web.Pages.HomeModel
+@{ 
+    var status = Model.MyAgreement.AgreementId == 0 ? Model.ShowStartAgreement == true ? "0" : "1" : Model.MyAgreement.StatusCode;
+    var chkList = Model.OhsCheckboxList.OrderBy(x => x.CategoryId).ToList();
+    var lang = CultureInfo.CurrentCulture.Name.Contains("en") ? "en" : "fr";
+}
+
+<style type="text/css">
+    .ohslist {
+        padding-bottom: 0rem !important;
+    }
+    .nowrap {
+        white-space: nowrap;
+    }
+</style>
+
+<div id="content-5" data-testid="section-checklist" class="ui transition hidden">
+    <div class="ui attached segment">
+        <div class="ui fully-centered grid">
+            <div class="twelve wide column">
+                <Heading icon="file alternate outline" headinglevel="1" primaryText=@Global.OhsChekListTitle secondaryText=@Global.OhsChekListSubTitle></Heading>
+            </div>
+            <div class="four wide column">
+                <span class="right floated">
+                    <span class="ui small basic right pointing label">@Global.Status</span> <partial name="Shared/_AgreementStatus" model="new StatusModel() { Status = @status, IsMgr = false }" />
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui attached segment">
+        <div class="ui from">
+            <p>@Html.Raw(Global.OHSCheckListDesc1)</p>
+            <p>@Html.Raw(Global.OHSCheckListDesc2)</p>
+            <p>@Html.Raw(Global.OHSCheckListDesc3)</p>
+
+            @{ if (chkList.Count > 0)
+                {
+                    int i = 0;
+                    foreach (var category in chkList)
+                    {
+                        <h2 class="ui dividing small header"><lang en="@category.English" fr="@category.French" /></h2>
+                        var categoryId = category.CategoryId;
+                        var oHSChecklist = category.OHSChecklist.Where(x => x.DeleteDate == null).ToList();
+                        foreach (var item in oHSChecklist)
+                        {
+                            var itemId = item.CheckListId;
+                            <div class="ui grid">
+                                <div class="three wide column ohslist">
+                                    <div class="inline fields">
+                                        <div class="field">
+                                            <div class="ui radio checkbox" >
+                                                <input  type="radio" value="yes" class="OhsChecklist"    asp-for="@Model.OhsSelected[i].Value"  />
+                                                <label for="@itemId"><span class="a11y-label">@Global.Yes</span></label>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <div class="ui radio checkbox">
+                                                <input type="radio" value="no" asp-for="@Model.OhsSelected[i].Value" class="OhsChecklist"     />
+                                                <label for="@itemId"><span class="a11y-label">@Global.No</span></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="thirteen wide column ohslist">
+                                    <span class="a11y-label"><lang en="@Html.Raw(item.English)" fr="@Html.Raw(item.French)" /></span>
+                                </div>
+                            </div>
+                            <input type="hidden" asp-for="@Model.OhsSelected[i].Id"   class="OhsChecklistID"/>
+                            i++;
+                        }
+                    }
+
+                }
+            }
+        </div>
+        <br />
+    </div>
+    <div class="ui modal ohsConfirm">
+        <div class="header">
+            <span class="a11y-label">@Global.OhsWarningTitle</span>
+        </div>
+        <div class="image content">
+            <div class="description">
+                    @Global.OhsWarning
+            </div>
+        </div>
+        <div class="actions">
+            <div class="ui positive right labeled icon button">
+                @Global.btnAcknowledged
+                <i class="checkmark icon"></i>
+            </div>
+        </div>
+    </div>
+</div>

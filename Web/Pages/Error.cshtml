@@ -1,0 +1,33 @@
+﻿@page
+@model ErrorModel
+@{
+    ViewData["Title"] = Global.Error;
+
+    @section Breadcrumbs {
+        <nav>
+            <h2 class="wb-inv">@Template.YouAreHere</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a asp-route="@routeMap.GetRouteName("/Agreement/Index")"><span class="">@Global.Home</span></a> <i class="small white right chevron icon"></i>
+                </li>
+                <li>
+                    <span class="ui white text">@Global.Error</span>
+                </li>
+            </ol>
+        </nav>
+
+    }
+}
+
+<div class="ui centered grid" style="padding-top:50px;">
+    <div class="nine wide center aligned column">
+        <div class="ui very padded segment" tabindex="0">
+            <h2 class="ui medium header">@Global.Error</h2>
+            <div>
+                <span class="ui grey text">
+                    @Html.Raw(Global.ErrorMessage)
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,98 @@
+﻿@inject Microsoft.Extensions.Hosting.IHostEnvironment environment
+@{
+    var lang = CultureInfo.CurrentCulture.Name.Contains("en") ? "en" : "fr";
+}
+<!DOCTYPE html>
+<html lang="@(Template.Language_2Char)">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="@Template.Description" />
+    <meta name="dcterms.description" content="@Template.Description" />
+    <meta name="dcterms.creator" content="@Template.Creator" />
+    <meta name="dcterms.title" content="@Template.Title" />
+    <meta name="dcterms.issued" title="W3CDTF" content="2020-01-01" />
+    <meta name="dcterms.modified" title="W3CDTF" content="2021-03-31" />
+    <meta name="dcterms.subject" title="gccore" content="@Template.Subject" />
+    <meta name="dcterms.language" title="ISO639" content="@Template.Language_3Char" />
+    <meta name="keywords" content="@Template.Keywords" />
+
+    @*<link rel="shortcut icon" href="~/images/contact_icon.ico" />*@
+    <title>@ViewData["Title"]</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/lib/jquery-ui/jquery-ui.css" />
+        <link rel="stylesheet" href="~/lib/FUI/fonts/fonts.css" />
+        <link rel="stylesheet" href="~/lib/FUI/dist/components/calendar.css" />
+        <link rel="stylesheet" href="~/lib/FUI/dist/semantic.css" />
+        <link rel="stylesheet" href="~/lib/Toasts/snackbar.css" />
+        <link rel="stylesheet" href="~/css/rwa.css" />
+        <link rel="stylesheet" href="~/lib/FUI/dist/components/message.css" />
+        <link rel="stylesheet" href="~/lib/FUI/dist/components/list.css" />
+        <link rel="stylesheet" href="~/lib/FUI/dist/components/divider.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/lib/FUI/dist/components/calendar.css" />
+        <link rel="stylesheet" href="~/lib/FUI/dist/semantic.css" />
+        <link rel="stylesheet" href="~/lib/FUI/dist/components/message.css" />
+        <link rel="stylesheet" href="~/lib/FUI/dist/components/list.css" />
+        <link rel="stylesheet" href="~/lib/FUI/dist/components/divider.css" />
+    </environment>
+
+    @RenderSection("Styles", required: false)
+</head>
+<body vocab="http://schema.org/" typeof="WebPage">
+    <partial name="_Header" />
+
+    @RenderSection("Menu", required: false)
+    <main property="mainContentOfPage" class="ui container" style="padding-bottom: 20px; position: relative;" id="main_cont">
+        @RenderBody()
+    </main>
+    <partial name="_Footer" />
+
+    @if (environment.EnvironmentName == "PROD")
+    {
+        <!-- Piwik -->
+        <script type="text/javascript">
+            var _paq = _paq || [];
+            _paq.push(['trackPageView']);
+            _paq.push(['enableLinkTracking']);
+            (function () { var u = "//stats-int.tpsgc-pwgsc.gc.ca/"; _paq.push(['setTrackerUrl', u + 'piwik.php']); _paq.push(['setSiteId', 358]); var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0]; g.type = 'text/javascript'; g.async = true; g.defer = true; g.src = u + 'piwik.js'; s.parentNode.insertBefore(g, s); }
+            )();
+        </script>
+        <noscript>
+            <p><img id="piwik-link" src="//stats-int.tpsgc-pwgsc.gc.ca/piwik.php?idsite=358" style="border:0;" alt="" /></p>
+        </noscript>
+        <!-- End Piwik Code -->
+    }
+
+
+
+<environment include="Development">
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-ui/jquery-ui.js"></script>
+    <script src="~/lib/text-mask/textmask.js"></script>
+    <script src="~/js/polyfill.js"></script>
+    <script src="~/lib/FUI/dist/semantic.js" asp-append-version="true"></script>
+    <script src="~/lib/FUI/dist/components/calendar.js" asp-append-version="true"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/A11yDropdown.js" asp-append-version="true"></script>
+    <script src="~/js/a11y.accordion.js" asp-append-version="true"></script>
+    <script src="~/lib/Toasts/snackbar.js" asp-append-version="true"></script>
+    <script src="~/lib/Toasts/Toasts.js" asp-append-version="true"></script>
+    <script src="~/js/formValidation.js" asp-append-version="true"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/site.min.js" asp-append-version="true"></script>
+    <script src="~/lib/FUI/dist/semantic.js" asp-append-version="true"></script>
+    <script src="~/lib/FUI/dist/components/calendar.js" asp-append-version="true"></script>
+</environment>
+
+    @RenderSection("Scripts", required: false)
+
+    <vc:toast></vc:toast>
+</body>
+</html>

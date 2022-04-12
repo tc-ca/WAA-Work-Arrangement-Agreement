@@ -1,0 +1,67 @@
+﻿@model Web.Pages.Shared.EmailContent._OnRecommendEmailModel
+@{
+    var cultureEnglish = CultureInfo.CreateSpecificCulture("en");
+    var cultureFrench = CultureInfo.CreateSpecificCulture("fr");
+}
+
+<style>
+    a.accessible-link {
+        font-weight: bold;
+        text-decoration: underline;
+    }
+</style>
+
+<p>Good day @Model.ManagerFullName,</p>
+
+<p>
+    A Work Arrangement Agreement (WAA) for @Model.EmployeeFullName is being recommended by @Model.SupervisorFullName for your approval.
+</p>
+
+<p>
+    Information and considerations for reviewing work arrangements for your team can be found in the
+    <a class="accessible-link" href="https://mytc-montc.tc.gc.ca/rdims.php?id=17998178" target="_blank">Guide to Reviewing Employee Work Arrangement Requests</a>.
+</p>
+
+<p>
+    The employee will be notified of your decision. If you deny the request, the employee will be informed of the reason(s) and may wish to discuss this decision.
+</p>
+
+<p>
+    If you have any questions or concerns, contact your regional Human Resources or Labour Relations Advisor.
+</p>
+
+<p>
+    “Click” on the link below to access the WAA and input your decision. To log into this app, you must be connected to the VPN.
+</p>
+
+<p>
+    <a class="accessible-link" href="@($"{Model.BaseURL}/en/agreement")" target="_blank">Work Arrangement Agreement</a>
+</p>
+
+<hr />
+
+<p>Bonjour @Model.ManagerFullName,</p>
+<p>
+    L’Entente d’aménagement de travail (EAT) de  @Model.EmployeeFullName a été recommandée par @Model.SupervisorFullName pour votre approbation.
+</p>
+
+<p>
+    Vous trouverez des informations et des considérations à garder en tête pour la revue des ententes d’aménagement de travail de votre équipe dans le
+    <a class="accessible-link" href="https://mytc-montc.tc.gc.ca/rdims.php?id=18014985" target="_blank">Guide d'examen des ententes d’aménagement de travail des employés</a>.
+</p>
+
+<p>
+    L'employé sera informé de votre décision. Si vous refusez la demande, l'employé sera informé de la ou des raisons et pourrait vouloir en discuter.
+</p>
+
+<p>
+    Si vous avez des questions ou des préoccupations, veuillez communiquer avec votre conseiller régional en ressources humaines ou en relations de travail.
+</p>
+
+<p>
+    «Cliquez» sur le lien ci-dessous pour accéder à l’EAT et entrer votre décision. Pour vous brancher à cette application, vous devez être connecté au RPV.
+</p>
+
+<p>
+    <a class="accessible-link" href="@($"{Model.BaseURL}/fr/entente")" target="_blank">Entente d’aménagement de travail</a>
+</p>

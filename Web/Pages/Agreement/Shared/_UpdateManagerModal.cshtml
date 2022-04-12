@@ -1,0 +1,32 @@
+﻿
+<div class="ui medium modal" id="manager-modal" data-testid="manager-modal">
+    <form class="ui form" id="manager-form" asp-antiforgery="true" method="post">
+        <div class="ui segment">
+            <div class="ui segment" tabindex="0">
+                <Heading icon="address card alternate" headingLevel="2" primaryText="@Global.UpdateSupervisor" secondaryText=""></Heading>
+            </div>
+            <div class="ui  aligned very padded segment">
+                <div class="ui grid">
+                    <div class="six wide column">
+                        <div class="field">
+                            <label><strong>@Global.SupervisorName</strong><span>@Global.SupervisorNameHelp</span></label>
+                            <input type="text" id="txtUserName" name="FullName" data-testid="manager-name-field" />
+                        </div>
+                    </div>
+                </div>
+
+                <input type="hidden" id="hfUserId" name="UserName" />
+            </div>
+            <div class="ui secondary segment">
+                <button type="submit" asp-page-handler="UpdateManager"  class="ui tiny blue button" id="save-manager-btn" data-testid="save-manager-btn">
+                    <i class="save icon"></i>
+                    @Global.SaveBtn
+                </button>
+                <button type="button" class="ui closing labeled tiny basic icon button" id="manager-close-btn" data-testid="close-address-modal">
+                    <i class="close icon"></i> @Global.btnClose
+                </button>
+            </div>
+        </div>
+</form>
+</div>
+

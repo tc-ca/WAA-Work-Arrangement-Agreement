@@ -1,0 +1,33 @@
+﻿@model Web.Pages.Shared.EmailContent._OnReopenEmailModel
+
+<style>
+    a.accessible-link {
+        font-weight: bold;
+        text-decoration: underline;
+    }
+</style>
+
+<p>Good day @Model.EmployeeFullName,</p>
+
+<p>Your Work Arrangement Agreement is being returned to you by @Model.ManagerFullName.</p>
+
+<p>
+    “Click” on the link below to access it, make the necessary changes and resubmit. To log into this app, you must be connected to the VPN.
+</p>
+<p>
+    <a class="accessible-link" href="@($"{Model.BaseURL}/en/agreement")" target="_blank">Work Arrangement Agreement</a>
+</p>
+
+<hr />
+
+<p>Bonjour @Model.EmployeeFullName,</p>
+
+<p>Votre Entente d'aménagement de travail vous a été renvoyée par @Model.ManagerFullName.</p>
+
+<p>
+    «Cliquez» sur le lien ci-dessous pour y accéder, effectuer les modifications nécessaires et soumettre à nouveau.
+    Pour vous brancher à cette application, vous devez être connecté au RPV.
+</p>
+<p>
+    <a class="accessible-link" href="@($"{Model.BaseURL}/fr/entente")" target="_blank">Entente d’aménagement de travail</a>
+</p>

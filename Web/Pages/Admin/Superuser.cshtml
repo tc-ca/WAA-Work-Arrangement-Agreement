@@ -1,0 +1,119 @@
+﻿@page
+@model Web.Pages.Admin.SuperuserModel
+@{
+    
+
+    ViewData["Title"] = Global.AppTitle;
+
+    @section Breadcrumbs {
+        <nav>
+            <h2 class="wb-inv">@Template.YouAreHere</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a asp-route="@routeMap.GetRouteName("/Agreement/Index")"><span class="">@Global.Home</span></a> <i class="small white right chevron icon"></i>
+                </li>
+                <li>
+                    <a asp-route="@routeMap.GetRouteName("/Admin")"><span class="">@Global.Administration</span></a> <i class="small white right chevron icon"></i>
+                </li>
+                <li>
+                    <span class="ui white text"> Manage admin</span>
+                </li>
+            </ol>
+        </nav>
+    }
+}
+<form class="ui form" id="my-employees-form" method="post">
+    <div class="ui segments">
+        <div class="ui segment">
+            <Heading icon="users" headingLevel="2" primaryText=" Admin User list" secondaryText=""></Heading>
+        </div>
+
+
+        <div class="ui padded blue segment">
+            <table class="ui very basic table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th class="left aligned">User ID</th>
+                        <th class="left aligned"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var emp in Model.SuperUsers)
+                    {
+                    <tr>
+                        <td>@emp.TcUser.FullName</td>
+                        <td>@emp.UserId</td>
+                        @if (@emp.UserId.ToLower() == @ViewContext.HttpContext.Session.GetString("Username").ToLower())
+                        {
+                            <td><button id="del-btn" asp-page-handler="DeleteUser" asp-route-id="@emp.UserId" disabled>Remove</button></td>
+                        }
+                        else
+                        {
+                            <td><button id="del-btn" asp-page-handler="DeleteUser" asp-route-id="@emp.UserId">Remove</button></td>
+                        }
+                    </tr>
+                    }
+                </tbody>
+            </table>
+            <h4 class="ui  dividing header">Add a user</h4>
+            <div class="ui grid" id="add-user">
+                <div class="ten wide column">
+                    <div class="fields">
+
+                        <input type="text" id="txtSuperUserName" name="suName" />
+                        <button class="ui primary button" asp-page-handler="AddUser" id="save-user-btn">
+                            Add
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <input type="hidden" id="hfSuperUserId" name="UserName" />
+        </div>
+        
+        <div class="ui center aligned basic segment">
+            <a class="ui primary button" asp-route="@routeMap.GetRouteName("/Admin")">Back</a>
+        </div>
+    </div>
+
+
+
+
+
+</form>
+<script type="text/javascript" on-content-loaded="true">
+    var hostUrl = window.location.href;
+    var baseurl = hostUrl.substr(0, hostUrl.indexOf('/en/') + hostUrl.indexOf('/fr/') + 2);
+    $("#txtSuperUserName").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: baseurl + 'api/agreement/Searchuser',
+                data: { "prefix": request.term },
+                type: "POST",
+                dataType: "json",
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return item;
+                    }))
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        },
+        select: function (e, i) {
+            $("#hfSuperUserId").val(i.item.value);
+            $("#txtSuperUserName").val(i.item.label);
+            $('#save-user-btn').removeClass('disabled');
+            return false;
+        },
+        minLength: 3,
+        appendTo: "#add-user"
+    });
+
+
+</script>

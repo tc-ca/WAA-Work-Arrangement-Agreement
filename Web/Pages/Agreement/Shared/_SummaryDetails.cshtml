@@ -1,0 +1,174 @@
+﻿@model UserAgreementModel
+@{
+    var lang = CultureInfo.CurrentCulture.Name.Contains("en") ? "en" : "fr";
+
+    var telework_schedule = "Less than 5 days";
+    switch (Model.Agreement.HybridOptionId)
+    {
+        case 1:
+            telework_schedule = lang =="en"? "Less than 5 days" : "Moins de 5 jours";
+            break;
+        case 2:
+            telework_schedule = lang == "en" ? "5 to 9 days" : "5 à 9 jours";
+            break;
+        case 3:
+            telework_schedule = lang == "en" ? "10 to 14 days" : "10 à 14 jours";
+            break;
+        case 4:
+            telework_schedule = lang == "en" ? "15 to 19 days" : "15 à 19 jours";
+            break;
+        case 5:
+            telework_schedule = lang == "en" ? "20 (and over) days" : "20 jours (et plus)";
+            break;
+        default:
+            break;
+    }
+    //
+}
+
+<style type="text/css">
+    .nowrap {
+        white-space: nowrap;
+    }
+</style>
+
+<div class="agreement-details" data-testid="summary-details">
+    @if (!string.IsNullOrEmpty(Model.Agreement.WorkTypeId))
+    {
+        <div class="agreement-summary-row">
+            <p class="ui grey small header">@Global.WorkArrangement</p>
+            @switch (Model.Agreement.WorkTypeId)
+            {
+                case "1":
+                    <span class="summary-text">@Global.TypeFulltimeOnSite</span>
+                    break;
+                case "2":
+        <span class="summary-text">@Global.TypeHybrid</span><br />
+                    break;
+            }
+        </div>
+    }
+    @if (Model.Agreement.WorkTypeId == "2")
+    {
+        <div class="agreement-summary-row">
+            <p class="ui grey small header">@Global.TeleworkScheduleSubTitle</p>            
+                <p class="summary-text">@telework_schedule </p>
+                <p class="summary-text">@Model.Agreement.VariableScheduleDetails</p>
+        </div>
+    }
+    <div class="agreement-summary-row">
+
+        <p class="ui grey small header">@Global.DateRange</p>
+        <p class="summary-text">@Model.Agreement.StartDate.ToString("D") - @Model.Agreement.EndDate.ToString("D")</p>
+    </div>
+    <div class="agreement-summary-row">
+
+        <p class="ui grey small header">@Global.TCDesignatedWorksite</p>
+        @if (lang == "en")
+        {
+            <p class="summary-text">
+                @Model.Agreement.TcWorksite?.English (@Model.Region?.English)
+            </p>
+            @if (@Model.Agreement.IsVirtual > 0)
+            {
+                <p class="warning-text">@Global.GeoLocationWarning</p>
+            }
+        }
+        else
+        {
+            <p class="summary-text">
+                @Model.Agreement.TcWorksite?.French (@Model.Region?.French)
+            </p>
+            @if (@Model.Agreement.IsVirtual > 0)
+            {
+                <p class="warning-text">@Global.GeoLocationWarning</p>
+            }
+        }
+    </div>
+    @if (!String.IsNullOrEmpty(Model.Agreement.TeleworkAddrStreet))
+    {
+        <div class="agreement-summary-row">
+            <p class="ui grey small header">@Global.TeleworkAddress @(Model.Agreement.WorkTypeId == "1"? "(Ad-Hoc)" : "")</p>
+            <p class="summary-text">@string.Format("{0},  {1},  {2}  {3}", Model.Agreement.TeleworkAddrStreet, Model.Agreement.TeleworkAddrCity, Model.Agreement.TeleworkAddrProvince, Model.Agreement.TeleworkAddrPostal) </p>
+        </div>
+    }
+    @if (Model.Agreement.AltWorkSites != null && Model.Agreement.AltWorkSites.Count > 0)
+    {
+        <div class="agreement-summary-row">
+            <p class="ui grey small header">@Global.AlternateWorksite</p>
+            @foreach (AltWorkSite site in Model.Agreement.AltWorkSites)
+            {
+                <p class="summary-text">@string.Format("{0},  {1},  {2}  {3}", site.AltWorkSiteAddrStreet, site.AltWorkSiteAddrCity, site.AltWorkSiteAddrProvince, site.AltWorkSiteAddrPostal) </p>
+
+            }
+        </div>
+    }
+    <div class="agreement-summary-row">
+        <p class="ui grey small header">@Global.AccommodateDutyTitle</p>
+        <p class="summary-text">@((Model.Agreement.IsAccommodateDuty==1) ? Global.Yes : Global.No) </p>
+    </div>
+
+    @if (!String.IsNullOrEmpty(Model.Agreement.Comments) && int.Parse(Model.Agreement.StatusCode) >= 3)
+    {
+        <div class="agreement-summary-row" data-testid="ManagerComments">
+            <p class="ui grey small header">@Global.MgrComments</p>
+            <p>@Model.Agreement.Comments</p>
+        </div>
+    }
+
+    @if (!string.IsNullOrEmpty(Model.Agreement.TeleworkAddrStreet) &&
+           (Model.Agreement.UnmetOHSItems != null && Model.Agreement.UnmetOHSItems.Count > 0))
+    {
+        <div class="agreement-summary-row">
+            <p class="ui grey small header">@Global.UnmetConditions</p>
+            <p>Total : @Model.Agreement.UnmetOHSItems.Count.  <a class="accessible-link" id="unmet-list-link" href="#" data-testid="action-link"><strong>@Global.ViewDetail</strong></a> </p>
+        </div>
+    }
+</div>
+
+<div class="ui medium modal" id="unmet-modal" data-testid="unmet-modal">
+    <div class="ui segment">
+        <div class="ui segment" tabindex="0">
+            <Heading icon="file alternate outline" headingLevel="2" primaryText="@Global.UnmetCondition" secondaryText="@Global.UnmetConditionDesc"></Heading>
+        </div>
+        <div class="ui attached segment">
+            @{ if (Model.Agreement.UnmetOHSItems.Count > 0)
+                {
+                    var category = Model.Agreement.UnmetOHSItems.Select(x => new { x.OHSChecklist.OHSCategory })
+                                          .OrderBy(x => x.OHSCategory.CategoryId).Distinct();
+
+                    @foreach (var item in category)
+                    {
+                        <h4 class="ui dividing header"><lang en="@item.OHSCategory.English" fr="@item.OHSCategory.French" /></h4>
+                        <ul class="ui list">
+                            @foreach (var unMetItem in Model.Agreement.UnmetOHSItems)
+                            {
+                                @if (item.OHSCategory.CategoryId == unMetItem.OHSChecklist.CategoryId) {
+                                     <li><lang en="@Html.Raw(unMetItem.OHSChecklist.English)" fr="@Html.Raw(unMetItem.OHSChecklist.French)" /></li>
+                                }
+                            }
+                        </ul>
+                    }
+                  }
+                }
+            </div>
+        <div class="ui secondary segment">
+            <button type="button" class="ui closing labeled tiny basic icon button" id="unmet-close-btn" data-testid="close-unmet-modal">
+                <i class="close icon"></i> @Global.btnClose
+            </button>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" on-content-loaded="true">
+    // Unmetlist Modal
+    $('#unmet-list-link').click(function () {
+        $('#unmet-modal')
+            .modal('setting', 'transition', 'scale')
+            .modal('show');
+    });
+    $('#unmet-close-btn').on('click', function () {
+        $('#unmet-modal').modal('hide');
+    });
+
+</script>

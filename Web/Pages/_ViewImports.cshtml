@@ -1,0 +1,13 @@
+@using Web
+@using Resources
+@using Data
+@namespace Web.Pages
+@using Microsoft.AspNetCore.Http
+@using System.Globalization
+@using Utilities.TagHelpers
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, Web
+@addTagHelper *, Utilities
+@addTagHelper *, Web.Pages.Components
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer
+@inject Web.Localization.LocalizedRouteMap routeMap

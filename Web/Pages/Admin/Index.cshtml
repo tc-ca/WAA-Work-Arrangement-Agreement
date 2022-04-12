@@ -1,0 +1,55 @@
+﻿@page
+@model Web.Pages.Admin.IndexModel
+@{
+    ViewData["Title"] = Global.AppTitle;
+
+    @section Breadcrumbs {
+        <nav>
+            <h2 class="wb-inv">@Template.YouAreHere</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a asp-route="@routeMap.GetRouteName("/Agreement/Index")"><span class="">@Global.Home</span></a> <i class="small white right chevron icon"></i>
+                </li>
+                <li>
+                    <span class="ui white text">@Global.Administration</span>
+                </li>
+            </ol>
+        </nav>
+
+    }
+}
+
+<h2>@Global.Administration</h2>
+
+<br />
+<div class="ui container" id="admin-buttons-container">
+    <div class="ui basic padded segment">
+        <div class="ui grid">
+            <div class="row">
+                <div class="eight wide column">
+                    <a class="ui fluid button" asp-route="@routeMap.GetRouteName("/Admin/Superuser")">
+                        <div class="ui small header">
+                            <i class="purple shield alternate icon"></i>
+                            <div class="content">
+                                Manage admin users
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="eight wide column">
+                    <a class="ui fluid button" asp-route="@routeMap.GetRouteName("/Admin/agreement")">
+                        <div class="ui small header">
+                            <i class="purple shield alternate icon"></i>
+                            <div class="content">
+                                Manage agreements
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

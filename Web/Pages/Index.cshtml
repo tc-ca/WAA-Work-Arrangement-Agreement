@@ -1,0 +1,93 @@
+﻿@page
+@model Web.Pages.IndexModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="" />
+    <meta name="description" lang="en" content="" />
+    <meta name="dcterms.creator" content="" />
+    <meta name="dcterms.creator" lang="en" content="" />
+    <meta name="dcterms.title" content="" />
+    <meta name="dcterms.title" lang="en" content="Boilerplate" />
+    <meta name="dcterms.issued" title="W3CDTF" content="2019-12-01" />
+    <meta name="dcterms.modified" title="W3CDTF" content="" />
+    <meta name="dcterms.subject" title="gccore" content="" />
+    <meta name="dcterms.subject" lang="en" title="gccore" content="" />
+    <meta name="dcterms.language" title="ISO639-2" content="fra" />
+    <meta name="dcterms.language" lang="en" title="ISO639-2" content="eng" />
+    <meta name="keywords" content="" />
+    <meta name="keywords" lang="en" content="" />
+    <meta name="robots" content="noindex, follow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="~/images/favicon.ico" rel="icon" type="image/x-icon" />
+    <title>@ViewData["Title"]</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/wet-boew.css" />
+        <link rel="stylesheet" href="~/css/theme.css" />
+        <link rel="stylesheet" href="~/css/messages.css" />
+        <link rel="stylesheet" href="~/css/splashpage.css" />
+        <link rel="stylesheet" href="~/css/splashfix.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/css/wet-boew.min.css" />
+        <link rel="stylesheet" href="~/css/theme.min.css" />
+        <link rel="stylesheet" href="~/css/messages.min.css" />
+        <link rel="stylesheet" href="~/css/splashpage.css" />
+        <link rel="stylesheet" href="~/css/splashfix.css" />
+    </environment>
+    <script>dataLayer1 = [];</script>
+</head>
+<body class="splash" vocab="http://schema.org/" typeof="WebPage">
+    <div id="bg">
+        <img src="~/images/sp-bg-2.jpg" alt="" />
+    </div>
+    <main role="main">
+        <div class="sp-hb">
+            <div class="sp-bx col-xs-12">
+                <h1 property="name" class="wb-inv">{Interim work agreement}</h1>
+                <div class="row text-right">
+                    <div class="col-xs-11">
+                        <object type="image/svg+xml" tabindex="-1" role="img" data="~/images/tc-en.svg" aria-label="Transport Canada / Transports Canada"></object>
+                    </div>
+                </div>
+                <div class="row">
+                    <section class="col-xs-6 text-right">
+                        <h2 class="wb-inv">Transport Canada</h2>
+                        <p><a href="~/en/agreement" class="btn btn-primary">English</a></p>
+
+                    </section>
+                    <section class="col-xs-6"  lang="fr">
+                        <h2 class="wb-inv">Transports Canada</h2>
+                        <p><a href="~/fr/entente" class="btn btn-primary">Fran&ccedil;ais</a></p>
+                    </section>
+                </div>
+            </div>
+            <div class="sp-bx-bt col-xs-12">
+                <div class="row">
+                    <div class="col-xs-7 col-md-8">
+                        <a href="http://www.canada.ca/en/transparency/terms.html" class="sp-lk" lang="en">
+                            <span style="font-size:medium;">Terms & conditions</span>
+                        </a> &nbsp;
+                        <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                        <a href="http://www.canada.ca/fr/transparence/avis.html" class="sp-lk" lang="fr">
+                            <span style="font-size:medium;">Avis</span>
+                        </a>
+                    </div>
+                    <div class="col-xs-5 col-md-4 text-right mrgn-bttm-md">
+                        <object type="image/svg+xml" tabindex="-1" role="img" data="~/images/wmms-spl.svg" aria-label="Symbole du gouvernement du Canada / Symbol of the Government of Canada"></object>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
+

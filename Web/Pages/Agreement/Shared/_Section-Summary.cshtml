@@ -1,0 +1,88 @@
+﻿@model Web.Pages.HomeModel
+@{
+    var lang = CultureInfo.CurrentCulture.Name.Contains("en") ? "en" : "fr";
+}
+
+<div data-testid="section-summary" class="ui segment">
+    <div class="ui fully-centered grid">
+        <div class="ten wide column">
+            <Heading icon="file alternate outline" headingLevel="2" primaryText="@Global.SummaryDetailHeading" secondaryText=""></Heading>
+        </div>
+        <div class="two wide column">
+            <h2 class="ui small header">@Global.ProtectedA</h2>
+        </div>
+        <div class="four wide column">
+            <span class="right floated">
+                <span class="ui small basic right pointing label">@Global.Status</span> <partial name="Shared/_AgreementStatus" model="new StatusModel() { Status = @Model.MyAgreement.StatusCode, IsMgr = false }" />
+            </span>
+        </div>
+    </div>
+</div>
+<div class="ui very padded segment">
+    @if (Model.MyAgreement.StatusCode == "2" || Model.MyAgreement.StatusCode == "3")
+    {
+        <div class="ui compact yellow segment">
+            <div class="ui small floating header">
+                <i class="inverted circular yellow warning icon"></i>
+                <div class="content">
+                    @if (Model.MyAgreement.StatusCode == "2")
+                    {
+                        @Global.RequestReviewedBy<strong> @Model.MyAgreement.Approver.FullName.</strong>
+                        <div class="sub header"> @Global.RequestReviewedByDesc</div>
+                    }
+                    else
+                    {
+                        @Global.RequestRecommendedTo <strong> @Model.MyAgreement.Recommender.FullName.</strong>
+                    }
+                </div>
+            </div>
+        </div>
+
+    }
+    <h2 class="ui medium header">@Global.RequestDetails</h2>
+    <partial name="Shared/_SummaryDetails" model="new UserAgreementModel {
+    User = Model.EmpInfo,
+    Agreement = Model.MyAgreement,
+    Region = Model.Region}" />
+
+    @if (Model.MyAgreement.StatusCode == "4")
+    {
+        <div class="ui grid">
+            <div class="ui eight wide column">
+                <div class="ui compact green segment">
+                    <div class="ui small floating header">
+                        <i class="inverted circular green checkmark icon"></i>
+                        <div class="content">
+                            @Global.RequestIsApproved
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    @if (Model.MyAgreement.StatusCode == "5")
+    {
+        <div class="ui grid">
+            <div class="ui ten wide column">
+                <div class="ui compact red segment">
+                    <div class="ui small floating header">
+                        <i class="times circle outline red icon"></i>
+                        <div class="content">
+                            @Global.RequestIsDeniedBy @Model.MyAgreement.ApproveRejectedBy?.FullName.
+                            <span>
+                                @Global.DenyReason:
+                                <lang en="@Model.MyAgreement.DenyReason.English" fr="@Model.MyAgreement.DenyReason.French" />
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui center aligned basic segment">
+            <button asp-page-handler="Reopen" asp-route-id="@Model.MyAgreement.AgreementId" class="ui tiny blue labeled icon load-indicator button" id="return-agreement-btn" tabindex="0">
+                <i class="folder open outline icon"></i>
+                <span class="text">@Global.OpenToUpdate</span>
+            </button>
+        </div>
+    }
+</div>

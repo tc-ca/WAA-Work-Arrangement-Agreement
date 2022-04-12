@@ -1,0 +1,70 @@
+﻿.data-table-div {
+    margin-top: 0px !important;
+    margin-bottom: 30px !important;
+    padding: 0px !important;
+}
+
+#datatable {
+    max-height: 50vh;
+}
+
+.table-purple {
+    background: #6F487b !important;
+    max-width: 100%;
+}
+
+.table-controls-purple {
+    background: #21ba45 !important;
+}
+
+.edited-cell {
+    border-left: 5px solid #26d950 !important;
+    font-weight: bold;
+    background-color: #cbf6d5;
+}
+
+.deleted-row {
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #af484d !important;
+}
+
+.tabulator-validation-fail {
+    border: 2px solid red !important;
+    border-left: 5px solid red !important;
+    background-color: #ffd1d1;
+}
+
+#filter {
+    width: 400px;
+}
+
+.recordcount-bold {
+    font-weight: bold;
+}
+
+.recordcount-inline {
+    display: inline;
+}
+
+.recordcount-hidden {
+    display: none !important;
+}
+
+main {
+    padding-bottom: 0 !important;
+}
+
+.required-fields-message {
+    font-size: .85em !important;
+    background-color: #e6e6e6 !important;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+}
+.required-fields-icon {
+    color: black;
+}
+
+/*#required-fields-message:not(i) {
+    color: black !important;
+}*/

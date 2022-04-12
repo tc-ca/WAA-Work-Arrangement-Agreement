@@ -1,0 +1,33 @@
+﻿@page
+@model Web.Pages.UnauthorizedModel
+@{
+    ViewData["Title"] = Global.Unauthorized;
+
+    @section Breadcrumbs {
+        <nav>
+            <h2 class="wb-inv">@Template.YouAreHere</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a asp-route="@routeMap.GetRouteName("/Agreement/Index")"><span class="">@Global.Home</span></a> <i class="small white right chevron icon"></i>
+                </li>
+                <li>
+                    <span class="ui white text">@Global.Unauthorized</span>
+                </li>
+            </ol>
+        </nav>
+
+    }
+}
+
+<div class="ui centered grid" style="padding-top:50px;">
+    <div class="nine wide center aligned column">
+        <div class="ui very padded segment" tabindex="0">
+            <h2 class="ui medium header">@Global.Unauthorized</h2>
+            <div>
+                <span class="ui grey text">
+                    @Html.Raw(Global.UnauthorizedMessage) 
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

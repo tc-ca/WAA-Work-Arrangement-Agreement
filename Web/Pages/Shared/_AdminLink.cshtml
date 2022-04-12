@@ -1,0 +1,31 @@
+﻿@using Resources;
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor httpContextAccessor;
+
+@{
+    string link = "";
+    string linkName = "";
+    string icon = "";
+    bool Admin = (httpContextAccessor.HttpContext.Session.GetString("IsAdmin").ToString()=="Y");
+    
+    if (httpContextAccessor.HttpContext.Request.Path.Value.ToLower().Contains("admin"))
+    {
+        link = "/Agreement/Index";
+        linkName = @Global.MyAgreement;
+        icon = "reply";
+    }
+    else
+    {
+        link = "/Admin/Index";
+        linkName = @Global.Administration;
+        icon = "shield";
+    }
+
+    if (Admin)
+    {
+        <span class="ui grey text"> | </span>
+        <a asp-route="@routeMap.GetRouteName(link)" class="ui mini tertiary grey icon button" data-testid="navAdministration" id="admin-btn">
+            <i class="@icon icon"></i> @linkName
+        </a>
+    }
+}

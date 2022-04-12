@@ -1,0 +1,11 @@
+﻿.breadcrumb {
+    background-color: inherit;
+}
+
+.breadcrumb > li {
+    font-weight: bold;
+}
+
+.breadcrumb > li > a {
+    font-weight: normal;
+}

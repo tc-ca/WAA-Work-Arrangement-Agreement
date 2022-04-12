@@ -1,0 +1,236 @@
+﻿@page
+@model Web.Pages.Admin.AgreementModel
+@{
+
+    ViewData["Title"] = Global.AppTitle;
+
+    @section Breadcrumbs {
+        <nav>
+            <h2 class="wb-inv">@Template.YouAreHere</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a asp-route="@routeMap.GetRouteName("/Agreement/Index")"><span class="">@Global.Home</span></a> <i class="small white right chevron icon"></i>
+                </li>
+                <li>
+                    <a asp-route="@routeMap.GetRouteName("/Admin")"><span class="">@Global.Administration</span></a> <i class="small white right chevron icon"></i>
+                </li>
+                <li>
+                    <span class="ui white text">@Global.ManageAgreements</span>
+                </li>
+            </ol>
+        </nav>
+    }
+}
+<form class="ui form" id="updat-agreement-form" method="post">
+    <div class="ui segments">
+        <div class="ui segment">
+            <Heading icon="users" headingLevel="2" primaryText="Manage Agreements" secondaryText=""></Heading>
+        </div>
+
+
+        <div class="ui padded blue segment">
+            <div class="ui visible success message" id="msg-success">
+                <i class="close icon"></i>
+                <div class="header">
+                    @Global.Message_UpdateSuccess
+                </div>
+                <p>@Global.Message_EmailSent</p>
+            </div>
+            <div class="ui visible negative  message" id="msg-notfound">
+                <i class="close icon"></i>
+                <div class="header">
+                    @Global.Message_NotFound
+                </div>
+                <p>@Global.Message_NotFoundEmployee</p>
+            </div>
+            <div class="ui visible negative  message" id="msg-err">
+                <i class="close icon"></i>
+                <div class="header">
+                    @Global.Message_UpdateFail
+                </div>
+                <p>@Global.Message_UpdateError</p>
+            </div>
+            <div class="ui grid" id="search-agreement">
+
+                <div class="six wide column">
+                    <div class="field">
+                        <label><strong>@Global.SearchAgreementByName</strong></label>
+                        <input type="text" id="txtEmployeeName" name="empName" />
+                    </div>
+                </div>
+            </div>
+
+            <input type="hidden" id="hfAgmtId" name="AgmtId" />
+            <!-- Should rename between ImmediateSupervisor and Approver for the both UI(.js) and API-->
+            <table class="ui very basic table" id="employee-agmt-div">
+                <thead>
+                    <tr>
+                        <th>@Global.Employee</th>
+                        <th class="left aligned">@Global.Status</th>
+                        <th class="left aligned">@Global.DecisionDate</th>
+                        <th class="left aligned">@Global.ImmediateSupervisor</th>
+                        <th class="left aligned">@Global.Approver</th>
+                        <th class="left aligned">@Global.ReturnTo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="empoyee"></td>
+                        <td id="status"></td>
+                        <td id="Decison-Date"></td>
+                        <td id="approver"></td>
+                        <td id="recommender"></td>
+                        <td>
+                            <select id="returnTo">
+                                <option value="-1">@Global.Select</option>
+                                <option value="a">@Global.ImmediateSupervisor</option>
+                                <option value="r">@Global.Approver</option>
+                                <option value="e">@Global.Employee</option>
+                            </select>
+
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot class="full-width">
+                    <tr>
+                        <th></th>
+                        <th colspan="5">
+                            <div class="ui right floated small primary labeled icon button" id="btnAgmtUpdate">
+                                <i class="user icon"></i>@Global.Update
+                            </div>
+                        </th>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <br />
+            <br /><br />
+        </div>
+        
+        <div class="ui center aligned basic segment">
+            <a class="ui primary button" asp-route="@routeMap.GetRouteName("/Admin")">@Global.Back</a>
+        </div>
+    </div>
+
+
+
+
+</form>
+<script type="text/javascript" on-content-loaded="true">
+    $(".message").hide();
+    $("#employee-agmt-div").hide();
+    $("#btnAgmtUpdate").addClass('disabled');
+    var hostUrl = window.location.href;
+    var baseurl = hostUrl.substr(0, hostUrl.indexOf('/en/') + hostUrl.indexOf('/fr/') + 2);
+    var lang = $('#lang').val();
+
+    $("#returnTo").change(function () {
+        
+        if (this.value !== '-1') {
+            $("#btnAgmtUpdate").removeClass('disabled');
+        } else {
+            $("#btnAgmtUpdate").addClass('disabled');
+        }        
+    });
+
+    $("#txtEmployeeName").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: baseurl + 'api/agreement/Searchuser',
+                data: { "prefix": request.term },
+                type: "POST",
+                dataType: "json",
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return item;
+                    }))
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        },
+        select: function (e, i) {
+            $("#hfAgmtId").val(i.item.value);
+            $("#txtEmployeeName").val(i.item.label);
+            $("#returnTo").attr("disabled", false);
+            $("#returnTo option").attr("disabled", false);
+            findAgreement(i.item.value);
+            return false;
+        },
+        minLength: 3,
+        appendTo: "#search-agreement"
+    });
+    $("#btnAgmtUpdate").click(function () {
+        var id = $("#hfAgmtId").val();
+        var retCode = $("#returnTo").val();
+        $("#btnAgmtUpdate").addClass('disabled');
+        $.ajax({
+            url: baseurl + 'api/agreement/updateagreement',
+            data: { "id": id, "returnTo": retCode, "lan": lang },
+            type: "POST",
+            dataType: "json",
+            success: function (data) {
+                if (data['id'] !== -1) {
+                    updateTable(data);                    
+                    $("#msg-success").show();
+                } else {
+                    $("#msg-err").show();
+                }
+
+            },
+            error: function (response) {
+                alert(response.responseText);
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            }
+        });
+    });
+    function findAgreement(agmtId) {
+        $.ajax({
+            url: baseurl + 'api/agreement/searchagreement',
+            data: { "userId": agmtId, "lan": lang },
+            type: "POST",
+            dataType: "json",
+            success: function (data) {
+                if (data['id'] !== -1) {
+                    updateTable(data);
+                    $("#employee-agmt-div").show();
+                } else {
+                    $("#employee-agmt-div").hide();
+                    $("#msg-notfound").show();
+                }            
+
+            },
+            error: function (response) {
+                alert(response.responseText);
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            }
+        });
+    }
+    function updateTable(data) {
+        $(".message").hide();
+        $("#hfAgmtId").val(data['id']);
+        $('#empoyee').html(data['employee']);
+        $('#status').html(data['status']);
+        $('#Decison-Date').html(data['decisionDate']);
+        $('#approver').html(data['approver']);
+        $('#recommender').html(data['recommender']);
+        if (data['recommender'] == null || data['statusCode'] == 3)
+            $("#returnTo option[value='r']").attr('disabled', 'disabled');
+        if (data['statusCode'] <= 2)
+            $("#returnTo option[value='a']").attr('disabled', 'disabled');
+        if (data['statusCode'] == 1 || data['statusCode'] == 5)
+            $("#returnTo").attr('disabled', 'disabled');        
+    }
+    $('.message .close')
+        .on('click', function () {
+            $(this).closest('.message').transition('fade');
+        });
+</script>

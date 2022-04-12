@@ -1,0 +1,55 @@
+﻿@model Web.Pages.Shared.EmailContent._OnCompletionDeniedEmailModel
+
+<style>
+    a.accessible-link {
+        font-weight: bold;
+        text-decoration: underline;
+    }
+</style>
+
+<p>Good day @Model.EmployeeFullName,</p>
+
+<p>
+    Your Work Arrangement Agreement (WAA) has been reviewed and has been denied by @Model.ManagerFullName.
+</p>
+
+<p>Reason for denial: @Model.Agreement.DenyReason.English</p>
+<p>Comments for denial: @Model.Agreement.Comments</p>
+
+<p>
+    You may wish to discuss this decision with your supervisor.
+    Open and respectful communication between you and your immediate supervisor is essential.
+</p>
+<p>A revised WAA will need to be submitted to your immediate supervisor.</p>
+
+<p>
+    “Click” on the link below to access your WAA. To log into this app, you must be connected to the VPN.
+</p>
+
+<p>
+    <a class="accessible-link" href="@($"{Model.BaseURL}/en/agreement")" target="_blank">Work Arrangement Agreement</a>
+</p>
+
+<hr />
+
+<p>Bonjour @Model.EmployeeFullName,</p>
+
+<p>Votre Entente d’aménagement de travail (EAT) a été revue par @Model.ManagerFullName et refusée.</p>
+
+<p>Raison du refus: @Model.Agreement.DenyReason.French</p>
+<p>Commentaires de refus: @Model.Agreement.Comments</p>
+
+<p>
+    Vous pourriez vouloir discuter de cette décision avec votre superviseur.
+    Une communication ouverte et respectueuse entre votre superviseur et vous-même est essentielle.
+</p>
+
+<p>Une version révisée de votre EAT devra être soumise à votre superviseur immédiat.</p>
+
+<p>
+    «Cliquez» sur le lien ci-dessous pour accéder votre EAT. Pour vous brancher à cette application, vous devez être connecté au RPV.
+</p>
+
+<p>
+    <a class="accessible-link" href="@($"{Model.BaseURL}/fr/entente")" target="_blank">Entente d’aménagement de travail</a>
+</p>

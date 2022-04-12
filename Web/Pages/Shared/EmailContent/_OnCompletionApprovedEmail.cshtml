@@ -1,0 +1,176 @@
+﻿@model Web.Pages.Shared.EmailContent._OnCompletionApprovedEmailModel
+
+@{
+    var cultureEnglish = CultureInfo.CreateSpecificCulture("en");
+    var cultureFrench = CultureInfo.CreateSpecificCulture("fr");
+}
+
+<style>
+    a.accessible-link {
+        font-weight: bold;
+        text-decoration: underline;
+    }
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 5px;
+    }
+</style>
+
+<p>Good day @Model.EmployeeFullName,</p>
+
+<p>
+    Your Work Arrangement Agreement (WAA) has been reviewed and approved by @Model.ManagerFullName.
+</p>
+<p>
+    “Click” on the link below to access it. To log into this app, you must be connected to the VPN.
+</p>
+<p>
+    <a class="accessible-link" href="@($"{Model.BaseURL}/en/agreement")" target="_blank">Work Arrangement Agreement</a>
+</p>
+<p>
+    <strong>Summary of approved Work Arrangement Agreement:</strong>
+</p>
+
+<table border='1'>
+    <tbody>
+        <tr>
+            <td><strong>Agreement period</strong></td>
+            <td>@Model.Agreement.StartDate.ToString("D", cultureEnglish) - @Model.Agreement.EndDate.ToString("D", cultureEnglish)</td>
+        </tr>
+        <tr>
+            <td><strong>Work arrangement type</strong></td>
+            <td>@Model.Agreement.WorkType.English</td>
+        </tr>
+        <tr>
+            <td><strong>Telework Schedule</strong></td>
+            <td>
+                @if (Model.Agreement.WorkTypeId == "2")
+                {
+                    <span>@Model.TeleworkScheduleEng </span>
+                    <br />
+                    <span>@Model.Agreement.VariableScheduleDetails</span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <td><strong>TC Designated Worksite</strong></td>
+            <td>@Model.Agreement.TcWorksite?.English (@Model.Region.English)</td>
+        </tr>
+        <tr>
+            <td><strong>Alternate Worksite Address</strong></td>
+            <td>
+                @foreach (AltWorkSite site in Model.Agreement.AltWorkSites)
+                {
+                    <span> @site.AltWorkSiteAddrStreet, @site.AltWorkSiteAddrCity,@site.AltWorkSiteAddrProvince,@site.AltWorkSiteAddrPostal</span>
+                    <br />
+                }
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Telework worksite</strong></td>
+            <td>
+                @if (!string.IsNullOrWhiteSpace(@Model.Agreement.TeleworkAddrStreet))
+                {
+                    <span>@Model.Agreement.TeleworkAddrStreet, @Model.Agreement.TeleworkAddrCity, @Model.Agreement.TeleworkAddrProvince, @Model.Agreement.TeleworkAddrPostal</span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Duty to Accommodate</strong></td>
+            <td>@Model.AccommodationIndEng</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>
+    <strong>A reminder of the terms found in the Work Arrangement Agreement:</strong>
+    <a class="accessible-link" href="@($"{Model.BaseURL}/html/TermEng.html")" target="_blank">Terms</a>
+</p>
+
+<p>
+    <strong>You must advise your immediate supervisor if the conditions outlined in the above approved arrangements change either temporarily or permanently. You may be required to submit a revised WAA.
+    To request changes to an approved WAA, contact your immediate supervisor</strong>.
+    In all cases, prompt and open communication between you and your supervisor is essential.
+</p>
+
+<hr />
+
+<p>Bonjour @Model.EmployeeFullName,</p>
+
+<p>
+    Votre entente d’aménagement de travail (EAT) a été revue et approuvée par @Model.ManagerFullName.
+</p>
+<p>
+    «Cliquez» sur le lien ci-dessous pour y accéder. Pour vous brancher à cette application, vous devez être connecté au RPV.
+</p>
+<p>
+    <a class="accessible-link" href="@($"{Model.BaseURL}/fr/entente")" target="_blank">Entente d’aménagement de travail</a>
+</p>
+
+<p>
+    <strong>Résumé de l’entente d’aménagement de travail : </strong>
+</p>
+<table border='1' style="border-collapse: collapse;">
+    <tbody>
+        <tr>
+            <td><strong>Période d’aménagement de travail</strong></td>
+            <td>@Model.Agreement.StartDate.ToString("D", cultureFrench) - @Model.Agreement.EndDate.ToString("D", cultureFrench)</td>
+        </tr>
+        <tr>
+            <td><strong>Type d’aménagement de travail</strong></td>
+            <td>@Model.Agreement.WorkType.French</td>
+        </tr>
+        <tr>
+            <td><strong>Horaire de télétravail</strong></td>
+            <td>
+                @if (Model.Agreement.WorkTypeId == "2")
+                {
+                    <span>@Model.TeleworkScheduleFra </span>
+                    <br />
+                    <span>@Model.Agreement.VariableScheduleDetails</span>
+                }
+
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Lieu de travail désigné par TC</strong></td>
+            <td>@Model.Agreement.TcWorksite?.French (@Model.Region.French)</td>
+        </tr>
+        <tr>
+            <td><strong>Adresse autre que celle du lieu de travail</strong></td>
+            <td>
+                @foreach (AltWorkSite site in Model.Agreement.AltWorkSites)
+                {
+                    <span> @site.AltWorkSiteAddrStreet, @site.AltWorkSiteAddrCity,@site.AltWorkSiteAddrProvince,@site.AltWorkSiteAddrPostal</span>
+                    <br />
+                }
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Adresse du lieu de télétravail</strong></td>
+            <td>
+                @if (!string.IsNullOrWhiteSpace(@Model.Agreement.TeleworkAddrStreet))
+                {
+                    <span>@Model.Agreement.TeleworkAddrStreet, @Model.Agreement.TeleworkAddrCity, @Model.Agreement.TeleworkAddrProvince, @Model.Agreement.TeleworkAddrPostal</span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Obligation de prendre des mesures d'adaptation</strong></td>
+            <td>@Model.AccommodationIndFra</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>
+    <strong>Rappel des conditions dans l’entente d’aménagement de travail : </strong>
+    <a class="accessible-link" href="@($"{Model.BaseURL}/html/TermFra.html")" target="_blank">Modalités</a>
+</p>
+
+<p>
+    <strong>Vous devez informer votre superviseur immédiat si les conditions décrites dans l’entente approuvée ci-dessus changent de façon temporaire ou permanente. Il se peut que vous soyez obligé de soumettre une version révisée de votre entente d’aménagement de travail. Pour demander des modifications à une EAT approuvée, veuillez communiquer avec votre superviseur immédiat.</strong>
+    Dans tous les cas, une communication immédiate et ouverte entre vous et votre superviseur est essentielle.
+</p>

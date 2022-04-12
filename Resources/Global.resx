@@ -1,0 +1,1109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="TermAdditionalInfo" xml:space="preserve">
+    <value>Additional Considerations</value>
+  </data>
+  <data name="TermAdditionalInfoList2" xml:space="preserve">
+    <value>&lt;a class="accessible-link" href="http://health-safety.esdc.gc.ca/oeplms-ccohs/st.2p1@-eng.jsp" target="_blank"&gt;Preventing Musculoskeletal Injury E-tool (HRSDC)&lt;/a&gt;</value>
+  </data>
+  <data name="TermAdditionalInfoList4" xml:space="preserve">
+    <value>The &lt;a class="accessible-link" href="https://www.ccohs.ca/oshanswers/ergonomics/" target="_blank"&gt;Canadian Centre for Occupational Health and Safety (CCOHS)&lt;/a&gt; offers workplace specific information on ergonomics.</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="ADInfoNotFound" xml:space="preserve">
+    <value>Your active directory information was not found. Please contact Service Desk to ensure your information is properly filled in prior to requesting a work agreement.</value>
+  </data>
+  <data name="Administration" xml:space="preserve">
+    <value>Administration</value>
+  </data>
+  <data name="AgreementReceived" xml:space="preserve">
+    <value>Agreement received</value>
+  </data>
+  <data name="Approved" xml:space="preserve">
+    <value>Approved</value>
+  </data>
+  <data name="ApprovedRejected" xml:space="preserve">
+    <value>Approved/Denied</value>
+  </data>
+  <data name="ApprovedRejectedBy" xml:space="preserve">
+    <value>Approved/Denied by</value>
+  </data>
+  <data name="AppTitle" xml:space="preserve">
+    <value>Work Arrangement Agreement</value>
+  </data>
+  <data name="AreYouMgr" xml:space="preserve">
+    <value>Do you have the delegated authority to approve the agreement?</value>
+  </data>
+  <data name="browse" xml:space="preserve">
+    <value>browse...</value>
+  </data>
+  <data name="btnBack" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="btnCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="btnClose" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="btnEdit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="btnHelp" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="btnNext" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="btnPrint" xml:space="preserve">
+    <value>Print</value>
+  </data>
+  <data name="btnSave" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="confirm" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="TermConfirmConditions" xml:space="preserve">
+    <value>I understand all of my obligations and agree to all the conditions pertaining to my work arrangement request.</value>
+  </data>
+  <data name="ConfirmDenyAgreement" xml:space="preserve">
+    <value>Are you sure you want to deny the agreement?</value>
+  </data>
+  <data name="TermConfirmObligations" xml:space="preserve">
+    <value>I confirm that I have read the information above and that I understand my occupational health and safety obligations.</value>
+  </data>
+  <data name="ConfirmReopenAgreement" xml:space="preserve">
+    <value>Are you sure you want to reopen this agreement?</value>
+  </data>
+  <data name="TermOHSRequirementDesc" xml:space="preserve">
+    <value>I have reviewed and confirmed (by checking the appropriate boxes) that all of the requirements below have been met or steps have been taken to ensure they will be.</value>
+  </data>
+  <data name="ConsiderItem1" xml:space="preserve">
+    <value>The employee’s duties can be fulfilled in the requested work arrangement</value>
+  </data>
+  <data name="ConsiderItem2" xml:space="preserve">
+    <value>I have read the Transport Canada &lt;a class="accessible-link" href="https://mytc-montc.tc.gc.ca/rdims.php?id=17475936" target="_blank"&gt;Guidelines for Telework Arrangements &lt;/a&gt; (if applicable)</value>
+  </data>
+  <data name="ConsiderItem3" xml:space="preserve">
+    <value>The employee’s proposed telework location (if applicable) has the proper requirements for an efficient virtual work environment (access to WIFI, secure network, etc.)</value>
+  </data>
+  <data name="ConsiderTheFollowing" xml:space="preserve">
+    <value>I confirm that:</value>
+  </data>
+  <data name="ContinueBtn" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="CreateAgreementHere" xml:space="preserve">
+    <value>review or create your work agreement</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="CurrentCommit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>CurrentCommit.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="DateRange" xml:space="preserve">
+    <value>Date range</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Denied" xml:space="preserve">
+    <value>Denied</value>
+  </data>
+  <data name="Deny" xml:space="preserve">
+    <value>Deny</value>
+  </data>
+  <data name="Step3Auth" xml:space="preserve">
+    <value>Immediate supervisor</value>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value>Disabled</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="EditAgreement" xml:space="preserve">
+    <value>Review agreement</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="TermEmergencyMgt" xml:space="preserve">
+    <value>Emergency Contact  Management</value>
+  </data>
+  <data name="TermEmergencyMgtDesc" xml:space="preserve">
+    <value>I confirm that my emergency contact information in the &lt;a class="accessible-link" href="https://mytc-montc.tc.gc.ca/rdims.php?id=18262184" target="_blank"&gt;Personal Information&lt;/a&gt; section of my myTC account is up to date. I understand that it is my responsibility to maintain and promptly update this information as required.</value>
+  </data>
+  <data name="EmergencyMgtHeader" xml:space="preserve">
+    <value>Employee undertaking on workplace accidents, injury, illness, discomfort, ergonomic issues and hazards</value>
+  </data>
+  <data name="Employee" xml:space="preserve">
+    <value>Employee</value>
+  </data>
+  <data name="Enabled" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="ErrorGenericMsg" xml:space="preserve">
+    <value>An error occurred while processing your request.</value>
+  </data>
+  <data name="ErrorMessage" xml:space="preserve">
+    <value>There was an error saving your data.&lt;br /&gt;Please try again or close the application.</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="TermGeneralCondition" xml:space="preserve">
+    <value>General conditions</value>
+  </data>
+  <data name="gotIt" xml:space="preserve">
+    <value>Got it</value>
+  </data>
+  <data name="HelpQuestions" xml:space="preserve">
+    <value>Questions on the process? Contact your regional Human Resources or Labour Relations Advisor.</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Incorrect" xml:space="preserve">
+    <value>Incorrect?</value>
+  </data>
+  <data name="UpdateSupervisor" xml:space="preserve">
+    <value>Update Supervisor</value>
+  </data>
+  <data name="InProgress" xml:space="preserve">
+    <value>In progress</value>
+  </data>
+  <data name="InReview" xml:space="preserve">
+    <value>In review</value>
+  </data>
+  <data name="Step4Auth" xml:space="preserve">
+    <value>Delegated manager</value>
+  </data>
+  <data name="LocatedIn" xml:space="preserve">
+    <value>Located in</value>
+  </data>
+  <data name="LoggedInAs" xml:space="preserve">
+    <value>Logged in as: </value>
+  </data>
+  <data name="ConsiderItemGuidance1" xml:space="preserve">
+    <value>For guidance, see: &lt;a class="accessible-link" href="https://mytc-montc.tc.gc.ca/rdims.php?id=17998178" target="_blank"&gt;Reviewing Employees’ Work Arrangement Agreements&lt;/a&gt;.</value>
+  </data>
+  <data name="manager" xml:space="preserve">
+    <value>Manager</value>
+  </data>
+  <data name="TermMandatoryOHSTraining" xml:space="preserve">
+    <value>Mandatory Training and Awareness</value>
+  </data>
+  <data name="TermMandatoryTrainingList1" xml:space="preserve">
+    <value>&lt;a class="accessible-link" href="https://catalogue.csps-efpc.gc.ca/product?catalog=COR310&amp;cm_locale=en" target="_blank"&gt;Security Awareness (A230)&lt;/a&gt;</value>
+  </data>
+  <data name="TermMandatoryTrainingList2" xml:space="preserve">
+    <value>&lt;a class="accessible-link" href="https://mytc-montc.tc.gc.ca/en/employee-services/learning-tc/tc-mandatory-training" target="_blank"&gt;Workplace Hazardous Materials Information System (WHMIS)&lt;/a&gt;</value>
+  </data>
+  <data name="TermMandatoryTrainingList3" xml:space="preserve">
+    <value>&lt;a class="accessible-link" href="https://mytc-montc.tc.gc.ca/en/employee-services/learning-tc/tc-mandatory-training" target="_blank"&gt;Occupational Health and Safety (OHS) Training for Managers and Supervisors (as per the Canada Labour Code Part II)&lt;/a&gt;(if applicable)</value>
+  </data>
+  <data name="MgrComments" xml:space="preserve">
+    <value>Manager comments</value>
+  </data>
+  <data name="Mobile" xml:space="preserve">
+    <value>Mobile</value>
+  </data>
+  <data name="MultipleErrorSummaryMessage" xml:space="preserve">
+    <value>There are errors. Please fill out all required fields.</value>
+  </data>
+  <data name="MyTeam" xml:space="preserve">
+    <value>My team</value>
+  </data>
+  <data name="CreateWorkArrangementAgreement" xml:space="preserve">
+    <value>Create your Work Arrangement Agreement</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="NoDirectReports" xml:space="preserve">
+    <value>You do not have any direct reports listed and have not been identified as a 'recommended' manager.</value>
+  </data>
+  <data name="NotStarted" xml:space="preserve">
+    <value>Not started</value>
+  </data>
+  <data name="TermOHSRequirement" xml:space="preserve">
+    <value>Occupational Health and Safety (OHS) requirements</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Phone #</value>
+  </data>
+  <data name="PreviousBtn" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="Recommend" xml:space="preserve">
+    <value>Recommend</value>
+  </data>
+  <data name="RecommendApproveRequest" xml:space="preserve">
+    <value>Recommend/Approve request</value>
+  </data>
+  <data name="Recommended" xml:space="preserve">
+    <value>Recommended</value>
+  </data>
+  <data name="RecommendedTo" xml:space="preserve">
+    <value>Recommended to</value>
+  </data>
+  <data name="RecommendOrApproveHeader" xml:space="preserve">
+    <value>Recommend, approve or deny a request</value>
+  </data>
+  <data name="RecommendTo" xml:space="preserve">
+    <value>Recommend to</value>
+  </data>
+  <data name="Region" xml:space="preserve">
+    <value>Worksite Region</value>
+  </data>
+  <data name="btnReturn" xml:space="preserve">
+    <value>Return to Employee</value>
+  </data>
+  <data name="Reports" xml:space="preserve">
+    <value>Reports</value>
+  </data>
+  <data name="ReportsTo" xml:space="preserve">
+    <value>Reports to</value>
+  </data>
+  <data name="RequestDetails" xml:space="preserve">
+    <value>Request details</value>
+  </data>
+  <data name="RequestIsApproved" xml:space="preserve">
+    <value>Your request has been approved.</value>
+  </data>
+  <data name="RequestIsDenied" xml:space="preserve">
+    <value>Your request has been denied.</value>
+  </data>
+  <data name="RequestReviewedBy" xml:space="preserve">
+    <value>Your request is being reviewed by</value>
+  </data>
+  <data name="WhenCompletedStep1" xml:space="preserve">
+    <value>When completed, this work arrangement  will be sent to</value>
+  </data>
+  <data name="RequestsOnlyForMgrs" xml:space="preserve">
+    <value>Note: Work Arrangement Agreements may only be approved by the &lt;a class="accessible-link" href="https://mytc-montc.tc.gc.ca/rdims.php?id=14435629" target="_blank"&gt;delegated manager&lt;/a&gt;.</value>
+  </data>
+  <data name="TermGeneralConditionDesc" xml:space="preserve">
+    <value>I agree to abide by and respect the &lt;a class="accessible-link" href="https://mytc-montc.tc.gc.ca/rdims.php?id=17475936" target="_blank"&gt;TC Guidelines for Telework Arrangements&lt;/a&gt; and more specifically</value>
+  </data>
+  <data name="ReviewDirectReports" xml:space="preserve">
+    <value>Review and action your team's Work Arrangement Agreements by clicking on their names.</value>
+  </data>
+  <data name="SaveBtn" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="SingleErrorSummaryMessage" xml:space="preserve">
+    <value>There are errors. Please fill out all required fields.</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="StepTitle" xml:space="preserve">
+    <value>STEPS - WORK ARRANGEMENT AGREEMENT (WAA)</value>
+  </data>
+  <data name="Terms" xml:space="preserve">
+    <value>Terms</value>
+  </data>
+  <data name="TermsDesc" xml:space="preserve">
+    <value>Please read carefully as you need to agree to the terms below to submit the work arrangement agreement.</value>
+  </data>
+  <data name="UnableToStartRequest" xml:space="preserve">
+    <value>Unable to start your request</value>
+  </data>
+  <data name="Unauthorized" xml:space="preserve">
+    <value>Unauthorized</value>
+  </data>
+  <data name="UnauthorizedMessage" xml:space="preserve">
+    <value>You are not authorized to access this area.
+&lt;br /&gt;
+Please go back to the main area or close the application.</value>
+  </data>
+  <data name="UpdateYourSupervisor" xml:space="preserve">
+    <value>Update your supervisor</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="VerifyYourInfo" xml:space="preserve">
+    <value>Verify your information</value>
+  </data>
+  <data name="VerifyYourInfoTxt" xml:space="preserve">
+    <value>If incorrect, click &lt;a class="accessible-link" href="http://tcd/directory-annuaire/p002-eng.aspx" target="_blank"&gt;here&lt;/a&gt; for instructions on how to update your personal information.</value>
+  </data>
+  <data name="TermGeneralConditionList1" xml:space="preserve">
+    <value>Assuming the costs of maintaining my personal telework workspace, such as insurance, heat, hydro, basic internet and telephone, etc., unless otherwise covered under a Government of Canada policy instrument.</value>
+  </data>
+  <data name="TermGeneralConditionList2" xml:space="preserve">
+    <value>Safeguarding Transport Canada’s equipment and assuming responsibility for the safe transportation of government equipment, and any associated costs incurred between worksites</value>
+  </data>
+  <data name="TermGeneralConditionList3" xml:space="preserve">
+    <value>Ensuring the protection of information by respecting the applicable security requirements</value>
+  </data>
+  <data name="TermGeneralConditionList4" xml:space="preserve">
+    <value>Understanding that any access to TC's network outside of Canada is prohibited, either through TC-issued or personal devices unless approved by the Deputy Minister. A Departmental Security briefing is required to ensure that all necessary approvals are obtained prior to commencement.</value>
+  </data>
+  <data name="TermGeneralConditionList5" xml:space="preserve">
+    <value>Conforming with information technology and information management directives, standards and procedures</value>
+  </data>
+  <data name="WorkPhone" xml:space="preserve">
+    <value>Work phone</value>
+  </data>
+  <data name="WorkArrangement" xml:space="preserve">
+    <value>Work Arrangement</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="ConsiderItem4" xml:space="preserve">
+    <value>I understand my responsibilities for the health and safety of my employees</value>
+  </data>
+  <data name="RequestIsApprovedBy" xml:space="preserve">
+    <value>Request approved by </value>
+  </data>
+  <data name="RequestIsDeniedBy" xml:space="preserve">
+    <value>Request denied by </value>
+  </data>
+  <data name="IWAStep1" xml:space="preserve">
+    <value>&lt;strong&gt;Verify&lt;/strong&gt; your information including the name of your immediate supervisor.</value>
+  </data>
+  <data name="IWAStep2" xml:space="preserve">
+    <value>&lt;strong&gt;Select&lt;/strong&gt; your type of work arrangement.</value>
+  </data>
+  <data name="IWAStep3" xml:space="preserve">
+    <value>&lt;strong&gt;Identify&lt;/strong&gt; whether you are requesting a duty to accommodate.</value>
+  </data>
+  <data name="IWAStep4" xml:space="preserve">
+    <value>&lt;strong&gt;Review&lt;/strong&gt; the &lt;a class="accessible-link" href="https://mytc-montc.tc.gc.ca/rdims.php?id=15834778" target="_blank"&gt;Working Alone Directive&lt;/a&gt;.</value>
+  </data>
+  <data name="IWAStep5" xml:space="preserve">
+    <value>&lt;strong&gt;Review and complete&lt;/strong&gt; the Occupational Health and Safety Checklist, as applicable.</value>
+  </data>
+  <data name="IWAStepsAre" xml:space="preserve">
+    <value>These are the steps to complete and submit your Work Arrangement Agreement:</value>
+  </data>
+  <data name="IWAStep6" xml:space="preserve">
+    <value>&lt;strong&gt;Acknowledge, review and confirm &lt;/strong&gt; your agreement.</value>
+  </data>
+  <data name="ReportAgreementsByBranchAndSector" xml:space="preserve">
+    <value>Agreements by branch and sector report (excel download)</value>
+  </data>
+  <data name="RecommendedRequests" xml:space="preserve">
+    <value>Recommended requests</value>
+  </data>
+  <data name="Reopened" xml:space="preserve">
+    <value>Reopened</value>
+  </data>
+  <data name="TermsWillBeSentToYou" xml:space="preserve">
+    <value>Please note: The above terms will be sent to you in an email once your work arrangement has been approved by the delegated manager.</value>
+  </data>
+  <data name="ForReview" xml:space="preserve">
+    <value>For review</value>
+  </data>
+  <data name="L4ManagerHeader" xml:space="preserve">
+    <value>Manager Levels</value>
+  </data>
+  <data name="L4ManagerList1" xml:space="preserve">
+    <value>level 1: Branch Heads – Regional Director Generals (RDGs)</value>
+  </data>
+  <data name="L4ManagerList2" xml:space="preserve">
+    <value>level 2: Positions reporting to Level 1 (Regional Directors)</value>
+  </data>
+  <data name="L4ManagerList3" xml:space="preserve">
+    <value>level 3: Positions reporting to Level 2</value>
+  </data>
+  <data name="L4ManagerList4" xml:space="preserve">
+    <value>level 4: Positions reporting to Level 3</value>
+  </data>
+  <data name="L4ManagerList5" xml:space="preserve">
+    <value>level 5: Any position having formal and direct supervisory responsibilities</value>
+  </data>
+  <data name="TermAdditionalInfoDesc" xml:space="preserve">
+    <value>If you have any questions regarding ergonomic guidelines or the proper set-up of your virtual workstation, you should discuss this with your supervisor. You should also review the following documents:</value>
+  </data>
+  <data name="RequestRecommendedTo" xml:space="preserve">
+    <value>Your request has been recommended to </value>
+  </data>
+  <data name="DeleteAddress" xml:space="preserve">
+    <value>Are you sure you want to delete</value>
+  </data>
+  <data name="ReportAgreementsByWorkLocation" xml:space="preserve">
+    <value>Agreements by work location report (excel download)</value>
+  </data>
+  <data name="Branch" xml:space="preserve">
+    <value>Branch</value>
+  </data>
+  <data name="Division" xml:space="preserve">
+    <value>Division</value>
+  </data>
+  <data name="Telephone" xml:space="preserve">
+    <value>Telephone</value>
+  </data>
+  <data name="MyTeamAgreement" xml:space="preserve">
+    <value>My team's agreements</value>
+  </data>
+  <data name="SelectWorkType" xml:space="preserve">
+    <value>Select your work arrangement</value>
+  </data>
+  <data name="Step2Desc" xml:space="preserve">
+    <value>Employee outlines their proposed work arrangement and submits to immediate supervisor for review and recommendation.</value>
+  </data>
+  <data name="Step2Title" xml:space="preserve">
+    <value>Creates and submits request</value>
+  </data>
+  <data name="Step3Desc" xml:space="preserve">
+    <value>Supervisor reviews details of request and recommends,approves or denies as appropriate.</value>
+  </data>
+  <data name="Step3Title" xml:space="preserve">
+    <value>Reviews request for recommendation</value>
+  </data>
+  <data name="Step4Desc" xml:space="preserve">
+    <value>Delegated manager reviews details of request and approves or denies as appropriate.</value>
+  </data>
+  <data name="Step4Title" xml:space="preserve">
+    <value>Reviews request for Approval</value>
+  </data>
+  <data name="EmployeeInfo" xml:space="preserve">
+    <value>Employee Information</value>
+  </data>
+  <data name="EmpBranch" xml:space="preserve">
+    <value>Branch</value>
+  </data>
+  <data name="EmpClassification" xml:space="preserve">
+    <value>Group and level</value>
+  </data>
+  <data name="EmpDesignatedWorkplace" xml:space="preserve">
+    <value>Designated workplace</value>
+  </data>
+  <data name="EmpDirectorate" xml:space="preserve">
+    <value>Directorate</value>
+  </data>
+  <data name="EmpEmergencyContact" xml:space="preserve">
+    <value>Emergency Contact</value>
+  </data>
+  <data name="EmpEmergencyContactNumber" xml:space="preserve">
+    <value>Emergency Contact Number</value>
+  </data>
+  <data name="EmpMobile" xml:space="preserve">
+    <value>Mobile</value>
+  </data>
+  <data name="EmpName" xml:space="preserve">
+    <value>Name of employee</value>
+  </data>
+  <data name="EmpRegion" xml:space="preserve">
+    <value>Region</value>
+  </data>
+  <data name="EmpReportsTo" xml:space="preserve">
+    <value>Reports to (name of supervisor)</value>
+  </data>
+  <data name="EmpTitle" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="EmpWorkPhone" xml:space="preserve">
+    <value>Work phone</value>
+  </data>
+  <data name="SupervisorName" xml:space="preserve">
+    <value>Supervisor Name</value>
+  </data>
+  <data name="WhenCompletedStep2" xml:space="preserve">
+    <value>&lt;strong&gt;Incorrect? &lt;/strong&gt;&lt;a class="accessible-link" id="supervisor-update-btn" href="#" data-testid="supervisor-update-btn"&gt;&lt;strong&gt;Update your supervisor&lt;/strong&gt;&lt;/a&gt;.</value>
+  </data>
+  <data name="WhenCompletedStep3" xml:space="preserve">
+    <value>If you are unable to find your immediate supervisor in the drop down list, inform your immediate  supervisor (they may need to update their information in LEX).</value>
+  </data>
+  <data name="TeleworkType" xml:space="preserve">
+    <value>Type of Work Arrangement</value>
+  </data>
+  <data name="Friday" xml:space="preserve">
+    <value>Friday</value>
+  </data>
+  <data name="Monday" xml:space="preserve">
+    <value>Monday</value>
+  </data>
+  <data name="TeleworkAgreeArrangement" xml:space="preserve">
+    <value>Work Arrangement Agreement </value>
+  </data>
+  <data name="TeleworkingDays" xml:space="preserve">
+    <value>I am requesting to telework on the following frequency:</value>
+  </data>
+  <data name="Thursday" xml:space="preserve">
+    <value>Thursday</value>
+  </data>
+  <data name="Tuesday" xml:space="preserve">
+    <value>Tuesday</value>
+  </data>
+  <data name="TypeFulltimeOnSite" xml:space="preserve">
+    <value>Full-time On-site</value>
+  </data>
+  <data name="Wednesday" xml:space="preserve">
+    <value>Wednesday</value>
+  </data>
+  <data name="SupervisorNameHelp" xml:space="preserve">
+    <value> (First Name and Last Name)</value>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>End date (yyyy-mm-dd):</value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>Start date (yyyy-mm-dd):</value>
+  </data>
+  <data name="WorkingAlone" xml:space="preserve">
+    <value>Working Alone</value>
+  </data>
+  <data name="WorkingAloneDesc1" xml:space="preserve">
+    <value>Refer to the &lt;a class="accessible-link" href="https://mytc-montc.tc.gc.ca/rdims.php?id=15834778" target="_blank"&gt;Working Alone Directive&lt;/a&gt; for the definition of working alone.</value>
+  </data>
+  <data name="WorkingAloneDesc2" xml:space="preserve">
+    <value>&lt;strong&gt;If the conditions of your work arrangement meet the definition of working alone, you must speak to your immediate supervisor to discuss a working alone plan.&lt;/strong&gt;</value>
+  </data>
+  <data name="WorkingAloneDescRdims" xml:space="preserve">
+    <value>Working Alone Directive (RDIMS: 15834778)</value>
+  </data>
+  <data name="btnSteps" xml:space="preserve">
+    <value>STEPS</value>
+  </data>
+  <data name="PersonsDisability" xml:space="preserve">
+    <value>Persons with a disabiliy</value>
+  </data>
+  <data name="SelectGroupApply" xml:space="preserve">
+    <value>Select which group applies to you:</value>
+  </data>
+  <data name="StepInfo" xml:space="preserve">
+    <value>Employees and Managers must review the applicable policy instruments and other required information related to work arrangements.</value>
+  </data>
+  <data name="Step2" xml:space="preserve">
+    <value>Step 1</value>
+  </data>
+  <data name="Step3" xml:space="preserve">
+    <value>Step 2</value>
+  </data>
+  <data name="Step4" xml:space="preserve">
+    <value>Step 3</value>
+  </data>
+  <data name="VisibleMinority" xml:space="preserve">
+    <value>Members of visible minorities</value>
+  </data>
+  <data name="EndDateDesc" xml:space="preserve">
+    <value>(cannot be beyond one year of start date):</value>
+  </data>
+  <data name="TeleworkingDaysDesc1" xml:space="preserve">
+    <value>Your hours of work must comply with your collective agreement or terms and conditions of employment.</value>
+  </data>
+  <data name="TeleworkingDaysDesc2" xml:space="preserve">
+    <value>Your work arrangement agreement is conditional on your supervisor and delegated manager’s approval and meeting operational requirements. On occasion, there may be operational requirements that require a change to the agreement.</value>
+  </data>
+  <data name="TeleworkingDaysDesc4" xml:space="preserve">
+    <value>International telework agreements require deputy minister approval and are only granted on an exceptional basis. Employees should speak to their immediate supervisor to discuss the process for this type of request.</value>
+  </data>
+  <data name="TeleworkPeriod" xml:space="preserve">
+    <value>Work Arrangement Period (Work arrangement cannot exceed one year and may be reviewed earlier)</value>
+  </data>
+  <data name="TeleworkPeriodDesc" xml:space="preserve">
+    <value>Transport Canada (TC) employees, employees from other government departments and private contractors are not authorized to travel outside of Canada with TC-issued devices and assets (smartphones, tablets and notebooks) or to access TC information due to increased cyber-security threats. Any access to TC’s network outside of Canada is prohibited, whether it be through TC-issued devices or personal devices.</value>
+  </data>
+  <data name="OHSCheckListDesc1" xml:space="preserve">
+    <value>The same occupational health and safety standards must be met in a telework space as in a TC worksite. This checklist identifies the requirements under &lt;br&gt;the &lt;a class="accessible-link"   
+href="https://laws-lois.justice.gc.ca/eng/acts/L-2/page-15.html#docCont" target="_blank"&gt;&lt;i&gt;Canada Labour Code&lt;/i&gt;, Part II&lt;/a&gt; which outlines management's roles and responsibilities. This checklist is an integral part of the work arrangement agreement between the employer and employee and can assist the employee and their supervisor, in determining whether the telework location provides a safe and healthy work environment.</value>
+  </data>
+  <data name="OHSCheckListDesc2" xml:space="preserve">
+    <value>&lt;strong&gt;If you check “NO” in any section of this Occupational Health and Safety Checklist, you must speak to your immediate supervisor to discuss what, if any mitigation measures will be required.&lt;/strong&gt;</value>
+  </data>
+  <data name="TermConfirmMutualAgreement" xml:space="preserve">
+    <value>I understand that this agreement may be reviewed, modified or terminated as per the &lt;a class="accessible-link" href="https://mytc-montc.tc.gc.ca/rdims.php?id=17475936" target="_blank"&gt;TC Guidelines for Telework Arrangements&lt;/a&gt;.</value>
+  </data>
+  <data name="TermMandatoryTrainingList4" xml:space="preserve">
+    <value>&lt;a class="accessible-link" href="https://catalogue.csps-efpc.gc.ca/product?catalog=WMT101&amp;cm_locale=en" target="_blank"&gt;W101 Harassment and Violence Prevention for Employees&lt;/a&gt;</value>
+  </data>
+  <data name="TermMandatoryTrainingList5" xml:space="preserve">
+    <value>&lt;a class="accessible-link" href="https://catalogue.csps-efpc.gc.ca/product?catalog=WMT102&amp;cm_locale=en" target="_blank"&gt;W102 Harassment and Violence Prevention for Managers, and OHS Committees/Representatives&lt;/a&gt;</value>
+  </data>
+  <data name="TermWorkingAlone" xml:space="preserve">
+    <value>Working Alone</value>
+  </data>
+  <data name="TermWorkingAloneDesc" xml:space="preserve">
+    <value>You must ensure that if you are working alone, that you have reviewed the TC &lt;a class="accessible-link"   href="https://mytc-montc.tc.gc.ca/rdims.php?id=15834778" target="_blank"&gt;Working Alone Directive&lt;/a&gt; and have arranged with your supervisor to develop and abide by a working alone plan (if applicable).</value>
+  </data>
+  <data name="TermWorkplaceAccident" xml:space="preserve">
+    <value>Employee Responsibilities for telework</value>
+  </data>
+  <data name="TermWorkplaceAccidentDesc" xml:space="preserve">
+    <value>&lt;p&gt;I recognize that the Crown will not be held liable for an employee’s negligent misuse of government equipment that results in damages to the employee’s personal or real property during the performance of official duties or while using government equipment at the employee’s telework location.&lt;/p&gt;
+&lt;p&gt;I have completed or will complete the TC-required OHS training. I commit to maintaining a safe personal telework workspace. I recognize that my employer is responsible for my telework work tasks only, not for my entire home. I agree to report to my supervisor any accident, injury, illness, discomfort, ergonomic issues and hazards as soon as possible. Any accident, injury or illness arising from teleworking will only be considered work-related if arising from the performance of my work-related duties.&lt;/p&gt;
+&lt;p&gt;Transport Canada reserves the right to inspect the telework location I have identified. I recognize that in the event of a workplace accident, I may be required to allow access to investigators to perform their duties and recommend the appropriate corrective action and non-cooperation may impact my WAA.&lt;/p&gt;
+&lt;p&gt;Note : If you have any questions regarding the above conditions, contact your manager or Regional OHS Advisor, where applicable.&lt;/p&gt;</value>
+  </data>
+  <data name="OhsChekListTitle" xml:space="preserve">
+    <value>Occupational Health and Safety Checklist</value>
+  </data>
+  <data name="OhsChekListSubTitle" xml:space="preserve">
+    <value>Please review and complete the checklist for the telework location</value>
+  </data>
+  <data name="OhsWarningTitle" xml:space="preserve">
+    <value>Unmet OHS conditions</value>
+  </data>
+  <data name="OhsWarning" xml:space="preserve">
+    <value>Please discuss the unmet conditions with your supervisor to see what, if any mitigation measures need to be taken.</value>
+  </data>
+  <data name="AlternateWorksite" xml:space="preserve">
+    <value>Alternate Worksite Address - touchdown space or GCcoworking location (if applicable)</value>
+  </data>
+  <data name="MyAgreement" xml:space="preserve">
+    <value>My Agreement</value>
+  </data>
+  <data name="NotApplicable" xml:space="preserve">
+    <value>Not Applicable</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="SelectRegion" xml:space="preserve">
+    <value>Select Region</value>
+  </data>
+  <data name="SelfIdentification" xml:space="preserve">
+    <value>Self-identification</value>
+  </data>
+  <data name="SelfIdentificationDesc" xml:space="preserve">
+    <value>Self-identification information is only used for statistical reporting on the representation of employment equity groups within the public service workforce</value>
+  </data>
+  <data name="TCDesignatedWorksite" xml:space="preserve">
+    <value>TC Designated Worksite</value>
+  </data>
+  <data name="TCWorkSite" xml:space="preserve">
+    <value>TC Worksite</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="Postcode" xml:space="preserve">
+    <value>Postal Code</value>
+  </data>
+  <data name="Province" xml:space="preserve">
+    <value>Province</value>
+  </data>
+  <data name="SelectWorksite" xml:space="preserve">
+    <value>Select worksite</value>
+  </data>
+  <data name="TeleworkAddress" xml:space="preserve">
+    <value>Telework address (Enter the street number and select your address from the drop-down menu)</value>
+  </data>
+  <data name="btnAcknowledged" xml:space="preserve">
+    <value>Acknowledged</value>
+  </data>
+  <data name="DiscussWithManager" xml:space="preserve">
+    <value>Please discuss the unmet conditions with your supervisor to see what, if any mitigation measures need to be taken.</value>
+  </data>
+  <data name="OccupationalHealthSafetyChecklistDesc" xml:space="preserve">
+    <value>Please review and complete the checklist for the telework location</value>
+  </data>
+  <data name="SelectWorkArrangement" xml:space="preserve">
+    <value>Select the work arrangement</value>
+  </data>
+  <data name="SummaryDetailHeading" xml:space="preserve">
+    <value>Confirmation of your Work Arrangement Agreement Request</value>
+  </data>
+  <data name="TeleworkSchedule" xml:space="preserve">
+    <value>Telework Schedule</value>
+  </data>
+  <data name="UnmetOHSConditions" xml:space="preserve">
+    <value>Unmet OHS Conditions</value>
+  </data>
+  <data name="WorkingAloneTitle" xml:space="preserve">
+    <value>Working Alone</value>
+  </data>
+  <data name="WorkTypeSelectionInfo1" xml:space="preserve">
+    <value>If you are employed on a part-time basis, only select the actual workdays when you will be teleworking. Do not fill in the other days.</value>
+  </data>
+  <data name="Approve" xml:space="preserve">
+    <value>Approve</value>
+  </data>
+  <data name="SelectDenyReason" xml:space="preserve">
+    <value>Select reason</value>
+  </data>
+  <data name="DenyReason" xml:space="preserve">
+    <value>Deny Reason</value>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="RequestReviewedByDesc" xml:space="preserve">
+    <value>To save or print, select the CTRL+P function. Under Printer, either select
+Save to PDF or select your local printer.</value>
+  </data>
+  <data name="SetUpSupervisor" xml:space="preserve">
+    <value>Please setup your supervisor first.</value>
+  </data>
+  <data name="Decision" xml:space="preserve">
+    <value>Decision</value>
+  </data>
+  <data name="SelectDecision" xml:space="preserve">
+    <value>Select a decision</value>
+  </data>
+  <data name="DutyToAccommodate" xml:space="preserve">
+    <value>Is your request related to a duty to accommodate?</value>
+  </data>
+  <data name="DutyToAccommodateDesc1" xml:space="preserve">
+    <value>A duty to accommodate situation applies to needs related to the grounds of discrimination under the &lt;a class="accessible-link" href="https://laws-lois.justice.gc.ca/eng/acts/h-6/page-1.html#h-256800" target="_blank"&gt;&lt;i&gt;Canadian Human Rights Act&lt;/i&gt;&lt;/a&gt; where the employer has an obligation to adjust rules, polices or practices to enable you to participate fully.  (Requirements can be found in the &lt;a class="accessible-link" href="https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=32634" target="_blank"&gt;TB Directive on Duty to Accommodate&lt;/a&gt;)</value>
+  </data>
+  <data name="DutyToAccommodateDesc2" xml:space="preserve">
+    <value>&lt;strong&gt;You must speak with your immediate supervisor for them to better understand the request for duty to accommodate. Any information you provide is protected under the &lt;a class="accessible-link" href="https://laws-lois.justice.gc.ca/eng/acts/p-21/FullText.html" target="_blank"&gt;&lt;i&gt;Privacy Act&lt;/i&gt;&lt;/a&gt;. It will only be used to address duty to accommodate needs.&lt;/strong&gt;</value>
+  </data>
+  <data name="AccommodateDutyTitle" xml:space="preserve">
+    <value>Duty to accommodate</value>
+  </data>
+  <data name="NA" xml:space="preserve">
+    <value>N/A</value>
+  </data>
+  <data name="btnSubmit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="PrivacyStatement" xml:space="preserve">
+    <value>Privacy Notice Statement – For use by Transport Canada – Work Arrangement Agreement</value>
+  </data>
+  <data name="PrivacyStatementDesc" xml:space="preserve">
+    <value>The purpose of collecting and using this information is to fulfill your employer's responsibility to ensure the health and safety of employees in their work arrangements whether on-site or off-site. Any personal information provided is collected pursuant to section 7 and 11.1 of the &lt;i&gt;Financial Administration Act&lt;/i&gt; and will be used and disclosed in accordance with the &lt;i&gt;Privacy Act&lt;/i&gt;, as described in the Personal Information Bank, entitled &lt;a class="accessible-link" href="https://www.canada.ca/en/treasury-board-secretariat/services/access-information-privacy/access-information/information-about-programs-information-holdings/standard-personal-information-banks.html#pse907" target="_blank"&gt;Occupational Health and Safety - PSE 907&lt;/a&gt;.  Aggregated information may be used for management reporting to assist in planning and program evaluation purposes. You have the right to request access to and correction of, your personal information. Should you wish to exercise your rights under the Privacy Act or have any questions about this privacy statement, please contact Transport Canada’s &lt;a class="accessible-link" href="mailto:ATIP-AIPRP@tc.gc.ca"&gt;Access to Information and Privacy Office&lt;/a&gt;. Should you wish to lodge a complaint with respect to the handling of your personal information, you may do so by contacting the &lt;a class="accessible-link" href="https://www.priv.gc.ca/en/report-a-concern/file-a-formal-privacy-complaint/file-a-complaint-about-a-federal-institution/" target="_blank"&gt;Office of the Privacy Commissioner of Canada&lt;/a&gt;.</value>
+  </data>
+  <data name="UpdateEmergencyContactInfo" xml:space="preserve">
+    <value>To continue, please update your emergency contact information, find out how by clicking &lt;a class="accessible-link" href="https://mytc-montc.tc.gc.ca/rdims.php?id=18262184" target="_blank"&gt;here&lt;/a&gt;. Once the information is entered, you must either close or refresh your browser to continue.</value>
+  </data>
+  <data name="GeoLocationInfo" xml:space="preserve">
+    <value>Your position &lt;strong&gt;&lt;i&gt;GEO location&lt;/i&gt;&lt;/strong&gt; and TC Designated Worksite are in different regions. Please verify the accuracy of the inputted information.</value>
+  </data>
+  <data name="AdHocInfo" xml:space="preserve">
+    <value>Check here if requesting to telework on an ad hoc basis.</value>
+  </data>
+  <data name="ConsiderItem5" xml:space="preserve">
+    <value>The appropriate &lt;a class="accessible-link" href="https://mytc-montc.tc.gc.ca/rdims.php?id=14435629" target="_blank"&gt;delegated manager&lt;/a&gt; is aware of and will consider authorizing the change to the GEO code.</value>
+  </data>
+  <data name="ConsiderItem6" xml:space="preserve">
+    <value>Arrangements have been made with the manager responsible for the TC worksite and with Facilities to provide a workspace for this employee.</value>
+  </data>
+  <data name="ConsiderItem7" xml:space="preserve">
+    <value>Appropriate local supports (as applicable) are in place for the work arrangement.</value>
+  </data>
+  <data name="ConsiderItem8" xml:space="preserve">
+    <value>I am responsible for various costs as covered under Government of Canada policy instruments.</value>
+  </data>
+  <data name="DecisionBtn" xml:space="preserve">
+    <value>Decision</value>
+  </data>
+  <data name="GeoLocationWarning" xml:space="preserve">
+    <value>The position GEO location and TC Designated Worksite are in different regions. A manager-employee discussion is required.</value>
+  </data>
+  <data name="TCDesignatedWorksiteDesc" xml:space="preserve">
+    <value>Your designated worksite is the physical TC location where you ordinarily perform your work duties</value>
+  </data>
+  <data name="AdditionalInformation" xml:space="preserve">
+    <value>Additional Considerations</value>
+  </data>
+  <data name="UnmetCondition" xml:space="preserve">
+    <value>Unmet Condition</value>
+  </data>
+  <data name="UpdateYourInfo" xml:space="preserve">
+    <value>Update your information</value>
+  </data>
+  <data name="ViewDetail" xml:space="preserve">
+    <value>View details</value>
+  </data>
+  <data name="Saturday" xml:space="preserve">
+    <value>Saturday</value>
+  </data>
+  <data name="Sunday" xml:space="preserve">
+    <value>Sunday</value>
+  </data>
+  <data name="CheckDelegatedAuthority" xml:space="preserve">
+    <value>Not sure if you have the delegated authority? Click &lt;a class="accessible-link" href="https://mytc-montc.tc.gc.ca/rdims.php?id=14435629" target="_blank"&gt;here&lt;/a&gt;.</value>
+  </data>
+  <data name="CreateInstruction" xml:space="preserve">
+    <value>Instructions for creating your &lt;a class="accessible-link" href="https://mytc-montc.tc.gc.ca/rdims.php?id=18247946" target="_blank"&gt;Work Arrangement Agreement (WAA)&lt;/a&gt;.</value>
+  </data>
+  <data name="ReviewInstruction" xml:space="preserve">
+    <value>Instructions to &lt;a class="accessible-link" href="https://mytc-montc.tc.gc.ca/rdims.php?id=18247936" target="_blank"&gt;Reviewing Your Team's Work Arrangement Agreements (WAA)&lt;/a&gt;.</value>
+  </data>
+  <data name="UnmetConditionDesc" xml:space="preserve">
+    <value>The employee has identified the following unmet conditions. Consultation with your local or regional OHS Representative may be required.</value>
+  </data>
+  <data name="UnmetConditions" xml:space="preserve">
+    <value>Unmet Condition(s)</value>
+  </data>
+  <data name="IssuesToLREmail" xml:space="preserve">
+    <value>For issues encountered with the app, please contact: </value>
+  </data>
+  <data name="ProtectedA" xml:space="preserve">
+    <value>Protected A</value>
+  </data>
+  <data name="SearchAgreementByName" xml:space="preserve">
+    <value>Search agreements by name (First Name and Last Name)</value>
+  </data>
+  <data name="Approver" xml:space="preserve">
+    <value>Approver</value>
+  </data>
+  <data name="DecisionDate" xml:space="preserve">
+    <value>Decision Date</value>
+  </data>
+  <data name="ManageAgreements" xml:space="preserve">
+    <value>Manage Agreements</value>
+  </data>
+  <data name="Message_EmailSent" xml:space="preserve">
+    <value>An Email has been sent to the employee and the manager.</value>
+  </data>
+  <data name="Message_NotFound" xml:space="preserve">
+    <value>Agreement not found.</value>
+  </data>
+  <data name="Message_NotFoundEmployee" xml:space="preserve">
+    <value>Agreement was not found for this employee.</value>
+  </data>
+  <data name="Message_UpdateError" xml:space="preserve">
+    <value>An error occurred while updating the agreement.</value>
+  </data>
+  <data name="Message_UpdateFail" xml:space="preserve">
+    <value>Failed to update the agreement.</value>
+  </data>
+  <data name="Message_UpdateSuccess" xml:space="preserve">
+    <value>Agreement was successfully updated.</value>
+  </data>
+  <data name="Recommender" xml:space="preserve">
+    <value>Recommender</value>
+  </data>
+  <data name="ReturnTo" xml:space="preserve">
+    <value>Return to</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="DescribeYourVariableSchedules" xml:space="preserve">
+    <value>Describe in detail the proposed telework schedule and frequency (maximum 750 characters)</value>
+  </data>
+  <data name="SelectYourTeleworkDays" xml:space="preserve">
+    <value>Teleworking on the following days (proposed)</value>
+  </data>
+  <data name="TeleworkingDaysDesc3" xml:space="preserve">
+    <value>In certain locations, if you are approved to telework for three or more days per week, you may not have an assigned workspace when working at the TC worksite.</value>
+  </data>
+  <data name="TeleworkSchedule2" xml:space="preserve">
+    <value>I am requesting to telework on the following frequency:</value>
+  </data>
+  <data name="TypeHybrid" xml:space="preserve">
+    <value>Hybrid</value>
+  </data>
+  <data name="WorkTypeSelectionInfo2" xml:space="preserve">
+    <value>You may only choose Saturday and Sunday if it is part of your regular work schedule.</value>
+  </data>
+  <data name="TypeFulltimeOnSiteDesc" xml:space="preserve">
+    <value>(full-time on-site, may telework on an ad hoc basis)</value>
+  </data>
+  <data name="TypeHybridDesc" xml:space="preserve">
+    <value>(combination of on-site and teleworking)</value>
+  </data>
+  <data name="OHSCheckListDesc3" xml:space="preserve">
+    <value>&lt;strong&gt;If any OHS requirement is unclear, speak to your supervisor or Regional OHS Advisor.&lt;/strong&gt;</value>
+  </data>
+  <data name="TermITIM" xml:space="preserve">
+    <value>Information Technology, Information Management and Security of Information</value>
+  </data>
+  <data name="TermITIMList1" xml:space="preserve">
+    <value>I agree to use equipment and electronic networks belonging to the employer only for the purposes of carrying out the employee’s work unless otherwise authorized by the supervisor and/or described in the TBS &lt;a class="accessible-link" href="https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=27907" target="_blank"&gt;Guideline on Acceptable Network and Device Use&lt;/a&gt;.</value>
+  </data>
+  <data name="TermITIMList2" xml:space="preserve">
+    <value>I agree to take all reasonable precautions to protect the equipment used and to take responsibility for the safeguarding of information (physical or electronic) at the telework location in accordance with the &lt;a class="accessible-link" href="https://mytc-montc.tc.gc.ca/rdims.php?id=293335" target="_blank"&gt;TC Protected and Classified Information Standard&lt;/a&gt;.</value>
+  </data>
+  <data name="TermITIMList3" xml:space="preserve">
+    <value>I agree to manage information of business value according to the requirements under the &lt;a class="accessible-link" href="https://laws-lois.justice.gc.ca/eng/acts/a-1/page-1.html" target="_blank"&gt;&lt;i&gt;Access to Information Act&lt;/i&gt;&lt;/a&gt; and the &lt;a class="accessible-link" href="https://laws-lois.justice.gc.ca/eng/acts/p-21/page-1.html" target="_blank"&gt;&lt;i&gt;Privacy Act&lt;/i&gt;&lt;/a&gt;.</value>
+  </data>
+  <data name="TermITIMList4" xml:space="preserve">
+    <value>I agree to store information of business value with a security level up to and including Protected B in Transport Canada's approved databases or its official document repository RDIMS according to the &lt;a class="accessible-link" href="https://mytc-montc.tc.gc.ca/rdims.php?id=147060" target="_blank"&gt;TC Information Management Directive&lt;/a&gt;.</value>
+  </data>
+  <data name="TermITIMList5" xml:space="preserve">
+    <value>I will ensure that a secure internet connection is used at my telework location at my telework location, and that to reduce risk of a cybersecurity breach, unsecure publicly available internet connections will not be used.</value>
+  </data>
+  <data name="TermITIMList6" xml:space="preserve">
+    <value>I agree to review the guidance provided by the Canadian Centre for Cyber Security &lt;a class="accessible-link" href="https://cyber.gc.ca/en/guidance/mobile-devices-and-business-travellers-itsap00087" target="_blank"&gt;ITSAP.00.087 Mobile Devices and Business travelers&lt;/a&gt;.</value>
+  </data>
+  <data name="GEOCodeTooltip" xml:space="preserve">
+    <value>The position GEO location (GEO Code), assigned by Statistics Canada, identifies the geographic location of the physical location of a position at its designated workplace in Canada</value>
+  </data>
+  <data name="ConsiderItemGuidance2" xml:space="preserve">
+    <value>For additional information on GEO codes, please read &lt;a class="accessible-link" href="https://mytc-montc.tc.gc.ca/rdims.php?id=18449949" target="_blank"&gt;GEO Code Location - Requirements and Considerations&lt;/a&gt;</value>
+  </data>
+  <data name="ScheduleOption1" xml:space="preserve">
+    <value>Less than 5 days</value>
+  </data>
+  <data name="ScheduleOption2" xml:space="preserve">
+    <value>5 to 9 days</value>
+  </data>
+  <data name="ScheduleOption3" xml:space="preserve">
+    <value>10 to 14 days</value>
+  </data>
+  <data name="ScheduleOption4" xml:space="preserve">
+    <value>15 to 19 days</value>
+  </data>
+  <data name="ScheduleOption5" xml:space="preserve">
+    <value>&lt;strong&gt;20 (and over) days&lt;/strong&gt; (exceptional basis only, senior management approval required)</value>
+  </data>
+  <data name="ScheduleCommentTitle" xml:space="preserve">
+    <value>Describe in detail your proposed work arrangement schedule (Maximum 750 characters)</value>
+  </data>
+  <data name="ConsiderGEOCode" xml:space="preserve">
+    <value>GEO code considerations:</value>
+  </data>
+  <data name="ManagerAttest" xml:space="preserve">
+    <value>I confirm that this work arrangement agreement is aligned with and supports senior management’s strategy for TC’s flexible work model as well as my directorate and team plans.</value>
+  </data>
+  <data name="TeleworkScheduleSubTitle" xml:space="preserve">
+    <value>On a monthly basis, I am requesting to telework as follows:</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="ImmediateSupervisor" xml:space="preserve">
+    <value>Immediate supervisor</value>
+  </data>
+  <data name="IncompleteAltAddress" xml:space="preserve">
+    <value>Incomplete Alternate worksite address</value>
+  </data>
+  <data name="IncompleteAltAddressMsg" xml:space="preserve">
+    <value>Your Alternate worksite address is incomplete.</value>
+  </data>
+  <data name="OpenToUpdate" xml:space="preserve">
+    <value>Open to update</value>
+  </data>
+</root>

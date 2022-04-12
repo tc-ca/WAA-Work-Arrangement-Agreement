@@ -1,0 +1,56 @@
+﻿@using Microsoft.Extensions.Configuration;
+@inject IConfiguration _config
+
+@{
+    var CurrentCommit = Global.CurrentCommit.Replace("\r\n", string.Empty).Replace("\n", string.Empty).Replace("\r", string.Empty);
+
+    var Version = new
+    {
+        Prefix = Template.Language_2Char == "en" ? _config["AppSettings:AppAcronymEN"] : _config["AppSettings:AppAcronymFR"],
+        Number = CurrentCommit.Contains("-") ? "" : CurrentCommit,
+        Hash = CurrentCommit.Contains("-") ? CurrentCommit.Split('-')[2] : ""
+    };
+    var lastUpdateDate = _config["AppSettings:LastUpdateDate"];
+}
+
+<style>
+    .__versionInfo {
+        font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+        background: #b3b3b3;
+        display: inline-block;
+        border-radius: 3px;
+        font-size: 0.85em;
+    }
+
+        .__versionInfo .prefix {
+            background: #585858;
+            color: white;
+            padding: 0.025rem 0.5rem;
+            height: 100%;
+            display: inline-block;
+            border-top-left-radius: 3px;
+            border-bottom-left-radius: 3px;
+            font-weight: bold;
+        }
+
+        .__versionInfo .hash {
+            color: #454545;
+            font-weight: bold;
+            padding: 0.025rem 0.5rem;
+            height: 100%;
+        }
+</style>
+
+<div class="__versionInfo">
+    
+    @if (String.IsNullOrEmpty(Version.Hash))
+    {
+    <span class="prefix">Last Update Date: @lastUpdateDate</span>
+        <span class="hash">@Version.Number</span>
+    }
+    else
+    {
+        <span class="prefix">@Version.Prefix</span>
+        <span class="hash">@Version.Hash</span>
+    }
+</div>

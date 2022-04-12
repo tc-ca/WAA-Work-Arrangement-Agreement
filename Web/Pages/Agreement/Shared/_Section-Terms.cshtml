@@ -1,0 +1,101 @@
+﻿@model Web.Pages.HomeModel
+@{ var status = Model.MyAgreement.AgreementId == 0 ? Model.ShowStartAgreement == true ? "0" : "1" : Model.MyAgreement.StatusCode; }
+
+<style type="text/css">
+    .nowrap {
+        white-space: nowrap;
+    }
+</style>
+
+<div id="content-6" data-testid="section-terms" class="ui transition hidden">
+    <div class="ui attached segment">
+        <div class="ui fully-centered grid">
+            <div class="thirteen wide column">
+                <Heading icon="file alternate outline" headinglevel="1" primaryText="@Global.Terms" secondaryText="@Global.TermsDesc"></Heading>
+            </div>
+            <div class="three wide column">
+                <span class="right floated">
+                    <span class="ui small basic right pointing label">@Global.Status</span> <partial name="Shared/_AgreementStatus" model="new StatusModel() { Status = @status, IsMgr = false }" />
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="ui attached segment">
+
+        <h4 class="ui dividing header">@Global.TermOHSRequirement</h4>
+        <p>@Global.TermOHSRequirementDesc</p>
+
+        <h4 class="ui dividing header">@Global.TermMandatoryOHSTraining</h4>
+        <ul class="ui list">
+            <li>@Html.Raw(Global.TermMandatoryTrainingList1)</li>
+            <li>@Html.Raw(Global.TermMandatoryTrainingList2)</li>
+            <li>@Html.Raw(Global.TermMandatoryTrainingList3)</li>
+            <li>@Html.Raw(Global.TermMandatoryTrainingList4)</li>
+            <li>@Html.Raw(Global.TermMandatoryTrainingList5)</li>
+        </ul>
+
+        <h4 class="ui dividing header">@Global.TermWorkingAlone</h4>
+        <p>@Html.Raw(@Global.TermWorkingAloneDesc)</p>
+
+        <h4 class="ui dividing header">@Global.TermAdditionalInfo</h4>
+        <p>@Global.TermAdditionalInfoDesc</p>
+        <ul class="ui list">
+            <li>@Html.Raw(Global.TermAdditionalInfoList2)</li>
+            <li>@Html.Raw(Global.TermAdditionalInfoList4)</li>
+        </ul>
+
+        <h4 class="ui dividing header">@Global.TermEmergencyMgt</h4>
+        <p>@Html.Raw(@Global.TermEmergencyMgtDesc)</p>
+
+        <h4 class="ui dividing header">@Global.TermITIM</h4>
+        <p>@Html.Raw(Global.TermITIMList1)</p>
+        <p>@Html.Raw(Global.TermITIMList2)</p>
+        <p>@Html.Raw(Global.TermITIMList3)</p>
+        <p>@Html.Raw(Global.TermITIMList4)</p>
+        <p>@Html.Raw(Global.TermITIMList5)</p>
+        <p>@Html.Raw(Global.TermITIMList6)</p>
+
+
+        <h4 class="ui dividing header">@Global.TermWorkplaceAccident</h4>
+        <p>@Html.Raw(@Global.TermWorkplaceAccidentDesc)</p>
+
+
+        <h4 class="ui dividing header">@Global.TermGeneralCondition</h4>
+        <p>@Html.Raw(@Global.TermGeneralConditionDesc)</p>
+        <ul class="ui list">
+            <li>@Global.TermGeneralConditionList1</li>
+            <li>@Global.TermGeneralConditionList2</li>
+            <li>@Global.TermGeneralConditionList3</li>
+            <li>@Global.TermGeneralConditionList4</li>
+            <li>@Global.TermGeneralConditionList5</li>
+        </ul>
+
+        <div class="ui divider"></div>
+        <p class="terms-note"><b>@Global.TermsWillBeSentToYou</b></p>
+        <div class="inline field">
+            <div class="ui checkbox">
+                <input type="checkbox" asp-for="@Model.MyAgreement.ObligationInd" class="termChecks" data-testid="obligations-check" />
+                <label asp-for="@Model.MyAgreement.ObligationInd">
+                    <span style="color:#DB2828">*</span><span class="a11y-label">@Global.TermConfirmObligations</span>
+                </label>
+            </div>
+        </div>
+        <div class="inline field">
+            <div class="ui checkbox">
+                <input type="checkbox" asp-for="@Model.MyAgreement.ConditionInd" class="termChecks" data-testid="conditions-check" />
+                <label asp-for="@Model.MyAgreement.ConditionInd">
+                    <span style="color:#DB2828">*</span><span class="a11y-label">@Global.TermConfirmConditions</span>
+                </label>
+            </div>
+        </div>
+        <div class="inline field">
+            <div class="ui checkbox">
+                <input type="checkbox" asp-for="@Model.MyAgreement.MutualAgreementInd" class="termChecks" data-testid="conditions-check" />
+                <label asp-for="@Model.MyAgreement.MutualAgreementInd">
+                    <span style="color:#DB2828">*</span><span class="a11y-label">@Html.Raw(@Global.TermConfirmMutualAgreement)</span>
+                </label>
+            </div>
+        </div>
+
+    </div>
+</div>

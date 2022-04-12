@@ -1,0 +1,745 @@
+﻿@charset 'utf-8';
+
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+body {
+    padding-bottom: 20px;
+    overflow-y: scroll;
+    background: #f9f9f9 !important;
+}
+
+
+/* Wrapping element */
+
+
+/* Set some basic padding to keep content from hitting the edges */
+
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#wb-sm {
+    background: #515;
+}
+
+#wb-info {
+    background: #f8f8f8;
+    border-top: 4px solid #515;
+    line-height: 30px;
+    position: relative;
+    z-index: 5;
+}
+
+    #wb-info .brand {
+        background: #f8f8f8;
+    }
+
+        #wb-info .brand object,
+        #wb-info .brand img {
+            height: 40px;
+            margin-bottom: 10px;
+            margin-top: 20px;
+            width: auto;
+        }
+
+#wb-bnr {
+    padding: 0.75rem 0 0.5rem 0;
+}
+
+#wb-bc {
+    background-color: #e6e6e6;
+}
+
+main h1 {
+    margin-top: 1rem !important;
+}
+
+h1 {
+    border-bottom: none;
+}
+
+.ui.header h1 {
+    margin: 0;
+}
+
+.ui.small.header h1 {
+    font-size: 1.07142857em;
+}
+
+.ui.medium.header h1 {
+    font-size: 1em;
+}
+
+.ui.large.header h1 {
+    font-size: 1.71428571em;
+}
+
+i .icon {
+    padding-left: 0;
+    min-height: 0;
+    min-width: 0;
+}
+
+.ui.modal {
+    position: absolute;
+    top: initial;
+    right: initial;
+    bottom: initial;
+    left: initial;
+    overflow: visible;
+    background: transparent !important;
+}
+
+.alert,
+.label {
+    border-width: 0;
+}
+
+.ui.selectable.table tbody tr.active,
+.ui.selectable.table tbody tr.active:nth-child(2n) {
+    background-color: #eefaf0 !important;
+}
+
+.ui.selectable.striped.table tbody tr.active:nth-child(2n) {
+    background-color: #d4f2d9 !important;
+}
+
+.ui.selectable.table tr.active:hover {
+    background-color: #f4f4f4 !important;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+    nav ul li {
+        display: inline;
+    }
+
+.menu nav ul li {
+    display: inline-block;
+}
+
+.menu nav ul li, .menu nav ul li a {
+    height: 100%
+}
+
+#topNavBar {
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+}
+
+
+/* SUI improvements */
+/* make primary button accessible - fix color contrast */
+.ui.primary.buttons .button, .ui.primary.button {
+    background-color: #1e78be !important;
+}
+
+.fully-centered {
+    display: flex !important;
+    align-items: center !important;
+}
+
+.ui.table .muted {
+    color: rgba(0, 0, 0, .54);
+}
+
+.full.height.segment,
+.full.height.card {
+    height: 100%;
+}
+
+.ui.compact.segments {
+    max-width: 100%;
+}
+
+.ui.skinny.segment {
+    padding: 0.5em !important;
+}
+
+@media only screen and (min-width: 1450px) {
+    .ui.extremely.padded.segment {
+        margin: 0 8.5rem;
+    }
+}
+
+.ui.circular.label .icon {
+    margin: 2px;
+}
+
+.ui.basic.message,
+.ui.borderless.message {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+    .ui.basic.message > i {
+        font-size: 1.5em !important;
+    }
+
+i .light.purple.icon {
+    color: #d29ae5 !important;
+}
+
+.ui.paddingless.segment {
+    padding: 0 !important;
+}
+
+.brightorange {
+    color: #FF8C00 !important;
+}
+
+body.animating.in.dimmable,
+body.dimmed.dimmable {
+    overflow-y: scroll;
+}
+
+.bold.blue {
+    font-weight: bold;
+    color: #2185d0 !important;
+}
+
+#signature-icon {
+    top: 0;
+    left: 0;
+    position: absolute;
+    height: 100%;
+    line-height: 1;
+    border-radius: 0;
+    border-top-left-radius: inherit;
+    border-bottom-left-radius: inherit;
+    text-align: center;
+    margin: 0;
+    width: 2.57142857em;
+    background-color: rgba(0, 0, 0, .05);
+    -webkit-box-shadow: -1px 0 0 0 transparent inset;
+    box-shadow: -1px 0 0 0 transparent inset;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    color: #ffe21f !important;
+    font-size: 1.25em;
+}
+
+
+/* Make footer stick to bottom*/
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+footer {
+    flex-shrink: 0;
+}
+
+main {
+    padding-bottom: 9rem !important;
+}
+
+
+/* FORM */
+fieldset {
+    border-bottom: 1px solid #eee;
+    margin-bottom: 21px;
+    padding-bottom: 10.5px;
+    position: relative;
+    padding: 0 !important;
+    margin: 0;
+    border: 0;
+    min-width: 0;
+}
+
+.ui.form .field .ui.input:not(:first-of-type) {
+    margin-top: 0.25rem;
+}
+
+.ui.form .ui.dropdown .menu {
+    margin: 0 !important;
+}
+
+.ui.form input:focus,
+.ui.form ui.search.dropdown.active,
+.ui.form textarea:focus,
+.ui.form .focus,
+.ui.form .ui.dropdown.active,
+.ui.dropdown .menu,
+.ui.form select.ui.dropdown:focus,
+.ui.form .field.error .ui.dropdown.active,
+.ui.form .ui.selection.dropdown.focus {
+    border-color: #82299f !important;
+    transition: none;
+}
+
+.ui.form .field.error .ui.dropdown .item {
+    color: #000000 !important;
+    background: #ffffff !important;
+}
+
+    .ui.form .field.error .ui.dropdown .item.selected {
+        background: rgba(0, 0, 0, .03) !important;
+    }
+
+.ui.selection.dropdown .menu {
+    min-width: calc(100% + 4px) !important;
+    width: calc(100% + 4px) !important;
+    left: -2px;
+    border-width: 2px;
+}
+
+.update-form .header .icon {
+    font-size: 1em !important;
+    line-height: 0.75em;
+}
+
+.ui.form .fields {
+    margin-bottom: 1.25em;
+}
+
+
+/*.ui.form .ui.top.attached.secondary.segment {
+    flex-grow: 0;
+    border-bottom: 2px solid #ebebeb;
+    background-color: #fefcfe;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+*/
+
+.ui.form .bottom.attached.secondary.segment {
+    border-top: 1px solid #ccc !important;
+}
+
+.ui.form .ui.labeled.input .ui.label {
+    font-family: monospace;
+}
+
+.ui.form input,
+.ui.form textarea,
+.ui.form .ui.dropdown {
+    background-color: #fefcfe !important;
+}
+
+.ui.form input,
+.ui.form textarea,
+.ui.form .ui.labeled.input .ui.label,
+.ui.form .ui.dropdown {
+    border-width: 2px !important;
+    border-color: #ccc !important;
+}
+
+    .ui.form input.input-validation-error,
+    .ui.form .ui.dropdown.input-validation-error {
+        border: 2px solid #d01919 !important;
+    }
+
+.ui.form .field.error input,
+.ui.form .field.error textarea,
+.ui.form .field.error .ui.labeled.input .ui.label,
+.ui.form .field.error .ui.dropdown.selection {
+    border-color: #9F3A38 !important;
+}
+
+.ui.form .field.error .ui.dropdown .text,
+.ui.form .dropdown.active,
+.ui.form .field.error .ui.form .dropdown.active .menu .item:not(:hover) {
+    background: transparent !important;
+}
+
+.ui.form .field.error .ui.dropdown .item {
+    color: #000;
+}
+
+.ui.form .error-button {
+    text-align: left !important;
+}
+
+.ui.form .field-error-list {
+    margin-top: 6px !important;
+    margin-bottom: 0px !important;
+}
+
+.ui.form .ui.labeled.input .ui.label {
+    border-right: none !important;
+    background: #ebebeb;
+}
+
+.ui.form .ui.labeled.input input,
+.ui.form .ui.labeled.input textarea {
+    border-left: none !important;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+
+.ui.dropdown .text {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 95%;
+}
+
+.ui.checkbox label span.a11y-label {
+   padding: 4px; 
+    border: 1px solid transparent;
+    /*    min-width: 75px;
+    display: inline-block;*/
+}
+
+.ui.radio label {
+    margin: 1px;
+}
+
+.ui.checkbox.focus label:before, .ui.checkbox:hover label:before {
+    outline: none;
+    box-shadow: 0 0 8px 2px #2185D0;
+}
+
+.ui.checkbox.focus label span.a11y-label, .ui.checkbox:hover label span.a11y-label {
+    background: #f9f9f9;
+    border: 1px solid #ccc;
+    outline: 4px solid transparent;
+}
+
+.ui.checkbox:hover label {
+    cursor: pointer !important;
+}
+
+.ui.checkbox input {
+    display: block !important;
+}
+
+.ui.radio label:after, .ui.radio label:before {
+    margin-top: 0.5rem;
+}
+.ui.radio label .a11y-label {
+    display: block;
+}
+.ui.radio label .a11y-label span {
+    display: block;
+    font-size: 0.9em;
+    font-weight: normal;
+    }
+
+/* make required asterisk bigger */
+.ui.form .required.field > .checkbox:after,
+.ui.form .required.field > label:after,
+.ui.form .required.fields.grouped > label:after,
+.ui.form .required.fields:not(.grouped) > .field > .checkbox:after,
+.ui.form .required.fields:not(.grouped) > .field > label:after,
+.ui.form label.required:after {
+    font-size: 1.2em;
+}
+.ui.radio.checkbox .box:before, .ui.radio.checkbox label:before {
+    width: 16px !important;
+    height: 16px !important;
+    top: 0 !important;
+}
+    .ui.radio.checkbox input:checked ~ .box:after, .ui.radio.checkbox input:checked ~ label:after {
+    opacity: 1;
+    content: "";
+    border: 10px solid;
+    border-radius: 50%;
+    position: absolute;
+    margin-left: -2px;
+    margin-top: 4px;
+    transition: opacity 0.2s ease-in-out;
+}
+
+/* placeholder color */
+
+input::-webkit-input-placeholder {
+    color: #757575 !important;
+}
+
+input::-moz-placeholder {
+    color: #757575 !important;
+}
+
+.ui.form input:-ms-input-placeholder,
+.ui.form.error input:-ms-input-placeholder {
+    color: #757575 !important;
+}
+
+.ui.default.dropdown:not(.button) > .text,
+.ui.dropdown:not(.button) > .default.text {
+    color: #757575 !important;
+}
+
+
+/* end placeholder*/
+
+
+/* ------ */
+
+.light-purple.segment,
+.light.purple.menu,
+.light-purple {
+    background: #fefcfe !important;
+}
+
+
+/* turn off ie11 clear button on inputs */
+
+input::-ms-clear {
+    display: none;
+    height: 0;
+    width: 0;
+}
+
+.wb-inv,
+.wb-sl {
+    clip: rect(1px, 1px, 1px, 1px);
+    height: 1px;
+    margin: 0;
+    overflow: hidden;
+    position: absolute;
+    width: 1px;
+}
+
+.wb-sl {
+    background: #26374a;
+    color: #fff;
+    font-weight: 700;
+    margin-left: 0.5rem !important;
+    padding: 0.5rem;
+}
+
+    .wb-show-onfocus:focus,
+    .wb-sl:focus,
+    .wb-disable .wb-slc .wb-sl {
+        clip: rect(auto, auto, auto, auto);
+        height: inherit;
+        margin: inherit;
+        overflow: inherit;
+        position: static;
+        width: inherit;
+    }
+
+
+/* make dropdown icon's clear button accessible (DSBA-) */
+
+.ui.dropdown input:not([value]) ~ .remove.icon,
+.ui.dropdown input[value=''] ~ .remove.icon {
+    display: block !important;
+}
+
+.ui.dropdown select.noselection ~ .remove.icon,
+.ui.dropdown.loading > .remove.icon {
+    display: none !important;
+}
+
+.ui.loading.dropdown .remove.icon {
+    opacity: 0;
+}
+
+
+/* END DSBA*/
+
+
+/* ADMIN AREA */
+
+.muted-light-purple.segment {
+    background-color: #efedf9 !important;
+}
+
+.muted-dark-purple.segment {
+    background-color: #6d5477 !important;
+}
+
+
+/* Version info */
+
+.__versionInfo {
+    text-align: right;
+    font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    font-size: 0.85em;
+}
+
+    .__versionInfo .prefix {
+        color: #585858;
+        font-weight: bold;
+    }
+
+    .__versionInfo .hash {
+        color: #767676;
+    }
+
+
+/* END Version info */
+
+
+/* ie11 hacks*/
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    .basic.purple.button {
+        box-shadow: none !important;
+        border: 1px solid #9627ba;
+    }
+}
+
+#close {
+    margin-top: 2rem;
+}
+
+    #close:hover,
+    #close:focus {
+        background: #A333C8;
+        color: white;
+    }
+
+
+/* UserAuthMenu */
+
+#authMenu {
+    position: absolute;
+    top: 5px;
+    right: 0;
+}
+
+    #authMenu:hover {
+        cursor: pointer;
+    }
+
+.fakeDisabled {
+    cursor: default;
+    opacity: .45 !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    /*pointer-events: none !important;*/
+}
+
+nav ol.breadcrumb {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+    nav ol.breadcrumb li {
+        display: inline;
+    }
+
+
+/* app headers*/
+
+.app-header h1, .app-header h2 {
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+}
+
+.app-header .header-icon {
+    text-align: center;
+    padding-right: 0 !important;
+    padding-left: 1rem !important;
+}
+
+
+/* END app headers*/
+
+.basic.purple.button:hover,
+.basic.purple.button:focus {
+    background: #A333C8 !important;
+    color: white !important;
+}
+
+.hide-bullets li {
+    list-style: none !important;
+}
+
+    .hide-bullets li:before {
+        content: '' !important;
+    }
+
+
+/* fix color contrast issues with FUI */
+.yellow.button, .green.button, .orange.label, .yellow.label {
+    color: #000 !important;
+}
+
+.blue.button:not(.basic):not(.tertiary) {
+    background: #1e78be !important;
+}
+
+.ui.button:hover:not(.tertiary), .ui.button:focus:not(.tertiary) {
+    /*box-shadow: 0 0 8px 2px #2185D0;*/
+    box-shadow: 0 1px 8px 0 hsl(0deg 0% 100%), 0 0 0 4px #2185d0 !important;
+    outline: 4px solid transparent;
+}
+.ui.red.basic.button {
+    color: #d52727 !important;
+}
+.ui.blue.header {
+    color: #1e7abe !important;
+}
+.ui.green.label {
+    color: #003111 !important;
+}
+/* ---
+    END fix color contrast issues with FUI 
+   ---
+*/
+
+.fake-bullet {
+    display: list-item; /* This has to be "list-item"                                               */
+    list-style-type: disc; /* See https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-type     */
+    list-style-position: inside;
+    margin-left: 1.75em;
+}
+
+/* optional */
+:invalid {
+    outline: 1px solid red;
+}
+
+.shell {
+    position: relative;
+    line-height: 1;
+}
+
+    .shell span {
+        position: absolute;
+        left: 3px;
+        top: 1px;
+        color: #ccc;
+        pointer-events: none;
+        z-index: -1;
+    }
+
+        .shell span i {
+            font-style: normal;
+            /* any of these 3 will work */
+            color: transparent;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+    input.masked,
+    .shell span {
+        font-size: 16px;
+        font-family: monospace;
+        padding-right: 10px;
+        background-color: transparent;
+        text-transform: uppercase;
+    }
+.fieldLabel{
+    margin-right:40px;
+}
+.summary-text{
+    color:darkblue;
+}
+.warning-text {
+    color: red;
+}
+/*# sourceMappingURL=masking-input.css.map */
