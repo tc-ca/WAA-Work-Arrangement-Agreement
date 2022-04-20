@@ -6,7 +6,7 @@
     string link = "";
     string linkName = "";
     string icon = "";
-    bool Admin = (httpContextAccessor.HttpContext.Session.GetString("IsAdmin").ToString()=="Y");
+    bool Admin = (httpContextAccessor.HttpContext.Session?.GetString("IsAdmin")?.ToString()=="Y");
     
     if (httpContextAccessor.HttpContext.Request.Path.Value.ToLower().Contains("admin"))
     {

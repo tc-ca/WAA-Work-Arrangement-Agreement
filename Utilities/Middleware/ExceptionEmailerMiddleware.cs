@@ -1,4 +1,5 @@
 ﻿using GoC.TC.SecureMailer;
+using GoC.TC.SecureMailer.Config;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
@@ -14,16 +15,17 @@ namespace Utilities.Middleware
     {
         private readonly SecureSmtpClient _emailClient;
         private readonly IConfiguration _config;
-
-        public ExceptionEmailerMiddleware(IConfiguration config, SecureSmtpClient emailClient)
+        public bool isTesting;
+        public ExceptionEmailerMiddleware(IConfiguration config)
         {
             _config = config;
-            _emailClient = emailClient;
+            _emailClient = new SecureSmtpClient(new DefaultConfigStrategy());
         }
 
         public async Task Invoke(HttpContext context)
         {
             Exception e = context.Features.Get<IExceptionHandlerFeature>()?.Error;
+            isTesting = _config["EmailSettings:RedirectEmails"].ToString() == "True";
 
             if (e != null)
             {
@@ -76,16 +78,14 @@ namespace Utilities.Middleware
 
                 var errorEmail = new MimeMessage()
                 {
-                    //AppAcronym = _config["AppSettings:AppAcronymEN"],
-                    //Environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"),
-                    Subject = context.Session.GetString("Username"),
+                    Subject = isTesting ? "Testing--" + $"Error / Erreur: Work Arrangement Agreement" : $"Error / Erreur: Work Arrangement Agreement",
                     Body = builder.ToMessageBody()
                 };
-                string sender = _config["EmailSettings:EmailFrom"];
-                string receiver = _config["EmailSettings:ErrorTo"];
+                string sender = _config["EmailSettings:ErrorTo"].ToString();
+                string receiver = _config["EmailSettings:ErrorTo"].ToString();
                 errorEmail.From.Add(new MailboxAddress(sender, sender));
                 errorEmail.To.Add(new MailboxAddress(receiver, receiver));
-                //_emailClient.SendMimeMessage(errorEmail);
+                _emailClient.SendMimeMessage(errorEmail);
 
                 string culture = context.Request.Path.Value.Split('/')[1];
                 string errorPath = (culture == "fr") ? $"/fr/Error" : "/en/Error";

@@ -146,14 +146,6 @@ namespace Web
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IConfiguration config, SecureSmtpClient emailClient)
         {
             //pipeline ordering
-            if (env.IsDevelopment() || Boolean.Parse(config["AppSettings:ForceDeveloperExceptionPage"]))
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/en/Error");
-            }
 
             app.UseHttpsRedirection();
           
@@ -178,7 +170,17 @@ namespace Web
             app.UseSerilogRequestLogging();
             app.UseAuthentication();
             app.UseSession();
-
+            if (env.IsDevelopment() || Boolean.Parse(config["AppSettings:ForceDeveloperExceptionPage"]))
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandler(new ExceptionHandlerOptions
+                {
+                    ExceptionHandler = new ExceptionEmailerMiddleware(config).Invoke
+                });
+            }
             app.UseMiddleware<UserMiddleware>();
 
             app.UseMvc();
