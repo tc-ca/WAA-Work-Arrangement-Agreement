@@ -742,4 +742,14 @@ nav ol.breadcrumb {
 .warning-text {
     color: red;
 }
+.ui.dimmer .ui.modal .ui.loader:before {
+    border-color: rgba(0,0,0,.1);
+}
+
+.ui.dimmer .ui.modal .ui.loader:after {
+    border-color: #767676 transparent transparent;
+}
+.delemp_control {
+    cursor: pointer;
+}
 /*# sourceMappingURL=masking-input.css.map */

@@ -127,7 +127,7 @@
     <value>Adresse</value>
   </data>
   <data name="ADInfoNotFound" xml:space="preserve">
-    <value>Vos renseignements courants n’ont pas pu être trouvés au sein du répertoire. Veuillez communiquer avec le bureau de service pour vous assurer que vos renseignements sont correctement remplis avant de présenter une demande d’entente de travail.</value>
+    <value>Les informations de votre compte Transports Canada sont introuvables. Si vous êtes un nouvel employé de TC, votre compte peut prendre 24 heures pour être actif dans le portail libre-service RH. Veuillez essayer de vous reconnecter demain.</value>
   </data>
   <data name="Administration" xml:space="preserve">
     <value>Administration</value>
@@ -263,9 +263,6 @@
   </data>
   <data name="EmergencyMgtHeader" xml:space="preserve">
     <value>Engagement des employés en ce qui a trait aux accidents, aux blessures, aux maladies, aux malaises, aux questions d’ergonomie et aux risques au travail</value>
-  </data>
-  <data name="EmpBranch" xml:space="preserve">
-    <value>Secteur ou Branche</value>
   </data>
   <data name="EmpClassification" xml:space="preserve">
     <value>Groupe et niveau</value>
@@ -424,7 +421,7 @@
     <value>Les ententes de mon équipe</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>Name</value>
+    <value>Nom</value>
   </data>
   <data name="No" xml:space="preserve">
     <value>Non</value>
@@ -495,7 +492,7 @@
   <data name="RecommendOrApproveHeader" xml:space="preserve">
     <value>Recommander, approuver ou refuser une demande</value>
   </data>
-  <data name="Recommander" xml:space="preserve">
+  <data name="Recommend" xml:space="preserve">
     <value>Recommander</value>
   </data>
   <data name="Region" xml:space="preserve">
@@ -541,7 +538,7 @@
     <value>Votre demande est en cours d’examen par</value>
   </data>
   <data name="RequestsOnlyForMgrs" xml:space="preserve">
-    <value>Remarque : Les ententes d’aménagement de travail ne peuvent être approuvées que par &lt;a class="accessible-link" href="https://mytc-montc.tc.gc.ca/rdims.php?id=14484588" target="_blank"&gt;le gestionnaire délégué &lt;/a&gt;.</value>
+    <value>Remarque : Les ententes d’aménagement de travail ne peuvent être approuvées que par &lt;a class="accessible-link" href="https://hrdt.tc.gc.ca/?levelIds=&amp;areaIds=&amp;selectedAuthorityId=&amp;nonEx=true&amp;ex=true&amp;GoCTemplateCulture=fr-CA" target="_blank"&gt;le gestionnaire délégué &lt;/a&gt;.</value>
   </data>
   <data name="ReviewDirectReports" xml:space="preserve">
     <value>Examinez les ententes d’aménagement de travail de votre équipe en cliquant sur leurs noms et prenez les mesures nécessaires.</value>
@@ -700,7 +697,7 @@
     <value>J’accepte de me conformer et de respecter les &lt;a class="accessible-link" href="https://mytc-montc.tc.gc.ca/rdims.php?id=17618408" target="_blank"&gt;Lignes directrices sur les régimes de télétravail&lt;/a&gt; et plus particulièrement</value>
   </data>
   <data name="TermGeneralConditionList1" xml:space="preserve">
-    <value>de prendre en charge les coûts d’entretien de mon espace de travail personnel en télétravail, tels que les assurances, le chauffage, l’électricité, l’Internet et le téléphone, etc. à moins que cela soit décrit autrement dans un instrument de politique du Gouvernement du Canada;</value>
+    <value>de prendre en charge les coûts d’entretien de mon espace de travail personnel en télétravail, tels que les assurances, le chauffage, l’électricité, l’Internet à haute vitesse fiable et le téléphone, etc. à moins que cela soit décrit autrement dans un instrument de politique du Gouvernement du Canada;</value>
   </data>
   <data name="TermGeneralConditionList2" xml:space="preserve">
     <value>de protéger l’équipement de Transports Canada et d’assumer la responsabilité du transport sécuritaire de l’équipement du gouvernement et de tous les coûts connexes engagés entre les lieux de travail;</value>
@@ -892,13 +889,13 @@ lorsque l'employeur est tenu d'adapter les règles, les politiques ou les pratiq
     <value>Mettez à jour votre superviseur.</value>
   </data>
   <data name="GeoLocationInfo" xml:space="preserve">
-    <value>Le lieu &lt;strong&gt;&lt;i&gt;GEO de votre poste&lt;/i&gt;&lt;/strong&gt; et votre site de travail désigné par TC sont dans des régions différentes. Veuillez vérifier l'exactitude des informations entrées.</value>
+    <value>Le lieu &lt;u&gt;GEO de votre poste&lt;/u&gt; et votre site de travail désigné par TC sont dans des régions différentes. Veuillez vérifier l'exactitude des informations entrées.</value>
   </data>
   <data name="AdHocInfo" xml:space="preserve">
     <value>Cochez ici si vous demandez à faire du télétravail sur une base ad hoc</value>
   </data>
   <data name="ConsiderItem5" xml:space="preserve">
-    <value>Le &lt;a class="accessible-link" href="https://mytc-montc.tc.gc.ca/rdims.php?id=14484588" target="_blank"&gt;gestionnaire délégué&lt;/a&gt;  approprié est au courant de la modification du code GEO et va consider l'autoriser.</value>
+    <value>Le &lt;a class="accessible-link" href="https://hrdt.tc.gc.ca/?levelIds=&amp;areaIds=&amp;selectedAuthorityId=&amp;nonEx=true&amp;ex=true&amp;GoCTemplateCulture=fr-CA" target="_blank"&gt;gestionnaire délégué&lt;/a&gt;  approprié est au courant de la modification du code GEO et va consider l'autoriser.</value>
   </data>
   <data name="ConsiderItem6" xml:space="preserve">
     <value>Des dispositions ont été prises avec le gestionnaire responsable du lieu de travail de TC et avec les installations pour fournir un espace de travail à cet employé.</value>
@@ -937,7 +934,7 @@ lorsque l'employeur est tenu d'adapter les règles, les politiques ou les pratiq
     <value>Dimanche</value>
   </data>
   <data name="CheckDelegatedAuthority" xml:space="preserve">
-    <value>Êtes-vous incertain si vous avez la délégation des pouvoirs? Vérifiez &lt;a class="accessible-link" href="https://mytc-montc.tc.gc.ca/rdims.php?id=14484588" target="_blank"&gt;ici&lt;/a&gt;.</value>
+    <value>Vérifiez &lt;a class="accessible-link" href="https://hrdt.tc.gc.ca/?levelIds=&amp;areaIds=&amp;selectedAuthorityId=&amp;nonEx=true&amp;ex=true&amp;GoCTemplateCulture=fr-CA" target="_blank"&gt;ici&lt;/a&gt;.</value>
   </data>
   <data name="CreateInstruction" xml:space="preserve">
     <value>Instructions pour créer votre &lt;a class="accessible-link" href="https://mytc-montc.tc.gc.ca/rdims.php?id=18299369" target="_blank"&gt;Entente d'aménagement de travail (EAT)&lt;/a&gt;.</value>
@@ -973,7 +970,7 @@ lorsque l'employeur est tenu d'adapter les règles, les politiques ou les pratiq
     <value>Gérer les ententes</value>
   </data>
   <data name="Message_EmailSent" xml:space="preserve">
-    <value>Un courriel a été envoyé à l’employé et au gestionnaire.</value>
+    <value>Un courriel a été envoyé au récipiendaire.</value>
   </data>
   <data name="Message_NotFound" xml:space="preserve">
     <value>L’entente n’a pas été trouvée.</value>
@@ -994,7 +991,7 @@ lorsque l'employeur est tenu d'adapter les règles, les politiques ou les pratiq
     <value>Recommandeur</value>
   </data>
   <data name="ReturnTo" xml:space="preserve">
-    <value>Retourner à</value>
+    <value>Renvoyer à :</value>
   </data>
   <data name="Select" xml:space="preserve">
     <value>Sélectionner</value>
@@ -1072,7 +1069,7 @@ lorsque l'employeur est tenu d'adapter les règles, les politiques ou les pratiq
     <value>15 à 19 jours</value>
   </data>
   <data name="ScheduleOption5" xml:space="preserve">
-    <value>&lt;strong&gt;20 jours (et plus)&lt;/strong&gt; (à titre exceptionnel seulement, l’approbation de la haute gestion est requise)</value>
+    <value>&lt;strong&gt;20 jours (et plus)&lt;/strong&gt; (à titre exceptionnel seulement, l'approbation d'un &lt;u&gt;membre du CGX&lt;/u&gt; est requise)</value>
   </data>
   <data name="ScheduleCommentTitle" xml:space="preserve">
     <value>Décrivez en détail l'horaire et la fréquence du télétravail proposé (maximum 750 caractères)</value>
@@ -1100,5 +1097,260 @@ lorsque l'employeur est tenu d'adapter les règles, les politiques ou les pratiq
   </data>
   <data name="OpenToUpdate" xml:space="preserve">
     <value>Ouvrir pour mettre à jour</value>
+  </data>
+  <data name="AddUser" xml:space="preserve">
+    <value>Ajouter un usager</value>
+  </data>
+  <data name="AdminUserList" xml:space="preserve">
+    <value>Liste d'usagers admin</value>
+  </data>
+  <data name="ManageAdmin" xml:space="preserve">
+    <value>Gérer l'admin</value>
+  </data>
+  <data name="ManageAdminUsers" xml:space="preserve">
+    <value>Gérer les usagers admin</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Enlever</value>
+  </data>
+  <data name="UserId" xml:space="preserve">
+    <value>ID de l'utilisateur</value>
+  </data>
+  <data name="RequestReviewedByEmail" xml:space="preserve">
+    <value>pour qu'elle vous soit renvoyée.</value>
+  </data>
+  <data name="RequestReviewedByInfo" xml:space="preserve">
+    <value>Si vous avez soumis votre entente d'aménagement de travail au mauvais superviseur par erreur, veuillez s'il vous plait envoyer un courriel à</value>
+  </data>
+  <data name="TooltipsTMX" xml:space="preserve">
+    <value>&lt;h5&gt;Membres du CGX :&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;Sous-ministre&lt;/li&gt;
+&lt;li&gt;Sous-ministre délégué&lt;/li&gt;
+&lt;li&gt;Sous-ministre adjoint, Services généraux, et dirigeant principal des finances&lt;/li&gt;
+&lt;li&gt;Sous-ministre adjoint, Politiques&lt;/li&gt;
+&lt;li&gt;Sous-ministre adjoint, Programmes&lt;/li&gt;
+&lt;li&gt;Sous-ministre adjoint, Sécurité et Sûreté&lt;/li&gt;
+&lt;li&gt;Sous-ministre adjoint associé, Sécurité et Sûreté&lt;/li&gt;
+&lt;li&gt;Sous-ministre adjoint, Transformation&lt;/li&gt;
+&lt;li&gt;Directeur général régional, région de l'Atlantique&lt;/li&gt;
+&lt;li&gt;Directeur général régional, région du Québec&lt;/li&gt;
+&lt;li&gt;Directeur général régional, région de l'Ontario&lt;/li&gt;
+&lt;li&gt;Directeur général régional, région des Prairies et du Nord&lt;/li&gt;
+&lt;li&gt;Sous-ministre adjoint, région du Pacifique&lt;/li&gt;
+&lt;li&gt;Avocat général principal et directeur exécutif, Services juridiques&lt;/li&gt;
+&lt;li&gt;Directeur général, Communications et Marketing&lt;/li&gt;
+&lt;li&gt;Dirigeant principal de la vérification et de l'évaluation&lt;/li&gt;
+&lt;/ul&gt;</value>
+  </data>
+  <data name="OnSiteWork" xml:space="preserve">
+    <value>TRAVAIL SUR PLACE</value>
+  </data>
+  <data name="OnSiteWorkDesc" xml:space="preserve">
+    <value>Le terme "sur place" comprend l'exécution du travail au lieu de travail désigné de TC, la réalisation d'inspections ou la participation à des activités de parties prenantes à un site extérieur.</value>
+  </data>
+  <data name="WorkingAloneReminderDesc" xml:space="preserve">
+    <value>Si l’employé est dans une situation de travail en solitude, une discussion entre le gestionnaire et l’employé est requise.</value>
+  </data>
+  <data name="WorkingAloneReminderTitle" xml:space="preserve">
+    <value>Rappel pour le travail en solitude</value>
+  </data>
+  <data name="DelegateAuthNote" xml:space="preserve">
+    <value>&lt;strong&gt;Remarque :&lt;/strong&gt; Les niveaux de pouvoir pour approuver une EAT se trouvent dans la section Relations de travail de l'instrument de délégation.</value>
+  </data>
+  <data name="ColEffectiveDate" xml:space="preserve">
+    <value>Date d’entrée en vigueur</value>
+  </data>
+  <data name="ColExpiryDate" xml:space="preserve">
+    <value>Date de fin</value>
+  </data>
+  <data name="ColOHS" xml:space="preserve">
+    <value>Liste de contrôle en matière de SST</value>
+  </data>
+  <data name="ColTelework" xml:space="preserve">
+    <value>Télétravail</value>
+  </data>
+  <data name="ColWorkType" xml:space="preserve">
+    <value>Type d’aménagement de travail</value>
+  </data>
+  <data name="LegendClock" xml:space="preserve">
+    <value>Renvoyé à l'employé pour mettre à jour/renouveler</value>
+  </data>
+  <data name="LegendPlus" xml:space="preserve">
+    <value>Renouvelé (cliquez pour voir les détails du renouvellement)</value>
+  </data>
+  <data name="LegendRecycle" xml:space="preserve">
+    <value>Supprimer le nom de l'employé de ma liste d'équipe</value>
+  </data>
+  <data name="NoteActiveAgreements" xml:space="preserve">
+    <value>Examinez les ententes d'aménagement de travail de votre équipe en cliquant sur le lien dans la colonne « Version ».</value>
+  </data>
+  <data name="NoteAgreements" xml:space="preserve">
+    <value>Examinez les ententes d'aménagement de travail de votre équipe en cliquant sur leurs noms.</value>
+  </data>
+  <data name="StatusRenewed" xml:space="preserve">
+    <value>Renouvelé</value>
+  </data>
+  <data name="StatusRenewRequired" xml:space="preserve">
+    <value>Mise à jour/Renouvellement Requis</value>
+  </data>
+  <data name="StatusReturned" xml:space="preserve">
+    <value>Renvoyé pour être mis à jour</value>
+  </data>
+  <data name="TabActiveAgreements" xml:space="preserve">
+    <value>Ententes en vigueur</value>
+  </data>
+  <data name="TabProgressAgreements" xml:space="preserve">
+    <value>Ententes pour action</value>
+  </data>
+  <data name="TabRecommendedAgreements" xml:space="preserve">
+    <value>Ententes recommandées</value>
+  </data>
+  <data name="VerCurrent" xml:space="preserve">
+    <value>Actuel</value>
+  </data>
+  <data name="VerRenew" xml:space="preserve">
+    <value>Renouveler</value>
+  </data>
+  <data name="TIPSInfoNotFound" xml:space="preserve">
+    <value>Vous n'avez pas encore créé un compte LEX pour accéder au &lt;a class="accessible-link"   href="https://tcapps.tc.gc.ca/Corp-Serv-Gen/3/ess_lse/Portal/Home?culture=fr-ca" target="_blank"&gt;portail libre-service des RH&lt;/a&gt; de Transports Canada.</value>
+  </data>
+  <data name="BtnChangeFile" xml:space="preserve">
+    <value>Modifier le fichier</value>
+  </data>
+  <data name="BtnChangeRecommender" xml:space="preserve">
+    <value>Changer de recommandeur</value>
+  </data>
+  <data name="BtnReturnForRenew" xml:space="preserve">
+    <value>Renvoyer à l'employé</value>
+  </data>
+  <data name="BtnUpload" xml:space="preserve">
+    <value>Télécharger</value>
+  </data>
+  <data name="LblAgreementDetails" xml:space="preserve">
+    <value>Détails de l'entente</value>
+  </data>
+  <data name="LblApproveDoc" xml:space="preserve">
+    <value>Approuver la documentation &lt;span style="color:#DB2828"&gt;&lt;strong&gt;*&lt;/strong&gt; &lt;/span&gt; (requis pour le télétravail de 20 jours et plus par mois)</value>
+  </data>
+  <data name="LblComments" xml:space="preserve">
+    <value>Commentaires :</value>
+  </data>
+  <data name="LblConfirmManager" xml:space="preserve">
+    <value>Confirmez votre approbateur</value>
+  </data>
+  <data name="LblEditMyAgreement" xml:space="preserve">
+    <value>Modifier mon entente</value>
+  </data>
+  <data name="LblEmployee" xml:space="preserve">
+    <value>Employé :</value>
+  </data>
+  <data name="LblMyAgreements" xml:space="preserve">
+    <value>Mon entente</value>
+  </data>
+  <data name="LblMyTeamAgreements" xml:space="preserve">
+    <value>Les ententes de mon équipe</value>
+  </data>
+  <data name="LblRecommendedTo" xml:space="preserve">
+    <value>Recommandée à</value>
+  </data>
+  <data name="LblReviewMyAgreements" xml:space="preserve">
+    <value>Examinez votre Entente d'aménagement de travail</value>
+  </data>
+  <data name="LblReviewMyTeamAgreements" xml:space="preserve">
+    <value> : Examinez les Ententes d'aménagement de travail de votre équipe</value>
+  </data>
+  <data name="LblSelectRecommender" xml:space="preserve">
+    <value>Sélectionnez un nouveau recommandeur</value>
+  </data>
+  <data name="LblUploadFile" xml:space="preserve">
+    <value>Sélectionnez un fichier à télécharger -- Taille maximale : 10 Mb, type autorisé : PDF.</value>
+  </data>
+  <data name="LblUploadFileTitle" xml:space="preserve">
+    <value>Télécharger les fichiers</value>
+  </data>
+  <data name="MsgDelEmployee" xml:space="preserve">
+    <value>Retirer cet employé de votre équipe?</value>
+  </data>
+  <data name="MsgDelEmployeeInfo" xml:space="preserve">
+    <value>Toute entente soumise, approuvée ou recommandée sera envoyée à l'employé.</value>
+  </data>
+  <data name="MsgNoActiveAgreements" xml:space="preserve">
+    <value>Il n'y a pas d'entente en cours.</value>
+  </data>
+  <data name="MsgNoRecommAgreements" xml:space="preserve">
+    <value>Il n'y a pas d'ententes recommandées.</value>
+  </data>
+  <data name="MsgNoWAAFound" xml:space="preserve">
+    <value>Il n'y a aucune trace d'une Entente d'aménagement de travail. Cliquez sur le bouton « Créer » ci-dessous pour commencer.</value>
+  </data>
+  <data name="MsgRenewNotified" xml:space="preserve">
+    <value>L'employé a été avisé de renouveler son entente.</value>
+  </data>
+  <data name="MsgRenewRequired" xml:space="preserve">
+    <value>Votre entente doit être renouvelée.</value>
+  </data>
+  <data name="MsgSetupRecommder" xml:space="preserve">
+    <value>Veuillez choisir votre gestionnaire pour continuer.</value>
+  </data>
+  <data name="MsgUploadErrFileSize" xml:space="preserve">
+    <value>La taille du fichier excède la limite.</value>
+  </data>
+  <data name="MsgUploadErrFileType" xml:space="preserve">
+    <value>Seuls les fichiers PDF sont acceptés.</value>
+  </data>
+  <data name="MsgUploadErrSave" xml:space="preserve">
+    <value>Erreur de téléchargement du fichier, veuillez réessayer.</value>
+  </data>
+  <data name="MsgUploading" xml:space="preserve">
+    <value>Téléchargement…</value>
+  </data>
+  <data name="MsgViewApproveDoc" xml:space="preserve">
+    <value>Voir la documentation à l'appui</value>
+  </data>
+  <data name="MsgWAAReturned" xml:space="preserve">
+    <value>Votre entente vous a été renvoyée pour mettre à jour.</value>
+  </data>
+  <data name="TabActiveAgreement" xml:space="preserve">
+    <value>Entente active</value>
+  </data>
+  <data name="MsgDateGap" xml:space="preserve">
+    <value>Il y a un écart entre la date de début de votre entente proposée et la date de fin de votre entente active. Veuillez vérifier l'exactitude des informations entrées.</value>
+  </data>
+  <data name="MsgDateOverlap" xml:space="preserve">
+    <value>La date de début sélectionnée pour votre entente proposée chevauche la date de fin de votre entente active. L'application changera automatiquement la date de fin de votre entente active en conséquence.</value>
+  </data>
+  <data name="MsgReturnNotified" xml:space="preserve">
+    <value>L'employé a été avisé de mettre à jour son entente.</value>
+  </data>
+  <data name="PartTimeScheduleDesc" xml:space="preserve">
+    <value>Si vous êtes employé à temps partiel, n’indiquez que les jours de travail réels où vous ferez du télétravail. Par exemple, si vous travaillez à temps partiel trois jours par semaine, effectuer du télétravail durant les trois jours équivaudrait à une plage de 10 à 14 jours.</value>
+  </data>
+  <data name="AdminTMX" xml:space="preserve">
+    <value>Les membres du CGX</value>
+  </data>
+  <data name="BtnChangeManager" xml:space="preserve">
+    <value>Changer de gestionnaire</value>
+  </data>
+  <data name="ManagerAttestFTR" xml:space="preserve">
+    <value>En approuvant cette demande, je confirme qu'elle a été examinée par le comité d'examen du travail à distance à temps plein.</value>
+  </data>
+  <data name="ManageTMX" xml:space="preserve">
+    <value>Gérer les membres du CGX</value>
+  </data>
+  <data name="MsgFTR" xml:space="preserve">
+    <value>Il s'agit d'une entente à distance à temps plein. Seuls les membres du CGX peuvent approuver.</value>
+  </data>
+  <data name="ReturnToRecomm" xml:space="preserve">
+    <value>Renvoyer au recommandeur</value>
+  </data>
+  <data name="TabRenewAgreement" xml:space="preserve">
+    <value>Entente proposée</value>
+  </data>
+  <data name="Message_UpdateUserFail" xml:space="preserve">
+    <value>Échec de la mise à jour de l'utilisateur.</value>
+  </data>
+  <data name="Message_UpdateUserSuccess" xml:space="preserve">
+    <value>L'utilisateur a été mis à jour avec succès.</value>
   </data>
 </root>

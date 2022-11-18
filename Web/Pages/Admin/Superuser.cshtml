@@ -1,7 +1,7 @@
 ﻿@page
 @model Web.Pages.Admin.SuperuserModel
 @{
-    
+
 
     ViewData["Title"] = Global.AppTitle;
 
@@ -16,16 +16,17 @@
                     <a asp-route="@routeMap.GetRouteName("/Admin")"><span class="">@Global.Administration</span></a> <i class="small white right chevron icon"></i>
                 </li>
                 <li>
-                    <span class="ui white text"> Manage admin</span>
+                    <span class="ui white text">@Global.ManageAdmin</span>
                 </li>
             </ol>
         </nav>
     }
 }
+
 <form class="ui form" id="my-employees-form" method="post">
     <div class="ui segments">
         <div class="ui segment">
-            <Heading icon="users" headingLevel="2" primaryText=" Admin User list" secondaryText=""></Heading>
+            <Heading icon="users" headingLevel="2" primaryText="@Global.AdminUserList" secondaryText=""></Heading>
         </div>
 
 
@@ -33,47 +34,44 @@
             <table class="ui very basic table">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th class="left aligned">User ID</th>
+                        <th>@Global.Name</th>
+                        <th class="left aligned">@Global.UserId</th>
                         <th class="left aligned"></th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var emp in Model.SuperUsers)
                     {
-                    <tr>
-                        <td>@emp.TcUser.FullName</td>
-                        <td>@emp.UserId</td>
-                        @if (@emp.UserId.ToLower() == @ViewContext.HttpContext.Session.GetString("Username").ToLower())
-                        {
-                            <td><button id="del-btn" asp-page-handler="DeleteUser" asp-route-id="@emp.UserId" disabled>Remove</button></td>
-                        }
-                        else
-                        {
-                            <td><button id="del-btn" asp-page-handler="DeleteUser" asp-route-id="@emp.UserId">Remove</button></td>
-                        }
-                    </tr>
+                        <tr>
+                            <td>@emp.TcUser.FullName</td>
+                            <td>@emp.UserId</td>
+                            @if (@emp.UserId.ToLower() == @ViewContext.HttpContext.Session.GetString("Username").ToLower())
+                            {
+                                <td><button id="del-btn" asp-page-handler="DeleteUser" asp-route-id="@emp.UserId" disabled>@Global.Remove</button></td>
+                            }
+                            else
+                            {
+                                <td><button id="del-btn" asp-page-handler="DeleteUser" asp-route-id="@emp.UserId">@Global.Remove</button></td>
+                            }
+                        </tr>
                     }
                 </tbody>
             </table>
-            <h4 class="ui  dividing header">Add a user</h4>
+            <h4 class="ui  dividing header">@Global.AddUser</h4>
             <div class="ui grid" id="add-user">
                 <div class="ten wide column">
                     <div class="fields">
-
                         <input type="text" id="txtSuperUserName" name="suName" />
-                        <button class="ui primary button" asp-page-handler="AddUser" id="save-user-btn">
-                            Add
-                        </button>
+                        <button class="ui primary button" asp-page-handler="AddUser" id="save-user-btn">@Global.Add</button>
                     </div>
                 </div>
             </div>
 
             <input type="hidden" id="hfSuperUserId" name="UserName" />
         </div>
-        
+
         <div class="ui center aligned basic segment">
-            <a class="ui primary button" asp-route="@routeMap.GetRouteName("/Admin")">Back</a>
+            <a class="ui primary button" asp-route="@routeMap.GetRouteName("/Admin")">@Global.Back</a>
         </div>
     </div>
 

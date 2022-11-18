@@ -19,15 +19,14 @@
     }
 }
 
-<div class="ui centered grid" style="padding-top:50px;">
-    <div class="nine wide center aligned column">
-        <div class="ui very padded segment" tabindex="0">
-            <h2 class="ui medium header">@Global.Error</h2>
-            <div>
-                <span class="ui grey text">
-                    @Html.Raw(Global.ErrorMessage)
-                </span>
-            </div>
+<div class="ui icon negative message">
+    <i class="info circle icon"></i>
+    <div class="content">
+        <div class="header">
+            There was an error to process your request
         </div>
+        <p>
+            @Html.Raw(Model.ErrMsg)
+        </p>
     </div>
 </div>

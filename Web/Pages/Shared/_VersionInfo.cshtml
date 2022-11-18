@@ -7,7 +7,7 @@
     var Version = new
     {
         Prefix = Template.Language_2Char == "en" ? _config["AppSettings:AppAcronymEN"] : _config["AppSettings:AppAcronymFR"],
-        Number = CurrentCommit.Contains("-") ? "" : CurrentCommit,
+        Number = _config["AppSettings:Version"],// CurrentCommit.Contains("-") ? "" : CurrentCommit,
         Hash = CurrentCommit.Contains("-") ? CurrentCommit.Split('-')[2] : ""
     };
     var lastUpdateDate = _config["AppSettings:LastUpdateDate"];
@@ -46,7 +46,7 @@
     @if (String.IsNullOrEmpty(Version.Hash))
     {
     <span class="prefix">Last Update Date: @lastUpdateDate</span>
-        <span class="hash">@Version.Number</span>
+        <span class="hash">v @Version.Number</span>
     }
     else
     {

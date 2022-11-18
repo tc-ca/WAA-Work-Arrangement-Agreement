@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Web.Pages.Components.Toast;
 using Resources;
 using System.Globalization;
+using System.Linq;
 
 namespace Web.Pages
 {
@@ -35,8 +36,25 @@ namespace Web.Pages
             var username = Session.GetString("Username");
            // DirectReports = await _employeeService.GetDirectReports(username);
             DirectReports = await _employeeService.GetMyEmployees(username);
+            DirectReports = DirectReports.OrderBy(e => e.FullName).ToList();
             MyEmpsAgreements = await _agreementService.GetMyEmpsAgreements(DirectReports, username);
+            //remove expired ones if renewed
+            foreach (var ee in DirectReports)
+            {
+                var agmts = MyEmpsAgreements.Where(x => x.TcUserId == ee.UserName && (x.StatusCode == "4" || x.StatusCode =="6")).ToList();
+                if (agmts!=null && agmts.Count == 2)
+                {
+                    MyEmpsAgreements.Remove(MyEmpsAgreements.FirstOrDefault(x => x.TcUserId == ee.UserName && x.EndDate <= System.DateTime.Today));
+                }
 
+            }
+        }
+        public async Task<IActionResult> OnPostDeleteEmp(string empId)
+        {
+            var username = Session.GetString("Username");
+            //notification  -- 1. if user is still active 2.has agreement sent
+            await _employeeService.DeleteFromMyEmployees(empId, username);
+            return RedirectToPage();
         }
     }
 }

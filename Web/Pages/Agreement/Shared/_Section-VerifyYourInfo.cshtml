@@ -1,6 +1,6 @@
-﻿@model Web.Pages.HomeModel
+﻿@model Web.Pages.EditModel
 
-@{ var status = Model.MyAgreement.AgreementId == 0 ? Model.ShowStartAgreement == true ? "0" : "1" : Model.MyAgreement.StatusCode; }
+@{ var status = Model.MyAgreement.StatusCode; }
 
 
 <div id="content-2" data-testid="section-verifyyourinfo" class="ui transition hidden">
@@ -27,11 +27,11 @@
                         <i class="inverted circular yellow warning icon"></i>
                         <div class="content">
                             @if (Model.EmpInfo.Manager?.ManagerId != null)
-                            {
-                                <strong>
+                            {                               
+                                <span id="test">
                                     @Global.WhenCompletedStep1
-                                    <span id="test">@Model.EmpInfo.Manager.ManagerGivenName @Model.EmpInfo.Manager.ManagerSurname.</span>
-                                </strong>
+                                    @Model.EmpInfo.Manager.ManagerGivenName @Model.EmpInfo.Manager.ManagerSurname.
+                                </span>                                
                             }
                             else
                             {
@@ -39,17 +39,44 @@
                                 <a class="accessible-link" id="supervisor-update-btn" href="#" data-testid="supervisor-update-btn"><strong>@Global.UpdateYourSupervisor</strong></a>
                             }
 
-                        <div class="sub header">
-                            @if (Model.EmpInfo.Manager?.ManagerId != null)
-                            {
-                                @Html.Raw(Global.WhenCompletedStep2)                          
-                                <p>@Html.Raw(Global.WhenCompletedStep3)</p>
-                            }
-                        </div>
+                            <div class="sub header">
+                                @if (Model.EmpInfo.Manager?.ManagerId != null)
+                                {
+                                    @Html.Raw(Global.WhenCompletedStep2)
+                                    <p>@Html.Raw(Global.WhenCompletedStep3)</p>
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="ui small modal" id="approverConfirm">       
+        <div class="header">
+            @Global.LblConfirmManager
+        </div>
+        <div class="image content">
+            <div class="description">
+                <div class="ui header"> @Global.WhenCompletedStep1 <span style="color:blue" id="test">@Model.EmpInfo.Manager?.ManagerGivenName @Model.EmpInfo.Manager?.ManagerSurname.</span></div>
+
+                @*<div class="ui info tiny message">
+                    <i class="inverted circular green icon info"></i>
+                    @Html.Raw(Global.WhenCompletedStep3)
+                </div>*@
+            </div>
+        </div>
+        <div class="actions">
+            <div class="ui positive right blue labeled icon button">
+                <i class="ui checkmark icon"></i>
+                @Global.confirm
+            </div>
+            <div class="ui cancel right labeled icon button">
+                <i class="ui close icon"></i>
+                @Global.btnCancel
+            </div>
+
         </div>
     </div>
 </div>

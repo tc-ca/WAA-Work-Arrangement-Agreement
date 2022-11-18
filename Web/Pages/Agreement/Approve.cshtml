@@ -1,0 +1,629 @@
+﻿@page "/Agreement/Approve/{id}"
+@model Web.Pages.ApproveModel
+@using System.Text.Json
+@{
+    var lang = CultureInfo.CurrentCulture.Name.Contains("en") ? "en" : "fr";
+}
+
+@{
+    ViewData["Title"] = Global.AppTitle;
+
+    @section Breadcrumbs {
+        <nav>
+            <h2 class="wb-inv">@Template.YouAreHere</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a asp-route="@routeMap.GetRouteName("/Agreement/Index")"><span class="">@Global.Home</span></a> <i class="small white right chevron icon"></i>
+                </li>
+                <li>
+                    <a asp-route="@routeMap.GetRouteName("/MyEmployees")"><span class="">@Global.MyTeam</span></a> <i class="small white right chevron icon"></i>
+                </li>
+                <li>
+                    <span class="ui white text">@Global.EditAgreement</span>
+                </li>
+            </ol>
+        </nav>
+    }
+}
+
+<div class="ui segments">
+    <div class="ui segment">
+        <div class="ui fully-centered grid">
+            <div class="ten wide column">
+                <Heading icon="file alternate outline" headingLevel="2" primaryText="@Global.TeleworkAgreeArrangement" secondaryText="@Model.EmpAgreement.TcUserName"></Heading>
+            </div>
+            <div class="two wide column">
+                <h2 class="ui small header">@Global.ProtectedA</h2>
+            </div>
+            <div class="four wide column">
+                <span class="right floated">
+                    <span class="ui small basic right pointing label">@Global.Status</span> <partial name="Shared/_AgreementStatus" model="new StatusModel() { Status = @Model.EmpAgreement.StatusCode, IsMgr = true }" />
+                </span>
+            </div>
+        </div>
+    </div>
+    <form class="ui form" id="reOpen-agreement-form" method="post">
+        <input type="hidden" asp-for="@Model.EmpAgreement.AgreementId" />
+        <div class="ui very padded segment">
+            <div class="ui grid">
+                <div class="ui ten wide column">
+                    <partial name="Shared/_SummaryDetails" model="new UserAgreementModel { User = Model.EmpInfo, Agreement = Model.EmpAgreement, Region = Model.Region, ShowComments = true }" />
+                </div>
+
+                <div class="ui six wide column">
+                    <partial name="_UserCard" model="@Model.EmpInfo" />
+                </div>
+                @if (Model.EmpAgreement.StatusCode == "3" && Model.EmpAgreement.RecommenderId?.ToLower() != @ViewContext.HttpContext.Session.GetString("Username").ToLower())
+                {
+                    <div class="ui compact green segment">
+                        <div class="ui small floating header">
+                            <i class="inverted circular green checkmark icon"></i>
+                            <div class="content">
+                                @Global.RecommendedTo @Model.EmpAgreement.RecommenderName.
+                            </div>
+                        </div>
+                    </div>
+                }
+                @if (Model.EmpAgreement.StatusCode == "4")
+                {
+                    <div class="ui compact green segment">
+                        <div class="ui small floating header">
+                            <i class="inverted circular green checkmark icon"></i>
+                            <div class="content">
+                                @Global.RequestIsApprovedBy @Model.EmpAgreement.ApproveRejectedByName.
+                            </div>
+                        </div>
+                    </div>
+                }
+                @if (Model.EmpAgreement.StatusCode == "5")
+                {
+                    <div class="ui compact red segment">
+                        <div class="ui small floating header">
+                            <i class="times circle outline red icon"></i>
+                            <div class="content">
+                                @Global.RequestIsDeniedBy @Model.EmpAgreement.ApproveRejectedByName.
+                                @Global.DenyReason:
+                                <lang en="@Model.EmpAgreement.DenyReason.English" fr="@Model.EmpAgreement.DenyReason.French" />
+                            </div>
+                        </div>
+                    </div>
+                }
+                @if (Model.EmpAgreement.StatusCode == "6")
+                {
+                    var isRenew = Model.EmpAgreement.RenewNotified.Value != 2;
+                    <div class="ui compact green segment">
+                        <div class="ui small floating header">
+                            <i class="inverted circular green info icon"></i>
+                            <div class="content">
+                                @(isRenew ? Global.MsgRenewNotified : Global.MsgReturnNotified)
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="ui left floated attached secondary segment">
+            @if (int.Parse(Model.EmpAgreement.StatusCode) == 4 && Model.canRenew)
+            {
+                <button asp-page-handler="Reopen"
+                        class="ui tiny blue labeled icon load-indicator button"
+                        id="return-agreement-btn"
+                        data-testid="reopen-agreement-btn"
+                        onclick="return ReopenAgreement();"
+                        tabindex="0">
+                    <i class="folder open outline icon"></i>
+                    <span class="text">@Global.BtnReturnForRenew</span>
+                </button>
+                <a asp-route="@routeMap.GetRouteName("/MyEmployees")" class="ui right floated tiny basic icon button" id="back-btn" data-testid="back-btn">
+                    <i class="left chevron icon"></i>
+                    @Global.btnBack
+                </a>
+            }
+            else
+            {
+                <div class="buttons">
+
+                    @if ((Model.EmpAgreement.StatusCode != "2") && Model.EmpAgreement.RecommenderId?.ToLower() != @ViewContext.HttpContext.Session.GetString("Username").ToLower())
+                    {
+                        <button type="button" class="ui small blue icon button" id="approve-link" disabled="disabled" data-testid="action-link">
+                            @Global.DecisionBtn
+                        </button>
+                    }
+                    else
+                    {
+                        <button class="ui small blue icon button" id="approve-link" data-testid="action-link" type="button">
+                            @Global.DecisionBtn
+                        </button>
+                    }
+                    <a asp-route="@routeMap.GetRouteName("/MyEmployees")" class="ui right floated tiny basic icon button" id="back-btn" data-testid="back-btn">
+                        <i class="left chevron icon"></i>
+                        @Global.btnBack
+                    </a>
+                </div>
+            }
+        </div>
+    </form>
+</div>
+
+<div class="ui medium modal" id="approve-modal" data-testid="approve-modal" role="dialog">
+    <form class="ui form" id="edit-agreement-form" asp-antiforgery="true" method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="@Model.EmpAgreement.AgreementId" />
+        <input type="hidden" asp-for="@Model.EmpAgreement.TcUserId" />
+        <input type="hidden" asp-for="@Model.EmpAgreement.TcUser.FullName" />
+        <input type="hidden" asp-for="@Model.EmpAgreement.RecommenderId" value="@Model.MgrInfo.Manager?.RecommenderUserId" />
+        <input type="hidden" id="RecommenderFullName" value="@Model.MgrInfo.Manager?.RecommenderFullName" />
+        <input type="hidden" id="RecommenderToID" value="@Model.MgrInfo.Manager?.RecommenderUserId" />
+        <input type="hidden" asp-for="@Model.RecommendByUserInfo.UserId" />/
+        <input type="hidden" id="HybridOptId" value="@Model.EmpAgreement.HybridOptionId" />
+        <input type="hidden" id="isTMX" value=@Model.IsTMX.ToString() />
+        <input type="hidden" id="IsRecommender" value=@Model.IsRecommender.ToString() />
+        <input type="hidden" value="@Global.SingleErrorSummaryMessage" class="single-error-summary" />
+        <input type="hidden" value="@Global.MultipleErrorSummaryMessage" class="multiple-error-summary" />
+
+        <div asp-validation-summary="None" class="ui basic center aligned segment error-summary-display" style="display:none" data-testid="approve-modal-error-msg">
+            <div class="ui compact middle aligned grid">
+                <div class="one wide column">
+                    <i class="large exclamation triangle icon"></i>
+                </div>
+                <div class="fifteen wide left aligned column">
+                    <h3 class="ui header error-text"></h3>
+                    <div class="fifteen wide column error-message-list"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ui segments">
+            <div class="ui blue attached segment" tabindex="0">
+                <Heading icon="signature" headingLevel="2" primaryText="@Global.RecommendOrApproveHeader" secondaryText="@Global.RequestsOnlyForMgrs"></Heading>
+            </div>
+            <div class="ui attached segment">
+                <div class="ui field">
+                    <h2 class="ui small header">@Global.ConsiderTheFollowing</h2>
+                    <ul class="ui list hide-bullets">
+                        <li class="item">
+                            <i class="yellow warning circle icon"></i>
+                            <div class="content">
+                                @Html.Raw(@Global.ConsiderItem1)
+                            </div>
+                        </li>
+                        <li class="item">
+                            <i class="yellow warning circle icon"></i>
+                            <div class="content">
+                                @Html.Raw(@Global.ConsiderItem2)
+                            </div>
+                        </li>
+                        <li class="item">
+                            <i class="yellow warning circle icon"></i>
+                            <div class="content">
+                                @Global.ConsiderItem3
+                            </div>
+                        </li>
+                        <li class="item">
+                            <i class="yellow warning circle icon"></i>
+                            <div class="content">
+                                @Global.ConsiderItem4
+                            </div>
+                        </li>
+                    </ul>
+
+                    <p>@Html.Raw(Global.ConsiderItemGuidance1)</p>
+                </div>
+                <div class="ui field">
+                    <h2 class="ui small header">@Global.ConsiderGEOCode</h2>
+                    <ul class="ui list hide-bullets">
+                        <li class="item">
+                            <i class="yellow warning circle icon"></i>
+                            <div class="content">
+                                @Html.Raw(@Global.ConsiderItem5)
+                            </div>
+                        </li>
+                        <li class="item">
+                            <i class="yellow warning circle icon"></i>
+                            <div class="content">
+                                @Html.Raw(@Global.ConsiderItem6)
+                            </div>
+                        </li>
+                        <li class="item">
+                            <i class="yellow warning circle icon"></i>
+                            <div class="content">
+                                @Global.ConsiderItem7
+                            </div>
+                        </li>
+                        <li class="item">
+                            <i class="yellow warning circle icon"></i>
+                            <div class="content">
+                                @Global.ConsiderItem8
+                            </div>
+                        </li>
+                    </ul>
+                    <p>@Html.Raw(Global.ConsiderItemGuidance2)</p>
+                </div>
+            </div>
+
+            @if (!@Model.EmpAgreement.HybridOptionId.HasValue || Model.EmpAgreement.HybridOptionId.Value != 5)
+            {
+                <div class="ui attached segment">
+                    <partial name="Shared/_Level4Manager" />
+                </div>
+            }
+            else if (!@Model.IsTMX)
+            {
+                <div class="ui attached segment">
+                    <div class="ui visible negative  message" id="msg-err-ftr">
+                        <p>@Global.MsgFTR</p>
+                    </div>
+                </div>
+             }
+                
+                <div class="ui attached segment">
+                    <div class="ui form">
+                        <div class="five wide field required">
+                            <label>@Global.Decision</label>
+                            <div class="ui selection fluid dropdown disabled" id="decisions">
+                                <input type="hidden" name="decison">
+                                <i class="dropdown icon"></i>
+                                <div class="default text">@Global.Decision</div>
+                                <div class="menu">
+                                    <div class="item" data-value="a">@Global.Approve</div>
+                                    <div class="item" data-value="r">@Global.Recommend</div>
+                                    <div class="item" data-value="d">@Global.Deny</div>
+                                    <div class="item" data-value="o">@(Model.RecommendByUserInfo != null ? Global.ReturnToRecomm : Global.btnReturn)</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ui five wide field hidden decison required" id="denyOptionsDiv">
+                            <input type="hidden" asp-for="@Model.sDenyReasons" id="hdnDenyReasons" />
+                            <label>@Global.DenyReason</label>
+                            <div class="ui selection fluid dropdown" id="denyOptions">
+                                <input type="hidden" asp-for="@Model.EmpAgreement.DenyReasonCd" id="denySel">
+                                <i class="dropdown icon"></i>
+                                <div class="default text">@Global.DenyReason</div>
+                                <div class="menu"></div>
+                            </div>
+                        </div>
+
+                        <div id="recommender" class="field ten wide hidden decison">
+                            @if (@Model.MgrInfo?.Manager?.RecommenderUserId != null)
+                            {
+                                <div class="ui from">
+                                    <div class="inline fields">
+                                        <div class="eight wide field"><span class="ally-label">@Global.RecommendTo:</span><strong><span style="color:blue" id="recomm-name">@Model.MgrInfo.Manager.RecommenderFullName</span></strong></div>
+                                        <div class="six wide field">
+                                            <button type="button" class="ui tiny blue button select-recommender-btn">
+                                                @Global.BtnChangeRecommender
+                                            </button>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <span class="ally-label warning-text">@Global.MsgSetupRecommder</span>
+                            }
+
+                        </div>
+                        <div id="returnTo" class="field ten wide hidden decison">
+                            @if (@Model.RecommendByUserInfo != null)
+                            {
+                                <div class="ui from">
+                                    <div class="inline fields">
+                                        <div class="eight wide field"><span class="ally-label">@Global.ReturnTo </span><strong><span style="color:blue" id="return-to-name">@Model.RecommendByUserInfo.FullName</span></strong></div>
+                                        <div class="six wide field">
+                                            <button type="button" class="ui tiny blue button select-recommender-btn">
+                                                @Global.BtnChangeManager
+                                            </button>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            }
+                            @*else
+                        {
+                            <span class="ally-label warning-text">@Global.MsgSetupRecommder</span>
+                        }*@
+
+                        </div>
+                        <div id="approveSection" class="hidden decison">
+                            <div class="fields">
+                                <div class="field">
+                                    <div class="ui checkbox approveAttest">
+                                        <input type="checkbox" name="attest" id="attest" class="attest" />
+                                        <label for="attest">
+                                            <span style="color:#DB2828"><strong>*</strong> </span>@Global.ManagerAttest
+                                        </label>
+                                    </div>
+                                    @if (@Model.EmpAgreement.HybridOptionId.HasValue && Model.EmpAgreement.HybridOptionId.Value == 5)
+                                    {
+                                        <div class="ui checkbox approveAttest">
+                                            <input type="checkbox" name="attest2" id="attest2" class="attest" />
+                                            <label for="attest2">
+                                                <span style="color:#DB2828"><strong>*</strong> </span>@Global.ManagerAttestFTR
+                                            </label>
+                                        </div>
+                                    }
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="ui form">
+                        <div class="field ten wide" id="comment">
+                            <label class="ally-label" asp-for="@Model.EmpAgreement.Comments">@Global.Comment</label>
+                            <textarea asp-for="@Model.EmpAgreement.Comments" id="comment_txt" rows="3" data-testid="modal-comments-textarea"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ui secondary attached segment">
+                    <span class="hidden">
+                        <button asp-page-handler="ApproveAgreement" class="ui button" id="approve-btn">
+                            @Global.Approve
+                        </button>
+                        <button asp-page-handler="RecommendAgreement" class="ui button" id="recommend-btn">
+                            @Global.Recommend
+                        </button>
+                        <button asp-page-handler="DenyAgreement" class="ui button" id="deny-btn" onclick="return ConfirmDeny();">
+                            @Global.Deny
+                        </button>
+                        <button asp-page-handler="Reopen" class="ui button" id="return-btn">
+                            @Global.btnReturn
+                        </button>
+                        <button asp-page-handler="ReturnToRecommender" class="ui button" id="return-recomm-btn">
+                            @Global.btnReturn
+                        </button>
+                    </span>
+                    <button type="button" class="ui small blue icon button" disabled id="sumbit-btn" data-testid="approve-modal-btn">
+                        @Global.btnSubmit
+                    </button>
+                    @*<button asp-page-handler="Reopen" asp-route-id="@Model.EmpAgreement.AgreementId"
+                        class="ui tiny blue labeled icon load-indicator button" id="return-agreement-btn"
+                        data-testid="reopen-agreement-btn"
+                        onclick="return ReopenAgreement();"
+                        tabindex="0">
+                    <i class="folder open outline icon"></i>
+                    <span class="text">@Global.btnReturn</span>
+                </button>*@
+                    <button type="button" class="ui small right floated closing basic labeled icon button" id="close-modal-btn" data-testid="close-modal-btn" onclick="$('#approve-modal').modal('hide');">
+                        <i class="close icon"></i> @Global.btnCancel
+                    </button>
+                </div>
+            </div>
+    </form>
+</div>
+<div class="ui modal DenyConfirm">
+    <i class="close icon"></i>
+    <div class="header">
+        Unmet conditions
+    </div>
+    <div class="image content">
+        <div class="description">
+            <div class="ui header">@Global.OhsWarning</div>
+            <p>for any unmet conditions</p>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui positive right labeled icon button">
+            Acknowledged
+            <i class="checkmark icon"></i>
+        </div>
+    </div>
+</div>
+
+@*<div class="ui small modal" id="FileUploads" role="dialog" style="top: 400px !important;">    
+    <i class="close icon"></i>
+    <div class="header">
+        @Global.LblUploadFileTitle
+    </div>
+    <div class="content">
+        <p> @Global.LblUploadFile</p>
+        <div class="ui visible negative  message" id="msg-err-file-type">
+            <p>@Global.MsgUploadErrFileType</p>
+        </div>
+        <div class="ui visible negative  message" id="msg-err-size">
+            <p>@Global.MsgUploadErrFileSize</p>
+        </div>        
+        <div class="ui visible negative  message" id="msg-err-upload">
+            <p>@Global.MsgUploadErrSave</p>
+        </div>
+        <div class="ui inverted dimmer">
+            <div class="ui text loader">@Global.MsgUploading</div>
+        </div>
+        <form method="post" id="fileinfo" name="fileinfo" asp-antiforgery="true" enctype="multipart/form-data">
+            <div class="ui input">
+                <input type="file" class="inputfile" id="upFile" accept="application/pdf" />
+                <input type="text" value="" placeholder="" disabled="" id="fileName">
+                <label for="upFile" class="ui button">
+                    @Global.Select
+                </label>
+            </div>
+            <input type="hidden" id="id" asp-for="@Model.EmpAgreement.AgreementId" />
+        </form>
+    </div>
+    <div class="actions">
+        <div class="ui positive right labeled icon button">
+            <i class="ui upload icon"></i>
+            @Global.BtnUpload
+        </div>
+        <div class="ui negative right labeled icon button">
+            <i class="ui close icon"></i>
+            @Global.btnCancel
+        </div>
+    </div>
+</div>*@
+
+<div class="ui small modal" id="manager-modal">
+    <div id="manager-form">
+        <div class="ui secondary brown inverted attached segment" tabindex="0">
+            <Heading icon="address card alternate" headingLevel="2" primaryText="@Global.LblSelectRecommender" secondaryText=""></Heading>
+        </div>
+        <div class="ui attached aligned very padded segment">
+            <div class="ui form">
+
+
+                <label for="txtUserName"><strong>@Global.SupervisorName</strong><span>@Global.SupervisorNameHelp</span></label>
+                <input type="text" id="txtUserName" name="FullName" />
+
+
+            </div>
+
+            <input type="hidden" id="hfUserId" name="UserName" />
+        </div>
+        <div class="ui secondary attached segment">
+            <div class="actions">
+                <div class="ui positive right blue labeled icon button disabled" id="save-manager-btn">
+                    <i class="ui save icon"></i>
+                    @Global.SaveBtn
+                </div>
+                <div class="ui cancel right labeled icon button">
+                    <i class="ui close icon"></i>
+                    @Global.btnCancel
+                </div>
+            </div>
+            @*<button class="ui positive tiny blue button" id="save-manager-btn">
+                    <i class="save icon"></i>
+
+                </button>
+                <button type="button" class="ui small closing basic labeled icon button" id="rec-close-btn" onclick="$('#manager-modal').modal('hide');">
+                    <i class="close icon"></i> @Global.btnCancel
+                </button>*@
+        </div>
+    </div>
+    </div>
+
+
+
+    @section Scripts {
+        <environment include="Development">
+            <script src="~/js/agreementForm.js"></script>
+        </environment>
+        <environment exclude="Development">
+            <script src="~/js/agreementForm.min.js"></script>
+        </environment>
+    }
+    <script type="text/javascript" on-content-loaded="true">
+        if ($('#HybridOptId').val() === "5") {
+            
+            if ($('#isTMX').val() ==="True") {
+                resetDecisionDropdown(2);
+            } else {
+                resetDecisionDropdown(0);
+            }           
+        }
+        $('#approve-link').click(function () {
+            $('#approve-modal')
+                .modal('setting', 'transition', 'scale')
+                .modal('setting', 'allowMultiple', true)
+                .modal('setting', 'closable', false)
+                .modal('show');
+        });
+        $('#denyOptions').dropdown({
+            values: JSON.parse($('#hdnDenyReasons').val())
+        }
+        );
+        $('#decisions')
+            .dropdown({
+                onChange: function (value, text, $selectedItem) {
+                    var sel = value;
+                    $('#comment').removeClass('required');
+                    $('#denyOptions').dropdown('restore defaults');
+                    var mgr = $('#EmpAgreement_RecommenderId').val();
+                    $('.decison').addClass('hidden');
+                    $(".approveAttest").checkbox('uncheck');
+                    $('#sumbit-btn').attr('disabled', 'disabled');
+                    if (sel == 'd') {
+                        $("#denyOptionsDiv").removeClass('hidden');
+                    }
+                    else if (sel == 'r') {
+                        $("#returnTo").addClass('hidden');
+                        $("#recommender").removeClass('hidden');                        
+                        $('#EmpAgreement_RecommenderId').val($('#RecommenderToID').val());
+                    }
+                    else if (sel == 'o') {
+                        $("#recommender").addClass('hidden');
+                        if ($('#IsRecommender').val() === "True") {
+                            $("#returnTo").removeClass('hidden');
+                            $('#EmpAgreement_RecommenderId').val($('#RecommendByUserInfo_UserId').val());
+                        }
+                    }
+                    else if (sel == 'a') {
+                        $("#approveSection").removeClass('hidden');
+                    }
+                    if ((sel == 'r' && mgr.length > 0) || (sel == 'o' && $('#comment_txt').val() !== '')) {
+                        $('#sumbit-btn').removeAttr('disabled');
+                    }
+                    if (sel !== 'a' && sel !== 'r') {
+                        $('#comment').addClass('required');
+                    }
+                }
+            });
+        $('#denyOptions')
+            .dropdown({
+                onChange: function (value, text, $selectedItem) {
+                    var comment = $('#comment_txt').val();
+                    if (comment != '') {
+                        $('#sumbit-btn').removeAttr('disabled');
+                    }
+                }
+            });
+        $('#comment_txt').keyup(function () {
+
+            var sel = $('#decisions').dropdown('get value');
+            var denySel = $('#denyOptions').dropdown('get value');
+            if (sel == 'o' || (sel == 'd' && denySel !== '')) {
+                if ($(this).val() != '') {
+                    $('#sumbit-btn').removeAttr('disabled');
+                } else {
+                    $('#sumbit-btn').attr('disabled', 'disabled');
+                }
+            }
+        });
+        $('input[name="managerGroup"]').on('change', function () {
+            resetDecisionDropdown($(this).val());
+        }); 
+        $('#sumbit-btn').on('click', function () {
+            var sel = $("#decisions").dropdown('get value');
+            var isRecommender = $('#IsRecommender').val();
+            if (sel == 'a') {
+                document.getElementById('approve-btn').click();
+                $('#approve-modal').modal('hide');
+            }
+            else if (sel == 'r') {
+                document.getElementById('recommend-btn').click();
+                $('#approve-modal').modal('hide');
+            } else if (sel == 'd') {
+                document.getElementById('deny-btn').click();
+            } else if (sel == 'o') {
+                if (isRecommender === "True") {
+                    document.getElementById('return-recomm-btn').click();
+                } else {
+                    document.getElementById('return-btn').click();
+                }                
+            }
+        });
+        function resetDecisionDropdown(input) {
+            var isManager = input;
+            $('#decisions').removeClass('disabled');
+            $('#decisions').dropdown('restore defaults');
+            $('.decison').addClass('hidden');
+            $('#comment').removeClass('required');
+            $(".approveAttest").checkbox('uncheck');
+            $('#sumbit-btn').attr('disabled', 'disabled');
+            if (isManager == 1) {
+                $('.dropdown .menu .item[data-value ="r"]').addClass('disabled')
+                $('.dropdown .menu .item[data-value ="a"]').removeClass('disabled')
+            }
+            else if (isManager == 2) {
+                $('.dropdown .menu .item[data-value ="r"]').addClass('disabled')
+                $('.dropdown .menu .item[data-value ="a"]').removeClass('disabled')
+            }
+            else  {
+                $('.dropdown .menu .item[data-value ="a"]').addClass('disabled')
+                $('.dropdown .menu .item[data-value ="r"]').removeClass('disabled')
+            }
+        }
+
+    </script>

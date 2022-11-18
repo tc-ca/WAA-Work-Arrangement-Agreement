@@ -1,0 +1,43 @@
+﻿@model Web.Pages.Shared.EmailContent._OnRecommendReturnedEmail
+@{
+    var cultureEnglish = CultureInfo.CreateSpecificCulture("en");
+    var cultureFrench = CultureInfo.CreateSpecificCulture("fr");
+}
+
+<style>
+    a.accessible-link {
+        font-weight: bold;
+        text-decoration: underline;
+    }
+</style>
+
+<p>Good day @Model.ReturnedToFullName,</p>
+
+<p>
+    @Model.ReturnedByFullName has returned the Work Arrangement Agreement (WAA) that you recommended for @Model.EmployeeFullName.
+</p>
+<p>Comments: @Model.Agreement.Comments</p>
+
+<p>
+    “Click” on the link below to access the WAA. To log into this app, you must be connected to the VPN.
+</p>
+
+<p>
+    <a class="accessible-link" href="@($"{Model.BaseURL}/en/agreement")" target="_blank">Work Arrangement Agreement</a>
+</p>
+
+<hr />
+
+<p>Bonjour @Model.ReturnedToFullName,</p>
+<p>
+    @Model.ReturnedByFullName vous a renvoyé l’Entente d’aménagement de travail (EAT) de @Model.EmployeeFullName que vous avez recommandé.
+</p>
+<p>Commentaires : @Model.Agreement.Comments</p>
+
+<p>
+    «Cliquez» sur le lien ci-dessous pour accéder à l’EAT. Pour vous brancher à cette application, vous devez être connecté au RPV.
+</p>
+
+<p>
+    <a class="accessible-link" href="@($"{Model.BaseURL}/fr/entente")" target="_blank">Entente d’aménagement de travail</a>
+</p>

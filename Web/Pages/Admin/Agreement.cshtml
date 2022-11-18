@@ -24,7 +24,7 @@
 <form class="ui form" id="updat-agreement-form" method="post">
     <div class="ui segments">
         <div class="ui segment">
-            <Heading icon="users" headingLevel="2" primaryText="Manage Agreements" secondaryText=""></Heading>
+            <Heading icon="users" headingLevel="2" primaryText="@Global.ManageAgreements" secondaryText=""></Heading>
         </div>
 
 
@@ -59,10 +59,11 @@
                     </div>
                 </div>
             </div>
-
+        </div>
+        <div class="ui padded segment">
             <input type="hidden" id="hfAgmtId" name="AgmtId" />
-            <!-- Should rename between ImmediateSupervisor and Approver for the both UI(.js) and API-->
-            <table class="ui very basic table" id="employee-agmt-div">
+
+            <table id="employee-agmt-div" class="ui table">
                 <thead>
                     <tr>
                         <th>@Global.Employee</th>
@@ -73,24 +74,6 @@
                         <th class="left aligned">@Global.ReturnTo</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td id="empoyee"></td>
-                        <td id="status"></td>
-                        <td id="Decison-Date"></td>
-                        <td id="approver"></td>
-                        <td id="recommender"></td>
-                        <td>
-                            <select id="returnTo">
-                                <option value="-1">@Global.Select</option>
-                                <option value="a">@Global.ImmediateSupervisor</option>
-                                <option value="r">@Global.Approver</option>
-                                <option value="e">@Global.Employee</option>
-                            </select>
-
-                        </td>
-                    </tr>
-                </tbody>
                 <tfoot class="full-width">
                     <tr>
                         <th></th>
@@ -102,35 +85,74 @@
                     </tr>
                 </tfoot>
             </table>
-
             <br />
             <br /><br />
         </div>
-        
+
         <div class="ui center aligned basic segment">
             <a class="ui primary button" asp-route="@routeMap.GetRouteName("/Admin")">@Global.Back</a>
         </div>
     </div>
 
-
-
-
 </form>
 <script type="text/javascript" on-content-loaded="true">
-    $(".message").hide();
-    $("#employee-agmt-div").hide();
-    $("#btnAgmtUpdate").addClass('disabled');
     var hostUrl = window.location.href;
     var baseurl = hostUrl.substr(0, hostUrl.indexOf('/en/') + hostUrl.indexOf('/fr/') + 2);
     var lang = $('#lang').val();
+    var list = null;
+    var table = $('#employee-agmt-div').DataTable({
+        paging: false,
+        searching: false,
+        ordering: false,
+        info: false,
+        columns: [null,{ 'width': '20%' }, null, null, null, { width: '30%' }],
+        autoWidth: false,
+        fixedColumns: true,
+        ajax: function (data, callback, settings) {
+            callback(list);
+        },
+        columns: [
+                    { data: 'employee' },
+                    { data: 'status' },
+                    {
+                        data: 'decisionDate',
+                        render: DataTable.render.date(),
+                    },
+                    { data: 'approver' },
+                    { data: 'recommender' },
+                    {
+                        data: null,
+                        render: function (data, type, row, meta) {
+                            rendered = '<select style="width:80%" id="returnTo" name="returnTo" ><option value="-1">@Global.Select</option>';
+                            if (row.statusCode !== '6' && row.statusCode !== '5' && row.statusCode !== '1') {
+                                //console.log(row);
+                                $("#hfAgmtId").val(row.id);
+                                if (row.statusCode == '2') {
+                                    rendered = rendered + '<option value="e">@Global.Employee</option></select>';
+                                } else if (row.statusCode === '3' || (row.statusCode === '4' && row.canReturn == 1 && row.recommender == null)) {
+                                    rendered = rendered + '<option value="a">@Global.ImmediateSupervisor</option><option value="e">@Global.Employee</option></select>';
+                                } else if (row.statusCode === '4' && row.canReturn == 1) {
+                                    rendered = rendered + '<option value="a">@Global.ImmediateSupervisor</option><option value="r">@Global.Approver</option><option value="e">@Global.Employee</option></select>';
+                                }
+                            } else {
+                                rendered = '';
+                            } 
+                            return rendered;
+                        },
+                    }
+                 ],
+    });
 
-    $("#returnTo").change(function () {
-        
+    $(".message").hide();
+    $("#employee-agmt-div").hide();
+    $("#btnAgmtUpdate").addClass('disabled');
+
+    table.on("change", '#returnTo', function () {
         if (this.value !== '-1') {
             $("#btnAgmtUpdate").removeClass('disabled');
         } else {
             $("#btnAgmtUpdate").addClass('disabled');
-        }        
+        }
     });
 
     $("#txtEmployeeName").autocomplete({
@@ -154,19 +176,20 @@
             });
         },
         select: function (e, i) {
-            $("#hfAgmtId").val(i.item.value);
+            $(".message").hide();
+            $("#btnAgmtUpdate").addClass('disabled');
+
             $("#txtEmployeeName").val(i.item.label);
-            $("#returnTo").attr("disabled", false);
-            $("#returnTo option").attr("disabled", false);
             findAgreement(i.item.value);
             return false;
         },
         minLength: 3,
         appendTo: "#search-agreement"
     });
+
     $("#btnAgmtUpdate").click(function () {
         var id = $("#hfAgmtId").val();
-        var retCode = $("#returnTo").val();
+        var retCode = table.$('select').val()
         $("#btnAgmtUpdate").addClass('disabled');
         $.ajax({
             url: baseurl + 'api/agreement/updateagreement',
@@ -174,13 +197,14 @@
             type: "POST",
             dataType: "json",
             success: function (data) {
-                if (data['id'] !== -1) {
-                    updateTable(data);                    
+                if (data.length > 0) {
+                    list = { "data": data };
+                    table.ajax.reload();
+                    $("#employee-agmt-div").show();
                     $("#msg-success").show();
                 } else {
                     $("#msg-err").show();
                 }
-
             },
             error: function (response) {
                 alert(response.responseText);
@@ -197,13 +221,14 @@
             type: "POST",
             dataType: "json",
             success: function (data) {
-                if (data['id'] !== -1) {
-                    updateTable(data);
+                if (data.length > 0) {
+                    list = { "data": data };
+                    table.ajax.reload();
                     $("#employee-agmt-div").show();
                 } else {
                     $("#employee-agmt-div").hide();
                     $("#msg-notfound").show();
-                }            
+                }
 
             },
             error: function (response) {
@@ -214,21 +239,7 @@
             }
         });
     }
-    function updateTable(data) {
-        $(".message").hide();
-        $("#hfAgmtId").val(data['id']);
-        $('#empoyee').html(data['employee']);
-        $('#status').html(data['status']);
-        $('#Decison-Date').html(data['decisionDate']);
-        $('#approver').html(data['approver']);
-        $('#recommender').html(data['recommender']);
-        if (data['recommender'] == null || data['statusCode'] == 3)
-            $("#returnTo option[value='r']").attr('disabled', 'disabled');
-        if (data['statusCode'] <= 2)
-            $("#returnTo option[value='a']").attr('disabled', 'disabled');
-        if (data['statusCode'] == 1 || data['statusCode'] == 5)
-            $("#returnTo").attr('disabled', 'disabled');        
-    }
+
     $('.message .close')
         .on('click', function () {
             $(this).closest('.message').transition('fade');

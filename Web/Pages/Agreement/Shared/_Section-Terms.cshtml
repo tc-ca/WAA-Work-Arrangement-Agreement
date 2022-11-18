@@ -1,5 +1,5 @@
-﻿@model Web.Pages.HomeModel
-@{ var status = Model.MyAgreement.AgreementId == 0 ? Model.ShowStartAgreement == true ? "0" : "1" : Model.MyAgreement.StatusCode; }
+﻿@model Web.Pages.EditModel
+@{ var status = Model.MyAgreement.StatusCode; }
 
 <style type="text/css">
     .nowrap {

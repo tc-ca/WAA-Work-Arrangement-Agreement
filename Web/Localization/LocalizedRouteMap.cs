@@ -27,17 +27,16 @@ namespace Web.Localization
 
             AddRoutes(ref routes, "Error", "error", "erreur");
             AddRoutes(ref routes, "Unauthorized", "unauthorized", "nonautorise");
-
             AddRoutes(ref routes, "Agreement", "agreement", "entente");
             AddRoutes(ref routes, "Agreement/Edit", "agreement/edit", "agreement/editer");
+            AddRoutes(ref routes, "Agreement/Approve", "agreement/approve", "agreement/approuver");
             AddRoutes(ref routes, "Agreement/Index", "agreement/index", "agreement/index");
-            //AddRoutes(ref routes, "Agreement/Updatemanager", "agreement/updatemanager", "entente/updatemanager");
-            //AddRoutes(ref routes, "Agreement/Searchmanager", "agreement/searchmanager", "entente/searchmanager");
+            //AddRoutes(ref routes, "Agreement/ViewDoc", "agreement/viewdoc", "agreement/viewdoc");
             AddRoutes(ref routes, "MyEmployees", "myemployees", "mesemployes");
-
             AddRoutes(ref routes, "Admin", "admin", "admin");
             AddRoutes(ref routes, "Admin/Superuser", "admin/Superuser", "admin/Superuser");
             AddRoutes(ref routes, "Admin/Agreement", "admin/Agreement", "admin/Agreement");
+            AddRoutes(ref routes, "Admin/TmxMember", "admin/TmxMember", "admin/TmxMember");
             AddRoutes(ref routes, "ParameterTest", "parametertest", "testdeparametre");
 
             return routes;

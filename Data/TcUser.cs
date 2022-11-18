@@ -21,6 +21,12 @@ namespace Data
         [Column("EMP_INITIALS")]
         public string Initial { get; set; }
 
+        [Column("OFFICE_CODE")]
+        public string OfficeCode { get; set; }
+
+        [Column("EX_GROUP_IND")]
+        public int ExGroupInd { get; set; }
+
         [Column("POS_NUMBER")]
         public string PositionNumber { get; set; }
         
@@ -31,16 +37,16 @@ namespace Data
         public string PositionFra { get; set; }
         
         [Column("MGR_POS_NUMBER")]
-        public string ManagerPositionNumber { get; set; }
-        
-        //[Column("MGR_USER_ID")]
-        //public string ManagerUserId { get; set; }
-        
+        public string ManagerPositionNumber { get; set; }        
+      
         [Column("ORG_ID"), ForeignKey("Directorate")]
         public int OrganizationId { get; set; }
 
         [Column("TELEPHONE")]
         public string Telephone { get; set; }
+        
+        [Column("TELEPHONE_CELL_NUM")]
+        public string Cellphone { get; set; }
 
         [Column("OFFICE_BUILDING_EN")]
         public string OfficeBuildingEng { get; set; }
@@ -62,12 +68,10 @@ namespace Data
         public string Email { get; set; }
         [Column("GROUP_AND_LEVEL")]
         public string GroupAndLevel { get; set; }
-        [Column("BRANCH_ID"), ForeignKey("Branch")]
-        public string BranchId { get; set; } 
         [Column("GEO_CODE")]
         public string GeoCode { get; set; }
         public TcOrganization Directorate { get; set; }
-        public TcBranch Branch { get; set; }
+
         [NotMapped]
         public UserManager Manager { get; set; }
 
@@ -75,6 +79,8 @@ namespace Data
         public EmergencyContact EmergencyContact { get; set; }
         [NotMapped]
         public string FullName { get { return $"{GivenName} {SurName}"; } }
+        [NotMapped]
+        public string FullNameAndOfficeCode { get { return $"{GivenName} {SurName} ({OfficeCode})"; } }
     }
     public class EmergencyContact
     {

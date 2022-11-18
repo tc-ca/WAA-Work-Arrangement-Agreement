@@ -31,7 +31,7 @@
                         <div class="ui small header">
                             <i class="purple shield alternate icon"></i>
                             <div class="content">
-                                Manage admin users
+                                @Global.ManageAdminUsers
                             </div>
                         </div>
                     </a>
@@ -43,7 +43,19 @@
                         <div class="ui small header">
                             <i class="purple shield alternate icon"></i>
                             <div class="content">
-                                Manage agreements
+                                @Global.ManageAgreements
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="eight wide column">
+                    <a class="ui fluid button" asp-route="@routeMap.GetRouteName("/Admin/TmxMember")">
+                        <div class="ui small header">
+                            <i class="purple shield alternate icon"></i>
+                            <div class="content">
+                                @Global.ManageTMX
                             </div>
                         </div>
                     </a>

@@ -18,7 +18,7 @@ namespace Data
         public string StatusCode { get; set; }
         
         [Column("DATE_SUBMITTED_DTE")]
-        public DateTime SubmittedDate { get; set; }
+        public DateTime? SubmittedDate { get; set; }
 
         [Column("DECISION_DATE_DTE")]
         public DateTime? ApprovedRejectedDate { get; set; }
@@ -48,9 +48,6 @@ namespace Data
         [Required]
         [Column("WORK_TYPE_CD"),ForeignKey("WorkType")]
         public string WorkTypeId { get; set; }
-        
-        //[Column("TELEWORK_SCHEDULE_TXT")]
-        //public string TeleworkSchedule { get; set; }
 
         [Column("EMERGENCY_CONTACT_NAME_NM")]
         public string EmergencyContactName { get; set; }
@@ -74,8 +71,6 @@ namespace Data
         [Column("DATE_DELETED_DTE")]
         public DateTime? DeleteDate { get; set; }
 
-        // [Column("WORK_ALONE_IND")]
-        // public int? IsWorkAlone { get; set; }
         [Required]
         [Column("ACCOMMODATION_IND")]
         public int? IsAccommodateDuty { get; set; }
@@ -102,9 +97,13 @@ namespace Data
         [Column("VARIABLE_SCHEDULE_TXT")]
         public string VariableScheduleDetails { get; set; }
         [RequiredIfVisible]
-        [Column("HYBRID_OPTION_CD")]
+        [Column("HYBRID_OPTION_CD"), ForeignKey("HybridOption")]
         public int? HybridOptionId { get; set; }
+        //[Column("VERSION_CD")]
+        //public int? Version { get; set; }
 
+        [Column("RENEW_NOTIF_SENT_IND")]
+        public int? RenewNotified { get; set; }
 
         public WorkType WorkType { get; set; }
         public TcUser TcUser { get; set; }
@@ -115,10 +114,20 @@ namespace Data
         public DenyReason DenyReason { get; set; }
 
         public Status Status { get; set; }
-
+        public HybridOption HybridOption { get; set; }
         public ICollection<UserUnmetOHSItem> UnmetOHSItems { get; set; }
 
         public ICollection<AltWorkSite> AltWorkSites { get; set; }
+
+        // handle cases employees/managers left TC
+        [NotMapped]
+        public string TcUserName => TcUser != null ? TcUser.FullName : TcUserId;
+        [NotMapped]
+        public string ApproverName => Approver != null ? Approver.FullName : ApproverId; 
+        [NotMapped]
+        public string RecommenderName => Recommender != null ? Recommender.FullName : RecommenderId;
+        [NotMapped]
+        public string ApproveRejectedByName => ApproveRejectedBy != null ? ApproveRejectedBy.FullName : ApprovedRejectedById;
         public Agreement()
         {
             StatusCode = "0"; 

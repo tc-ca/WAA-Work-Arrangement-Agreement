@@ -9,7 +9,12 @@
 
 <p>Good day @Model.EmployeeFullName,</p>
 
-<p>Your Work Arrangement Agreement is being returned to you by @Model.ManagerFullName.</p>
+<p>Your Work Arrangement Agreement is being returned to you by @Model.ManagerFullName to update/renew.</p>
+@if (!string.IsNullOrWhiteSpace(@Model.Agreement.Comments))
+{
+    <p><strong><span>Comments: </span></strong>@Model.Agreement.Comments</p>
+
+}
 
 <p>
     “Click” on the link below to access it, make the necessary changes and resubmit. To log into this app, you must be connected to the VPN.
@@ -22,8 +27,12 @@
 
 <p>Bonjour @Model.EmployeeFullName,</p>
 
-<p>Votre Entente d'aménagement de travail vous a été renvoyée par @Model.ManagerFullName.</p>
+<p>Votre Entente d'aménagement de travail vous a été renvoyée par @Model.ManagerFullName pour mettre à jour/renouveler.</p>
+@if (!string.IsNullOrWhiteSpace(@Model.Agreement.Comments))
+{
+    <p><strong><span>Commentaires : </span></strong>@Model.Agreement.Comments</p>
 
+}
 <p>
     «Cliquez» sur le lien ci-dessous pour y accéder, effectuer les modifications nécessaires et soumettre à nouveau.
     Pour vous brancher à cette application, vous devez être connecté au RPV.

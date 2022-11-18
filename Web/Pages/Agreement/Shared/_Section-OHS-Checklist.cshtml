@@ -1,6 +1,6 @@
-﻿@model Web.Pages.HomeModel
+﻿@model Web.Pages.EditModel
 @{ 
-    var status = Model.MyAgreement.AgreementId == 0 ? Model.ShowStartAgreement == true ? "0" : "1" : Model.MyAgreement.StatusCode;
+    var status = Model.MyAgreement.StatusCode;
     var chkList = Model.OhsCheckboxList.OrderBy(x => x.CategoryId).ToList();
     var lang = CultureInfo.CurrentCulture.Name.Contains("en") ? "en" : "fr";
 }

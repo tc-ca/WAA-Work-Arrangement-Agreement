@@ -87,7 +87,7 @@ namespace Web
             }
             else if (agreement.StatusCode == "5")
             {
-                subject = $"Work Arrangement Agreement - Denied / Décision sur l’Entente d’aménagement de travail - refusée";
+                subject = $"Work Arrangement Agreement - Denied / Entente d’aménagement de travail - refusée";
             }
 
             if (agreement.StatusCode == "5")
@@ -160,6 +160,12 @@ namespace Web
                     Region = region,
                     BaseURL = BaseURL,
                 };
+                if (!string.IsNullOrEmpty(approvedModel.Agreement.TeleworkAddrStreet))
+                {
+                    approvedModel.Agreement.TeleworkAddrStreet = MaskAddress(approvedModel.Agreement.TeleworkAddrStreet);
+                    approvedModel.Agreement.TeleworkAddrCity = MaskAddress(approvedModel.Agreement.TeleworkAddrCity);
+                    approvedModel.Agreement.TeleworkAddrPostal = MaskAddress(approvedModel.Agreement.TeleworkAddrPostal);
+                }
 
                 body = await _renderer.RenderPartialToStringAsync("/Pages/Shared/EmailContent/_OnCompletionApprovedEmail.cshtml", approvedModel);
             }
@@ -167,6 +173,25 @@ namespace Web
             SendEmail(); 
         }
 
+        private string MaskAddress(string teleworkAddrStreet)
+        {
+            string masked = "";
+            if (!string.IsNullOrEmpty(teleworkAddrStreet))
+            {
+                int index = teleworkAddrStreet.IndexOf(" ");
+                if (index > 0)
+                {
+                    string s1 = new string('*', index - 1) + teleworkAddrStreet.Substring(index - 1, 1);
+                    string s2 = teleworkAddrStreet.Substring(index + 1, 1) + new string('*', teleworkAddrStreet.Length - index - 2);
+                    masked = s1 + " " + s2;
+                }
+                else
+                {
+                    masked = teleworkAddrStreet.Substring(0, 1) + new string('*', teleworkAddrStreet.Length - 1);
+                }
+            }
+            return masked;
+        }
 
         public async Task EmailOnRecommend(Agreement agreement, string recommenderUsername, string recommendedById)
         {
@@ -218,22 +243,47 @@ namespace Web
             SendEmail();
 
         }
-        public async Task EmailOnAdminUpdate(Agreement agreement, string returnTo)
+        public async Task EmailOnReturnToRecommender(Agreement agreement, string updatedBy)
+        {
+            TcUser returnedTo = await _employeeService.GetTcUserInfo(agreement.RecommenderId);
+            TcUser returnedBy = await _employeeService.GetTcUserInfo(updatedBy);
+
+            TcUser employee = await _employeeService.GetTcUserInfo(agreement.TcUserId);
+            //recipient_cc = employee.Email;
+
+            subject = $"Work Arrangement Agreement – Returned to recommender / Entente d’aménagement de travail – Renvoyée au recommandeur";
+            recipient_to = returnedTo.Email;
+
+            _OnRecommendReturnedEmail partialModel = new _OnRecommendReturnedEmail()
+            {
+                Agreement = agreement,
+                EmployeeFullName = employee.FullName,
+                ReturnedByFullName = returnedBy.FullName,
+                ReturnedToFullName = returnedTo.FullName,
+                BaseURL = BaseURL
+            };
+
+            body = await _renderer.RenderPartialToStringAsync("/Pages/Shared/EmailContent/_OnRecommendReturnedEmail.cshtml", partialModel);
+
+            SendEmail();
+
+        }
+        public async Task EmailOnAdminUpdate(AgreementInfo agreement, string returnTo)
         {  
             subject = $"Work Arrangement Agreement – Returned / Entente d’aménagement de travail – Renvoyée";
             TcUser manager = await _employeeService.GetTcUserInfo(returnTo);
-            TcUser employee = await _employeeService.GetTcUserInfo(agreement.TcUserId);
+            TcUser employee = await _employeeService.GetTcUserInfo(agreement.tcUserId);
 
             _OnAdminUpdateModel partialModel = new _OnAdminUpdateModel()
             {
                 EmployeeFullName = employee.FullName,
                 ManagerFullName = manager.FullName,
                 BaseURL = BaseURL,
-                isReturnedToEmployee = (returnTo == agreement.TcUserId)
+                isReturnedToEmployee = (returnTo == agreement.tcUserId)
             };
 
             body = await _renderer.RenderPartialToStringAsync("/Pages/Shared/EmailContent/_OnAdminUpdate.cshtml", partialModel);
-            if (returnTo != agreement.TcUserId)
+            if (returnTo != agreement.tcUserId)
             {
                 recipient_to = manager.Email;
                 recipient_cc = employee.Email;

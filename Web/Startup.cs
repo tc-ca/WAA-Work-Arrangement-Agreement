@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Rewrite;
@@ -56,11 +57,17 @@ namespace Web
            // services.AddScoped<Utils>();
             services.AddScoped<RazorPartialToStringRenderer>();
             services.AddTransient<LocalizedRouteMap>();
-            services.AddScoped<SecureSmtpClient>(x => new SecureSmtpClient(new DefaultConfigStrategy(true)));
+            services.AddScoped<SecureSmtpClient>(x => new SecureSmtpClient(new DefaultConfigStrategy(true))
+            //requester: Configuration["AppSettings:AppAcronymEN"],
+            //emailServiceURL: Configuration["EmailSettings:URL"],
+            //username: Configuration["EmailSettings:Username"],
+            //password: Configuration["EmailSettings:Password"]
+            );
             services.AddHttpClient();
             services.Configure<CanadaPostApiSetting>( Configuration.GetSection("AppSettings:CanadaPostApi"));
             services.AddHttpContextAccessor();
             services.AddDbContext<DomainContext>(options =>
+               //options.UseOracle(Configuration.GetConnectionString("TipsDb"))
                options.UseOracle(new Utils(Configuration, _webHostEnvironment).GetConnectionString())
                .AddInterceptors(new OracleCommandInterceptor())
            ) ;
@@ -79,7 +86,9 @@ namespace Web
                 options.IdleTimeout = TimeSpan.FromMinutes(60);
                 options.Cookie.IsEssential = true;
             });
-
+            services.Configure<CookieTempDataProviderOptions>(options => {
+                options.Cookie.IsEssential = true;
+            });
             // Enables authentication. It works but mostly due to trial and error so this may
             // be able to be simplified or improved.
             services.AddAuthentication(options => {
@@ -145,8 +154,6 @@ namespace Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IConfiguration config, SecureSmtpClient emailClient)
         {
-            //pipeline ordering
-
             app.UseHttpsRedirection();
           
             // app.UseStaticFiles();
@@ -162,17 +169,21 @@ namespace Web
             app.UseRequestLocalization();
 
             RewriteOptions rewriter = new RewriteOptions();
-
+            //rewriter.AddRewrite(@"^IWA/en/(.*)", "en/$1", skipRemainingRules: false);
             rewriter.Add(new RedirectLocalizedRoutes(app.ApplicationServices.GetService<LocalizedRouteMap>()));
             
             app.UseRewriter(rewriter);
+            //app.UsePathBase(new PathString("/IWA"));
 
             app.UseSerilogRequestLogging();
             app.UseAuthentication();
             app.UseSession();
+
+
+            //pipeline ordering
             if (env.IsDevelopment() || Boolean.Parse(config["AppSettings:ForceDeveloperExceptionPage"]))
             {
-                app.UseDeveloperExceptionPage();
+                 app.UseDeveloperExceptionPage();               
             }
             else
             {
@@ -180,6 +191,7 @@ namespace Web
                 {
                     ExceptionHandler = new ExceptionEmailerMiddleware(config).Invoke
                 });
+              //  app.UseExceptionHandler("/en/Error");
             }
             app.UseMiddleware<UserMiddleware>();
 

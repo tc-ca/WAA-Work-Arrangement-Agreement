@@ -4,7 +4,7 @@
 
 .fields, .one.field {
     margin: 0 -0.5em 1em !important;
-    float: left;
+    /*float: left;*/
 }
 
     .one.field .field {

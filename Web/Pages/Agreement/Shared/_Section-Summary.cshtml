@@ -1,88 +1,192 @@
 ﻿@model Web.Pages.HomeModel
 @{
     var lang = CultureInfo.CurrentCulture.Name.Contains("en") ? "en" : "fr";
+    var tab_count = 0;
+    var tab_css_active = "ui bottom attached tab segment active";
+    var tab_css = "ui bottom attached tab segment";
+    bool renewed = Model.MyAgreements != null && Model.MyAgreements.Count == 2 && Model.MyAgreements[1].StatusCode == "4";
+    if (renewed)
+    {
+        //hide renew buuton if already renewed
+        Model.MyAgreements[0].StatusCode = "4";
+        Model.MyAgreements[1].StatusCode = "7";
+    }
 }
 
-<div data-testid="section-summary" class="ui segment">
-    <div class="ui fully-centered grid">
-        <div class="ten wide column">
-            <Heading icon="file alternate outline" headingLevel="2" primaryText="@Global.SummaryDetailHeading" secondaryText=""></Heading>
+<div class="ui top attached tabular menu">
+    <a class="item active" data-tab="first">@Global.TabActiveAgreement</a>
+    @{
+        if (Model.MyAgreements.Count > 1)
+        { <a class="item" data-tab="second">@Global.TabRenewAgreement</a>}
+    }
+
+</div>
+@if (Model.MyAgreements.Count == 0)
+{
+    <div class="ui bottom attached tab segment active" data-tab="first">
+        <div class="ui attached info message">
+            <div class="header">
+                <i class="inverted circular info blue icon"></i> @Global.MsgNoWAAFound
+            </div>
         </div>
-        <div class="two wide column">
-            <h2 class="ui small header">@Global.ProtectedA</h2>
-        </div>
-        <div class="four wide column">
-            <span class="right floated">
-                <span class="ui small basic right pointing label">@Global.Status</span> <partial name="Shared/_AgreementStatus" model="new StatusModel() { Status = @Model.MyAgreement.StatusCode, IsMgr = false }" />
-            </span>
+        <div class="ui bottom attached fluid segment">
+            <div class="content">
+                <a class="ui primary button" asp-route="@routeMap.GetRouteName("/Agreement/Edit")"><span>@Global.Create</span></a>
+            </div>
         </div>
     </div>
-</div>
-<div class="ui very padded segment">
-    @if (Model.MyAgreement.StatusCode == "2" || Model.MyAgreement.StatusCode == "3")
+
+} else
+{ 
+    @foreach (var agreement in Model.MyAgreements)
     {
-        <div class="ui compact yellow segment">
-            <div class="ui small floating header">
-                <i class="inverted circular yellow warning icon"></i>
+<div class="@(tab_count ==0 ? tab_css_active : tab_css)" data-tab=@(tab_count ==0 ?"first" :"second")>
+
+
+    <div class="ui very padded attached segment">
+        <div class="four wide column">
+            <span class="right floated">
+                <span class="ui small basic right pointing label">@Global.Status</span> <partial name="Shared/_AgreementStatus" model="new StatusModel() { Status = @agreement.StatusCode, IsMgr = false }" />
+            </span>
+        </div>
+
+        <h2 class="ui medium header">@Global.LblAgreementDetails</h2>
+
+
+        <partial name="Shared/_SummaryDetails" model="new UserAgreementModel { User = Model.TcDirInfo, Agreement = agreement, Region = Model.Region, ShowComments =false}" />
+        @if (agreement.StatusCode == "2" || agreement.StatusCode == "3")
+        {
+            <div class="ui info visible message">
+                @if (agreement.StatusCode == "2")
+                {
+                    <i class="inverted circular green info icon"></i>@Global.RequestReviewedBy <strong>@agreement.ApproverName.</strong>
+                    @*<p><strong>@Global.RequestReviewedByInfo <span class="nowrap"><a href="mailto:@Model.AdminEmail">@Model.AdminEmail</a></span>  @Global.RequestReviewedByEmail</strong></p>*@
+                    <p>@Global.RequestReviewedByDesc </p>
+                }
+                else
+                {
+                    <i class="inverted circular green info icon"></i> @Global.RequestRecommendedTo <strong>@agreement.RecommenderName.</strong>
+                }
+            </div>
+        }
+        @if (agreement.StatusCode == "1")
+        {
+            <div class="ui attached info message">
+                <div class="header">
+                    <i class="inverted circular info blue icon"></i>@Global.MsgWAAReturned
+                </div>
+            </div>
+            <div class="ui bottom attached fluid segment">
                 <div class="content">
-                    @if (Model.MyAgreement.StatusCode == "2")
+                    @if (!string.IsNullOrEmpty(agreement.Comments))
                     {
-                        @Global.RequestReviewedBy<strong> @Model.MyAgreement.Approver.FullName.</strong>
-                        <div class="sub header"> @Global.RequestReviewedByDesc</div>
+                        <p class="ui grey small header">@Global.LblComments</p>
+                        <div class="ui secondary  segment">
+                            <p>@agreement.Comments</p>
+                        </div>
                     }
-                    else
+                    @{
+                        var parms = new Dictionary<string, string> { { "id", @agreement.AgreementId.ToString() } };
+                    }
+                    <a class="ui primary button" asp-route="@routeMap.GetRouteName("/Agreement/Edit")" asp-all-route-data="parms"><span>@Global.Update</span></a>
+                </div>
+            </div>
+        }
+        else if ((agreement.StatusCode == "4" || agreement.StatusCode == "7"))
+        {
+            <div class="ui attached info message">
+                <div class="header">
+                    <i class="inverted circular check green icon"></i> @Global.RequestIsApproved
+                </div>
+                <div class="content">
+                    <p>  by @agreement.ApproveRejectedByName On @agreement.ApprovedRejectedDate</p>
+                    @if (!string.IsNullOrEmpty(agreement.Comments))
                     {
-                        @Global.RequestRecommendedTo <strong> @Model.MyAgreement.Recommender.FullName.</strong>
+                        <p class="ui grey small header">@Global.LblComments</p>
+                        <div class="ui secondary  segment">
+                            <p>@agreement.Comments</p>
+                        </div>
+                    }
+
+                </div>
+            </div>
+
+        }
+        else if (agreement.StatusCode == "5")
+        {
+            <div class="ui attached negative message">
+                <div class="header">
+                    <i class="inverted circular info red icon"></i> @Global.RequestIsDeniedBy @agreement.ApproveRejectedByName.
+                </div>
+            </div>
+            <div class="ui bottom attached fluid segment">
+                <div class="content">
+                    <p class="ui grey small header">@Global.DenyReason:</p>
+                    <p class="summary-text"><lang en="@agreement.DenyReason.English" fr="@agreement.DenyReason.French" /></p>
+                    @if (!string.IsNullOrEmpty(agreement.Comments))
+                    {
+                        <p class="ui grey small header">@Global.LblComments</p>
+                        <div class="ui secondary  segment">
+                            <p>@agreement.Comments</p>
+                        </div>
+                    }
+                    <button asp-page-handler="Reopen" asp-route-id="@agreement.AgreementId" class="ui tiny blue labeled icon load-indicator button" id="reopen-agreement-btn" tabindex="0">
+                        <i class="folder open outline icon"></i>
+                        <span class="text">@Global.OpenToUpdate</span>
+                    </button>
+                </div>
+            </div>
+
+        }
+        else if (agreement.StatusCode == "6")
+        {
+
+            var isRenew = agreement.RenewNotified.Value != 2;
+
+            <div class="ui attached info message">
+                <div class="header">
+                    <i class="inverted circular info blue icon"></i>@(isRenew ? Global.MsgRenewRequired: Global.MsgWAAReturned)
+                </div>
+            </div>
+            <div class="ui bottom attached fluid segment">
+                <div class="content">
+                    @if (!string.IsNullOrEmpty(agreement.Comments))
+                    {
+                        <p class="ui grey small header">@Global.LblComments</p>
+                        <div class="ui secondary  segment">
+                            <p>@agreement.Comments</p>
+                        </div>
+                    }
+
+                    @if (Model.MyAgreements.Count == 1)
+                    {
+
+                        <button asp-page-handler="Renew" asp-route-id="@agreement.AgreementId" class="ui blue button right aligned" id="return-agreement-btn" tabindex="0">
+                            <span class="text">@(isRenew ? Global.VerRenew : Global.Update)</span>
+                        </button>
+
                     }
                 </div>
             </div>
+        }
+        <div class="ui warning visible message">
+            <i class="inverted circular yellow warning icon"></i><strong>@Global.WorkingAloneReminderTitle</strong>
+            <p>@Global.WorkingAloneReminderDesc</p>
         </div>
-
-    }
-    <h2 class="ui medium header">@Global.RequestDetails</h2>
-    <partial name="Shared/_SummaryDetails" model="new UserAgreementModel {
-    User = Model.EmpInfo,
-    Agreement = Model.MyAgreement,
-    Region = Model.Region}" />
-
-    @if (Model.MyAgreement.StatusCode == "4")
-    {
-        <div class="ui grid">
-            <div class="ui eight wide column">
-                <div class="ui compact green segment">
-                    <div class="ui small floating header">
-                        <i class="inverted circular green checkmark icon"></i>
-                        <div class="content">
-                            @Global.RequestIsApproved
-                        </div>
-                    </div>
-                </div>
+    </div>
+    <div class="ui attached secondary segment">
+        <div class="ui fully-centered grid">
+            <div class="twelve wide column">
+                <p>@Html.Raw(@Global.IssuesToLREmail)<a href="mailto:@Model.AdminEmail">@Model.AdminEmail</a></p>
             </div>
         </div>
-    }
-    @if (Model.MyAgreement.StatusCode == "5")
-    {
-        <div class="ui grid">
-            <div class="ui ten wide column">
-                <div class="ui compact red segment">
-                    <div class="ui small floating header">
-                        <i class="times circle outline red icon"></i>
-                        <div class="content">
-                            @Global.RequestIsDeniedBy @Model.MyAgreement.ApproveRejectedBy?.FullName.
-                            <span>
-                                @Global.DenyReason:
-                                <lang en="@Model.MyAgreement.DenyReason.English" fr="@Model.MyAgreement.DenyReason.French" />
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="ui center aligned basic segment">
-            <button asp-page-handler="Reopen" asp-route-id="@Model.MyAgreement.AgreementId" class="ui tiny blue labeled icon load-indicator button" id="return-agreement-btn" tabindex="0">
-                <i class="folder open outline icon"></i>
-                <span class="text">@Global.OpenToUpdate</span>
-            </button>
-        </div>
-    }
-</div>
+    </div>
+<div class="ui clearing"></div>
+</div>  
+    tab_count++;
+  }
+}        
+<script type="text/javascript" on-content-loaded="true">
+            $('.tabular.menu .item').tab();
+        </script>
+

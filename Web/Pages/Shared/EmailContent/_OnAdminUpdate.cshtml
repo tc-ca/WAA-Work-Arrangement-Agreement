@@ -6,37 +6,41 @@
         text-decoration: underline;
     }
 </style>
-@if(Model.isReturnedToEmployee){
+@if (Model.isReturnedToEmployee)
+{
     <p>Good day @Model.EmployeeFullName,</p>
 
     <p>As requested, your Work Arrangement Agreement (WAA) is being returned to you by the WAA Administrator.</p>
-} else{
-    <p>Good day @Model.ManagerFullName,</p>
-
-    <p>As requested, the Work Arrangement Agreement for  @Model.EmployeeFullName is being returned to you by the WAA Administrator.</p>
+    <p> “Click” on the link below to access it, make the necessary changes and resubmit. To log into this app, you must be connected to the VPN.</p>
 }
-<p>
-    “Click” on the link below to access it, make the necessary changes and resubmit. To log into this app, you must be connected to the VPN.
-</p>
+else
+{
+    <p>Good day @Model.ManagerFullName,</p>
+    <p>As requested, the Work Arrangement Agreement for  @Model.EmployeeFullName is being returned to you by the WAA Administrator.</p>
+    <p>“Click” on the link below to access it and make the necessary changes. To log into this app, you must be connected to the VPN.</p>
+}
+
 <p>
     <a class="accessible-link" href="@($"{Model.BaseURL}/en/agreement")" target="_blank">Work Arrangement Agreement</a>
 </p>
 
 <hr />
-@if(Model.isReturnedToEmployee){
+@if (Model.isReturnedToEmployee)
+{
+    <p>Bonjour @Model.EmployeeFullName,</p>
 
-<p>Bonjour @Model.EmployeeFullName,</p>
-
-<p>Comme vous l’avez demandé, votre Entente d’aménagement de travail (EAT) vous est renvoyée par l’administrateur EAT.</p>
-} else{
-<p>Bonjour  @Model.ManagerFullName,</p>
-
-<p>Comme vous l’avez demandé, l’Entente d’aménagement de travail de @Model.EmployeeFullName vous est renvoyée par l’administrateur EAT.</p>
+    <p>Comme vous l’avez demandé, votre Entente d’aménagement de travail (EAT) vous est renvoyée par l’administrateur EAT.</p>
+    <p>«Cliquez» sur le lien ci-dessous pour y accéder, effectuer les modifications nécessaires et soumettre à nouveau.
+        Pour vous brancher à cette application, vous devez être connecté au RPV.</p>
 }
-<p>
-    «Cliquez» sur le lien ci-dessous pour y accéder, effectuer les modifications nécessaires et soumettre à nouveau.
-    Pour vous brancher à cette application, vous devez être connecté au RPV.
-</p>
+else
+{
+    <p>Bonjour  @Model.ManagerFullName,</p>
+
+    <p>Comme vous l’avez demandé, l’Entente d’aménagement de travail de @Model.EmployeeFullName vous est renvoyée par l’administrateur EAT.</p>
+    <p>«Cliquez» sur le lien ci-dessous pour y accéder et effectuer les modifications nécessaires. Pour vous brancher à cette application, vous devez être connecté au RPV.</p>
+}
+
 <p>
     <a class="accessible-link" href="@($"{Model.BaseURL}/fr/entente")" target="_blank">Entente d’aménagement de travail</a>
 </p>

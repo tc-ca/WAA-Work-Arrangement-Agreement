@@ -1,0 +1,172 @@
+﻿@page
+@model Web.Pages.Admin.TmxMember
+@{
+
+
+    ViewData["Title"] = Global.AppTitle;
+
+    @section Breadcrumbs {
+        <nav>
+            <h2 class="wb-inv">@Template.YouAreHere</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a asp-route="@routeMap.GetRouteName("/Agreement/Index")"><span class="">@Global.Home</span></a> <i class="small white right chevron icon"></i>
+                </li>
+                <li>
+                    <a asp-route="@routeMap.GetRouteName("/Admin")"><span class="">@Global.Administration</span></a> <i class="small white right chevron icon"></i>
+                </li>
+                <li>
+                    <span class="ui white text">@Global.ManageTMX</span>
+                </li>
+            </ol>
+        </nav>
+    }
+}
+<form class="ui form" id="my-employees-form" method="post">
+    <div class="ui segments">
+        <div class="ui segment">
+            <Heading icon="users" headingLevel="2" primaryText="@Global.AdminTMX" secondaryText=""></Heading>
+        </div>
+        <div class="ui padded blue segment">
+            <h4>@Global.AddUser</h4>
+            <div class="ui grid" id="add-user">
+                <div class="six wide column">
+                    <div class="fields">
+                        <input type="text" id="txtSuperUserName" name="suName" />
+                        <button class="ui primary button" asp-page-handler="AddTMXUser" id="save-user-btn">@Global.Add</button>
+                    </div>
+                </div>
+            </div>
+
+            <input type="hidden" id="hfSuperUserId" name="UserName" />
+        </div>
+        <div class="ui padded blue segment">
+            <div class="ui hidden success message" id="msg-success">
+                <i class="close icon"></i>
+                <div class="header">
+                    @Global.Message_UpdateUserSuccess
+                </div>
+            </div>
+            <div class="ui hidden negative message" id="msg-err">
+                <i class="close icon"></i>
+                <div class="header">
+                    @Global.Message_UpdateUserFail
+                </div>               
+            </div>
+            <table class="ui table stripe" id="tmxTable">
+                <thead>
+                    <tr>
+                        <th>@Global.Name</th>
+                        <th class="left aligned">@Global.EmpTitle</th>
+                        <th class="left aligned">@Global.StartDate</th>
+                        <th class="left aligned">@Global.EndDate</th>
+                        <th class="left aligned"></th>
+                        <th class="left aligned"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var emp in Model.TmxUsers)
+                    {
+                        <tr data-userId="@emp.Tc_user_id">
+                            <td>@emp.TcUser.FullName</td>
+                            <td>@emp.TcUser.PositionEng</td>
+                            <td><input type="text" style="width:60%" class="effdate startdate" value=@emp.EffectiveStartDate.ToString("yyyy-MM-dd")></td>
+                            <td><input type="text" style="width:60%" class="effdate enddate" value=@emp.EffectiveEndDate?.ToString("yyyy-MM-dd")></td>
+                            <td><button id="del-btn" asp-page-handler="DeleteUser" asp-route-id="@emp.Tc_user_id">@Global.Remove</button></td>
+                            <td class="update">
+                                <button id="save-btn" disabled>@Global.Update</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="ui center aligned basic segment">
+            <a class="ui primary button" asp-route="@routeMap.GetRouteName("/Admin")">@Global.Back</a>
+        </div>
+    </div>
+
+
+
+
+
+</form>
+<script type="text/javascript" on-content-loaded="true">
+    var hostUrl = window.location.href;
+    var baseurl = hostUrl.substr(0, hostUrl.indexOf('/en/') + hostUrl.indexOf('/fr/') + 2);
+    $("#txtSuperUserName").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: baseurl + 'api/agreement/Searchuser',
+                data: { "prefix": request.term },
+                type: "POST",
+                dataType: "json",
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return item;
+                    }))
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        },
+        select: function (e, i) {
+            $("#hfSuperUserId").val(i.item.value);
+            $("#txtSuperUserName").val(i.item.label);
+            $('#save-user-btn').removeClass('disabled');
+            return false;
+        },
+        minLength: 3,
+        appendTo: "#add-user"
+    });
+    table = $('#tmxTable').DataTable({
+        paging: false,
+        searching: false,
+        ordering: true,
+    });
+    $('#tmxTable tbody').on('click', 'td.update', function () {
+        $('.message').hide();
+        var tr = $(this).closest('tr');
+        var btn = $(this).closest('tr').find('#save-btn');
+        var sdate = $(this).closest('tr').find(".startdate").val();
+        var edate = $(this).closest('tr').find(".enddate").val();
+        var empId = tr.attr('data-userId');
+        if (sdate) {
+            var tmx = { "id": empId, "sdate": sdate, "edate": edate };
+            $(".ui form").addClass("loading");
+            $.ajax({
+                url: baseurl + 'api/agreement/tmxupdate/',
+                type: 'POST',
+                data: tmx,
+                dataType: "json",
+                success: function (data) {
+                    $(".ui form").removeClass("loading");
+                    alert(data);
+                    if (data.indexOf('successfully') > 0) {
+                        $("#msg-success").show();
+                        btn.attr('disabled', 'disabled');                       
+                    } else {
+                        $("#msg-err").show(); 
+                    }
+
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        }
+        return false;
+    });
+    $('#tmxTable tbody').on('change', 'tr input[type="date"]', function () {
+        var tr = $(this).closest('tr').find('#save-btn');
+        tr.removeAttr('disabled');
+    });
+    $('.effdate').on('focus', function () { this.type = 'date' });
+    $('.effdate').on('blur', function () { this.type = 'text' });
+</script>

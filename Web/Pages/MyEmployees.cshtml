@@ -20,112 +20,388 @@
             </ol>
         </nav>
     }
+    var directList = Model.DirectReports.Select(x => x.UserName.ToLower()).ToList();
+    var agreementsInProcess = Model.MyEmpsAgreements.Where(x =>x.SubmittedDate !=null && (x.StatusCode == "1" || x.StatusCode == "2" || x.StatusCode == "3" || x.StatusCode == "5") && directList.Contains(x.TcUserId.ToLower())).ToList();
+    var recommended = Model.MyEmpsAgreements.Where(x => !directList.Contains(x.TcUserId.ToLower()) && x.StatusCode == "3").ToList();
 }
-
+<div class="ui faded-red segment">
+    <Heading icon="brown address card" headingLevel="2" primaryText="@Global.LblMyTeamAgreements" secondaryText="@ViewContext.HttpContext.Session.GetString("DisplayName")@Global.LblReviewMyTeamAgreements"></Heading>
+</div>
 <form class="ui form" id="my-employees-form" method="post">
-    <div class="ui manager-form segments">
-        <div class="ui segment">
-            <Heading icon="users" headingLevel="2" primaryText=" @Global.MyTeam" secondaryText="@ViewContext.HttpContext.Session.GetString("DisplayName"): @Global.ReviewDirectReports"></Heading>
-        </div>
+    @*<a class="ui primary button" asp-route="@routeMap.GetRouteName("/Agreement/MyTeam")"><span class="">Manage My Team</span></a>*@
+    <div class="ui top attached tabular menu">
+        <a class="item active" data-tab="first">@Global.TabActiveAgreements (@Model.DirectReports.Count)</a>
+        <a class="item" data-tab="second">@Global.TabProgressAgreements (@agreementsInProcess.Count)</a>
+        <a class="item" data-tab="third">@Global.TabRecommendedAgreements (@recommended.Count)</a>
+    </div>
+    <div class="ui bottom attached tab segment active" data-tab="first">
+        <div class="ui manager-form segments">
 
-        @if (Model.DirectReports.Count == 0 && Model.MyEmpsAgreements.Count == 0)
-        {
-            <div class="ui segment">
-                <div class="ui yellow icon message">
-                    <i class="info icon"></i>
-                    <div class="content">
-                        <p>@Global.NoDirectReports</p>
+            @*if (Model.DirectReports.Count == 0 && Model.MyEmpsAgreements.Count == 0)*@
+            @if (Model.DirectReports.Count == 0 && Model.MyEmpsAgreements.Count == 0)
+            {
+                <div class="ui segment">
+                    <div class="ui yellow icon message">
+                        <i class="info icon"></i>
+                        <div class="content">
+                            <p>@Global.NoDirectReports</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        }
-        else
-        {
-            <div class="ui padded blue segment">
-                <table class="ui very basic table">
-                    <thead>
-                    <thead>
-                        <tr>
-                            <th>@Global.Name</th>
-                            <th class="left aligned">@Global.Status</th>
-                            <th class="center aligned">@Global.AgreementReceived</th>
-                            <th class="center aligned">@Global.RecommendedTo</th>
-                            <th class="center aligned">@Global.ApprovedRejected</th>
-                            <th class="center aligned">@Global.ApprovedRejectedBy</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var emp in Model.DirectReports)
-                        {   /* display those users that are direct reports */
-                            var agreement = Model.MyEmpsAgreements.Where(x => x.TcUserId.ToLower() == emp.UserName.ToLower()).FirstOrDefault();
-                            var statuscode = agreement == null ? "0" : agreement.StatusCode;
-                            <tr data-testid="employee-row" data-username="@emp.UserName">
-                                <td>
-                                    @{
-                                        if (agreement!=null && int.Parse(agreement.StatusCode) > 1)
-                                        {
-                                            <a class="accessible-link" asp-route="@routeMap.GetRouteName("/Agreement/Edit")" asp-route-id="@agreement?.AgreementId" data-testid="edit-link">
-                                                @emp.FullName
-                                            </a>
-                                        }
-                                        else
-                                        { @emp.FullName }
-                                    }
-                                </td>
-                                <td class="left aligned"><partial name="Agreement/Shared/_AgreementStatus" model="new StatusModel() { Status = statuscode, IsMgr = true }" /></td>
-                                <td class="center aligned">@agreement?.LastUpdateDate.ToString(datePattern)</td>
-                                <td class="center aligned">@agreement?.Recommender?.FullName</td>
-                                <td class="center aligned">@agreement?.ApprovedRejectedDate?.ToString(datePattern)</td>
-                                <td class="center aligned">@agreement?.ApproveRejectedBy?.FullName</td>
+            }
+            else
+            {
+        <div class="ui visible info  message">
+            <i class="inverted circular green info icon"></i> @Global.NoteActiveAgreements
+        </div>
+                <div class="ui padded brown segment">
+                    @*<div class="ui visible info message">
+                    <div class="header">
+                        <i class="inverted circular green info icon"></i> Remove Employees from your team
+                    </div>
+                    <p>Any submitted/approved/recommended agreement will be returned to the employee</p>
+                </div>*@
+                    <table class="ui very basic table" id="myEmps">
+                        <thead>
+                            <tr>
+                                <th>@Global.Name</th>
+                                <th>Version</th>
+                                <th class="left aligned">@Global.ColWorkType</th>
+                                <th class="left aligned">@Global.ColTelework</th>
+                                <th class="left aligned">@Global.ColOHS</th>
+                                <th class="left aligned">@Global.ColEffectiveDate</th>
+                                <th class="left aligned">@Global.ColExpiryDate</th>
+                                <th class="left aligned"></th>
                             </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        <tbody>
+                            @foreach (var emp in Model.DirectReports)
+                            {   /* display those users that are direct reports */
+                                //var agreement = Model.MyEmpsAgreements.Where(x => x.Version == 1 && x.TcUserId.ToLower() == emp.UserName.ToLower() && x.StatusCode != "1").FirstOrDefault();
+                                var agreements = Model.MyEmpsAgreements.Where(x => x.TcUserId.ToLower() == emp.UserName.ToLower() && (x.StatusCode == "4" || x.StatusCode == "6")).OrderBy(y => y.StartDate).ToList();
+                                var line = 0;
+                                @if (agreements.Count == 0)
+                                {
+
+                                    <tr data-testid="employee-row" data-username="@emp.FullName" data-userId="@emp.UserName">
+                                        <td>
+                                            @emp.FullName
+                                        </td>
+                                        <td>N/A</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="delemp_control">
+                                            <i class="trash alternate icon"></i>
+                                        </td>
+                                    </tr>
+
+                                }
+                                foreach (Data.Agreement agreement in agreements)
+                                {
+                                    line++;
+                                    var color = "";
+                                    var telework = "";
+                                    var ohsTxt = "";
+                                    var ohs = "";
+                                    if (agreement != null)
+                                    {
+                                        var days_to_expaire = (agreement.EndDate - DateTime.Today).Days;
+
+                                        if (days_to_expaire < 0)
+                                        {
+                                            color = "color:red;";
+                                        }
+                                        else if (days_to_expaire <= 30)
+                                        {
+                                            color = "color:brown;";
+                                        }
+                                        if (agreement.TeleworkAddrStreet != null)
+                                        {
+                                            ohs = agreement.UnmetOHSItems?.Count > 0 ? "brown attention icon" : "green checkmark icon";
+                                            if (agreement.HybridOption != null)
+                                            {
+                                                telework = CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "en"? agreement.HybridOption.English : agreement.HybridOption.French;
+                                            }
+                                            else
+                                            {
+                                                telework = "Ad Hoc";
+                                            }
+                                        }
+                                        else { ohsTxt = "N/A"; telework = "N/A"; }
+                                    }
+                                    <tr data-testid="employee-row" data-username="@emp.FullName" data-userId="@emp.UserName" class=@(line==1? "" :"hidden")>
+
+                                        <td class="details-control">
+                                            @(line==1? emp.FullName :"")
+                                            @{
+                                                if (agreements.Count == 2 && line == 1)
+                                                {
+                                                    <i class="plus square outline icon" aria-hidden="true"></i>
+                                                }
+                                                if (agreement.StatusCode == "6")
+                                                {
+                                                    <i class="hourglass half brown icon" aria-hidden="true"></i>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @{
+                                                if (agreement != null)
+                                                {                                                    
+                                                    <a class="accessible-link" asp-route="@routeMap.GetRouteName("/Agreement/Approve")" asp-route-id="@agreement?.AgreementId" data-testid="edit-link">
+                                                        @(line == 1 ? Global.VerCurrent : Global.VerRenew)
+                                                    </a>
+                                                }
+                                            }
+
+                                        </td>
+                                        <td class="left aligned">@(CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "en"? @agreement?.WorkType.English : @agreement?.WorkType.French)</td>
+                                        <td class="left aligned">@telework</td>
+                                        <td class="center aligned"><i class='@ohs'></i>@ohsTxt</td>
+                                        <td class="left aligned">@agreement?.StartDate.ToString(datePattern)</td>
+                                        <td class="left aligned"><span style=@color>@agreement?.EndDate.ToString(datePattern)</span></td>
+                                        <td class="delemp_control">
+                                            <i class="trash alternate icon"></i>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                        <tfoot></tfoot>
+                    </table>
+                </div>
+
+            }
+        </div>
+        <div class="ui visible message">
+            <strong>Notes</strong>
+            <p>
+                <i class="plus square outline icon"></i>/<i class="minus square outline icon"></i>: @Global.LegendPlus
+            </p>
+            <p>
+                <i class="hourglass half brown icon"></i>: @Global.LegendClock
+            </p>
+            <p>
+                <i class="trash alternate icon icon"></i>: @Global.LegendRecycle
+            </p>
+        </div><div class="ui clearing"></div>
+    </div>
+    <div class="ui bottom attached tab segment" data-tab="second">
+        @{
+                <div class="ui manager-form segments">
+                    @*<div class="ui tertiary light-purple segment">
+            <Heading icon="users" headingLevel="2" primaryText="Agreements in process" secondaryText="@ViewContext.HttpContext.Session.GetString("DisplayName"): @Global.ReviewDirectReports"></Heading>
+        </div>*@
+                    @if (agreementsInProcess.Count > 0)
+                    {
+                    <div class="ui visible info  message">
+                        <i class="inverted circular green info icon"></i>  @Global.NoteAgreements
+                    </div>
+                        <div class="ui padded blue segment">
+                            <table class="ui very basic table">
+                                <thead>
+                                <thead>
+                                    <tr>
+                                        <th>@Global.Name</th>
+                                        <th class="left aligned">@Global.Status</th>
+                                        <th class="center aligned">@Global.AgreementReceived</th>
+                                        <th class="center aligned">@Global.RecommendedTo</th>
+                                        <th class="center aligned">@Global.ApprovedRejected</th>
+                                        <th class="center aligned">@Global.ApprovedRejectedBy</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach (var agreement in agreementsInProcess)
+                                    {
+                                        var statuscode = agreement == null ? "0" : agreement.StatusCode;
+                                        <tr data-testid="employee-row" data-username="@agreement.TcUserName">
+                                            <td><a class="accessible-link" asp-route="@routeMap.GetRouteName("/Agreement/Approve")" asp-route-id="@agreement?.AgreementId" data-testid="edit-link">@agreement.TcUserName</a></td>
+                                            <td class="left aligned"><partial name="Agreement/Shared/_AgreementStatus" model="new StatusModel() { Status = statuscode, IsMgr = true }" /></td>
+                                            <td class="center aligned">@agreement?.LastUpdateDate.ToString(datePattern)</td>
+                                            <td class="center aligned">@agreement?.RecommenderName</td>
+                                            <td class="center aligned">@agreement?.ApprovedRejectedDate?.ToString(datePattern)</td>
+                                            <td class="center aligned">@agreement?.ApproveRejectedByName</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="ui visible info  message">
+                            <div class="header">
+                                <i class="inverted circular green info icon"></i> @Global.MsgNoActiveAgreements
+                            </div>
+                            <div><br /><br /><br /><br /><br /><br /></div>
+                        </div>
+                    }
+                </div>
         }
     </div>
+    <div class="ui bottom attached tab segment" data-tab="third">
+        @{ 
+                <div class="ui manager-form segments">
+                    @*<div class="ui segment">
+            <Heading icon="purple signature" headingLevel="2" primaryText="@Global.RecommendedRequests" secondaryText=""></Heading>
+        </div>*@
+                    @if (recommended.Count > 0)
+                    {
+                    <div class="ui padded purple segment">
 
-    @{ /* display those users with agreements that have been recommended to this mgr (not direct reports) */
-        var directList = Model.DirectReports.Select(x => x.UserName.ToLower()).ToList();
-        var recommended = Model.MyEmpsAgreements.Where(x => !directList.Contains(x.TcUserId.ToLower())).ToList();
+                        <div class="ui visible info  message">
+                            <i class="inverted circular green info icon"></i>  @Global.NoteAgreements
+                        </div>
+                        <table class="ui very basic table">
+                            <thead>
+                            <thead>
+                                <tr>
+                                    <th>@Global.Name</th>
+                                    <th class="center aligned">@Global.Status</th>
+                                    <th class="center aligned">@Global.AgreementReceived</th>
+                                    <th class="center aligned">@Global.RecommendedTo</th>
+                                    <th class="center aligned">@Global.ApprovedRejected</th>
+                                    <th class="center aligned">@Global.ApprovedRejectedBy</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var rcd in recommended)
+                                {
+                                    <tr data-testid="recommended-row" data-username="@rcd.TcUserId">
+                                        <td><a asp-route="@routeMap.GetRouteName("/Agreement/Approve")" asp-route-id="@rcd.AgreementId" data-testid="recommended-link">@rcd.TcUserName</a></td>
+                                        <td class="center aligned"><partial name="Agreement/Shared/_AgreementStatus" model="new StatusModel() { Status = @rcd.StatusCode, IsMgr = true } " /></td>
+                                        <td class="center aligned">@rcd.SubmittedDate?.ToString(datePattern)</td>
+                                        <td class="center aligned">@rcd.RecommenderName</td>
+                                        <td class="center aligned">@rcd.ApprovedRejectedDate?.ToString(datePattern)</td>
+                                        <td class="center aligned">@rcd.ApproveRejectedByName</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    }
+                    else
+                    {
+                        <div class="ui visible info  message">
+                            <div class="header">
+                                <i class="inverted circular green info icon"></i> @Global.MsgNoRecommAgreements
+                            </div>
+                            <div><br /><br /><br /><br /><br /><br /></div>
+                        </div>                    
+                    }
+                </div>
+        }
+    </div>
+</form>
+@*<form id="delEmp-form" asp-antiforgery="true" method="post">
+    
 
-        if (recommended.Count > 0)
-        {
-        <div class="ui manager-form segments">
-            <div class="ui segment">
-                <Heading icon="purple signature" headingLevel="2" primaryText="@Global.RecommendedRequests" secondaryText=""></Heading>
-            </div>
-
-            <div class="ui padded purple segment">
-                <table class="ui very basic table">
-                    <thead>
-                    <thead>
-                        <tr>
-                            <th>@Global.Name</th>
-                            <th class="center aligned">@Global.Status</th>
-                            <th class="center aligned">@Global.AgreementReceived</th>
-                            <th class="center aligned">@Global.RecommendedTo</th>
-                            <th class="center aligned">@Global.ApprovedRejected</th>
-                            <th class="center aligned">@Global.ApprovedRejectedBy</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var rcd in recommended)
-                        {
-                            <tr data-testid="recommended-row" data-username="@rcd.TcUserId">
-                                <td><a asp-route="@routeMap.GetRouteName("/Agreement/Edit")" asp-route-id="@rcd.AgreementId" data-testid="recommended-link">@rcd.TcUser.FullName</a></td>
-                                <td class="center aligned"><partial name="Agreement/Shared/_AgreementStatus" model="new StatusModel() { Status = @rcd.StatusCode, IsMgr = true } " /></td>
-                                <td class="center aligned">@rcd.SubmittedDate.ToString(datePattern)</td>
-                                <td class="center aligned">@rcd.Recommender?.FullName</td>
-                                <td class="center aligned">@rcd.ApprovedRejectedDate?.ToString(datePattern)</td>
-                                <td class="center aligned">@rcd.ApproveRejectedBy?.FullName</td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+        <div class="header ui orange"> </div>
+        <div class="content">
+            <p><Label class="ui small header">Empoyee: </Label><span class="empName"></span></p>
+            <div class="ui info message">
+                <i class="icon info"></i>
+                Any submitted/approved/recommended agreement will be returned to the employee
             </div>
         </div>
-        }
-    }
-     
+
+        <input class="empId" type="hidden" name="empId" />
+        <div class="actions">
+            <button type="submit" asp-page-handler="DeleteEmp" class="ui tiny blue button" id="del-emp-btn">
+                Continue
+            </button>
+            <button type="button" class="ui tiny basic button" id="delConfirm-close-btn">
+                Cancel
+            </button>
+        </div>
+</form>*@
+<div class="ui tiny modal" id="delConfirm">
+    <form class="ui form" id="delEmp-form" asp-antiforgery="true" method="post">
+        <div class="ui segments">
+            <div class="ui secondary brown inverted segment">
+                <div class="header ui">@Global.MsgDelEmployee </div>
+            </div>
+            <div class="ui segment">
+                <div class="content">
+                    <p><Label class="ui small header">@Global.LblEmployee </Label><strong><span style="color:blue" class="empName"></span></strong></p>
+                    <div class="ui info tiny message">
+                        <i class="inverted circular green icon info"></i>
+                        @Global.MsgDelEmployeeInfo
+                    </div>
+                </div>
+
+                <input class="empId" type="hidden" name="empId" />
+            </div>
+            <div class="ui secondary center aligned segment">
+                <button type="submit" asp-page-handler="DeleteEmp" class="ui tiny blue button" id="del-emp-btn">
+                    @Global.ContinueBtn
+                </button>
+                <button type="button" class="ui tiny basic button" id="delConfirm-close-btn">
+                    @Global.btnCancel
+                </button>
+            </div>
+        </div>
 </form>
+</div>
+
+<script type="text/javascript" on-content-loaded="true">
+    var lang = $('#lang').val();
+    var bthPrev = 'Prevous';
+    var btnNext = 'Next';
+    var sTotal = "Showing _START_ to _END_ of _TOTAL_ entries";
+    if (lang == "fr") {
+        bthPrev = 'Précédente';
+        btnNext = 'Suivant';
+        sTotal = "Affichage de _START_ à _END_ sur _TOTAL_ entrées";
+    }
+    $('.tabular.menu .item').tab();
+    $('#delConfirm').modal({ closable: false });
+    $('#delConfirm-close-btn').on('click', function () {
+        $('#delConfirm').modal('hide');
+    });
+    var table = $('#myEmps').DataTable({
+        "lengthChange": false,
+        "searching": false,
+        ordering: false,
+        "pageLength": 10,
+        language: {
+            info: sTotal,
+            paginate: {
+                previous: bthPrev,
+                next: btnNext
+            },
+        }
+    });
+    // Add event listener for opening and closing details data-username
+    $('#myEmps tbody').on('click', 'td.details-control', function () {
+        var tr = $(this).closest('tr');
+        var tdi = tr.find("i.square");
+        if (tdi.first().hasClass('plus')) {
+            tr.next().removeClass("hidden");
+            tdi.first().removeClass('plus');
+            tdi.first().addClass('minus');
+        } else if (tdi.first().hasClass('minus')) {
+            tr.next().addClass("hidden");
+            tdi.first().removeClass('minus');
+            tdi.first().addClass('plus');
+        }
+    });
+    $('#myEmps tbody').on('click', 'td.delemp_control', function () {
+        var tr = $(this).closest('tr');
+        var empName = tr.attr('data-username');
+        var empId = tr.attr('data-userId');
+        $('#delConfirm input.empId').val(empId);
+        $('#delConfirm span.empName').text(empName);
+        $('#delConfirm').modal('show');
+    });
+
+    table.on("user-select", function (e, dt, type, cell, originalEvent) {
+        if ($(cell.node()).hasClass("details-control")) {
+            e.preventDefault();
+        }
+    });
+</script>

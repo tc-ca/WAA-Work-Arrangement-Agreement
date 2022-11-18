@@ -9,5 +9,6 @@ namespace Data
         public Agreement Agreement { get; set; }
         public TcRegion Region { get; set; }
         public List<OHSCategory> OhsCheckboxList { get; set; }
+        public bool ShowComments { get; set; }
     }
 }

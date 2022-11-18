@@ -20,6 +20,7 @@ namespace Data
             modelBuilder.Entity<Agreement>().Property(e => e.ConditionInd).HasConversion<int>();
             modelBuilder.Entity<Agreement>().Property(e => e.ArchivedInd).HasConversion<int>();
             modelBuilder.Entity<Agreement>().Property(e => e.MutualAgreementInd).HasConversion<int>();
+            modelBuilder.Entity<Manager>().HasNoKey().ToView(null); ;
 
             modelBuilder.Entity<UserUnmetOHSItem>()
             .HasKey(nameof(UserUnmetOHSItem.UnMetOHSItemId), nameof(UserUnmetOHSItem.AgreementId));
@@ -31,7 +32,6 @@ namespace Data
         public DbSet<WorkType> WorkTypes { get; set; }
         public DbSet<Status> Status { get; set; }
         public DbSet<Agreement> Agreements { get; set; }
-        public DbSet<TcBranch> TcBranches { get; set; }
         public DbSet<UserManager> UserManagers { get; set; }
         public DbSet<TcRegion> Regions { get; set; }        
         public DbSet<WorkSite> WorkSites { get; set; }
@@ -41,7 +41,10 @@ namespace Data
         public DbSet<DenyReason> DenyReasons { get; set; }
         public DbSet<Manager> Managers { get; set; }        
         public DbSet<AltWorkSite> AltWorkSites { get; set; }        
-        public DbSet<SuperUser> SuperUsers { get; set; }
-
+        public DbSet<SuperUser> SuperUsers { get; set; }        
+        public DbSet<HybridOption> HybridOptions { get; set; }
+        // public DbSet<SupportDocument> SupportDocuments { get; set; }
+        public DbSet<FTRRecommender> FTRRecommenders { get; set; }        
+        public DbSet<TMXMember> TMXMembers { get; set; }
     }
 }

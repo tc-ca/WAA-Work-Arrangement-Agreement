@@ -97,6 +97,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add user.
+        /// </summary>
+        public static string AddUser {
+            get {
+                return ResourceManager.GetString("AddUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Check here if requesting to telework on an ad hoc basis..
         /// </summary>
         public static string AdHocInfo {
@@ -106,7 +115,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your active directory information was not found. Please contact Service Desk to ensure your information is properly filled in prior to requesting a work agreement..
+        ///   Looks up a localized string similar to Your Transport Canada account information was not found. If you are a new employee to TC, your account may take 24 hours be active in HR Self-Service Portal. Please try logging back in tomorrow..
         /// </summary>
         public static string ADInfoNotFound {
             get {
@@ -120,6 +129,24 @@ namespace Resources {
         public static string Administration {
             get {
                 return ResourceManager.GetString("Administration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TMX members.
+        /// </summary>
+        public static string AdminTMX {
+            get {
+                return ResourceManager.GetString("AdminTMX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Admin user list.
+        /// </summary>
+        public static string AdminUserList {
+            get {
+                return ResourceManager.GetString("AdminUserList", resourceCulture);
             }
         }
         
@@ -259,6 +286,33 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change File.
+        /// </summary>
+        public static string BtnChangeFile {
+            get {
+                return ResourceManager.GetString("BtnChangeFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change Manager.
+        /// </summary>
+        public static string BtnChangeManager {
+            get {
+                return ResourceManager.GetString("BtnChangeManager", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change Recommender.
+        /// </summary>
+        public static string BtnChangeRecommender {
+            get {
+                return ResourceManager.GetString("BtnChangeRecommender", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Close.
         /// </summary>
         public static string btnClose {
@@ -313,6 +367,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Return to Employee.
+        /// </summary>
+        public static string BtnReturnForRenew {
+            get {
+                return ResourceManager.GetString("BtnReturnForRenew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         public static string btnSave {
@@ -340,7 +403,16 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Not sure if you have the delegated authority? Click &lt;a class=&quot;accessible-link&quot; href=&quot;https://mytc-montc.tc.gc.ca/rdims.php?id=14435629&quot; target=&quot;_blank&quot;&gt;here&lt;/a&gt;..
+        ///   Looks up a localized string similar to Upload.
+        /// </summary>
+        public static string BtnUpload {
+            get {
+                return ResourceManager.GetString("BtnUpload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click &lt;a class=&quot;accessible-link&quot; href=&quot;https://hrdt.tc.gc.ca/?levelIds=&amp;areaIds=&amp;selectedAuthorityId=&amp;nonEx=true&amp;ex=true&amp;GoCTemplateCulture=en-CA&quot; target=&quot;_blank&quot;&gt;here&lt;/a&gt; to verify your level. .
         /// </summary>
         public static string CheckDelegatedAuthority {
             get {
@@ -358,7 +430,52 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Comment.
+        ///   Looks up a localized string similar to Effective Date.
+        /// </summary>
+        public static string ColEffectiveDate {
+            get {
+                return ResourceManager.GetString("ColEffectiveDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expiry Date.
+        /// </summary>
+        public static string ColExpiryDate {
+            get {
+                return ResourceManager.GetString("ColExpiryDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OHS Checklist.
+        /// </summary>
+        public static string ColOHS {
+            get {
+                return ResourceManager.GetString("ColOHS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Telework.
+        /// </summary>
+        public static string ColTelework {
+            get {
+                return ResourceManager.GetString("ColTelework", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WorkType.
+        /// </summary>
+        public static string ColWorkType {
+            get {
+                return ResourceManager.GetString("ColWorkType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Comments.
         /// </summary>
         public static string Comment {
             get {
@@ -439,7 +556,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The appropriate &lt;a class=&quot;accessible-link&quot; href=&quot;https://mytc-montc.tc.gc.ca/rdims.php?id=14435629&quot; target=&quot;_blank&quot;&gt;delegated manager&lt;/a&gt; is aware of and will consider authorizing the change to the GEO code..
+        ///   Looks up a localized string similar to The appropriate &lt;a class=&quot;accessible-link&quot; href=&quot;https://hrdt.tc.gc.ca/?levelIds=&amp;areaIds=&amp;selectedAuthorityId=&amp;nonEx=true&amp;ex=true&amp;GoCTemplateCulture=en-CA&quot; target=&quot;_blank&quot;&gt;delegated manager&lt;/a&gt; is aware of and will consider authorizing the change to the GEO code..
         /// </summary>
         public static string ConsiderItem5 {
             get {
@@ -592,6 +709,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;strong&gt;Note:&lt;/strong&gt; WAA authority levels are found in the Labour Relations section of the delegation instrument..
+        /// </summary>
+        public static string DelegateAuthNote {
+            get {
+                return ResourceManager.GetString("DelegateAuthNote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         public static string Delete {
@@ -732,15 +858,6 @@ namespace Resources {
         public static string EmergencyMgtHeader {
             get {
                 return ResourceManager.GetString("EmergencyMgtHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Branch.
-        /// </summary>
-        public static string EmpBranch {
-            get {
-                return ResourceManager.GetString("EmpBranch", resourceCulture);
             }
         }
         
@@ -952,7 +1069,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your position &lt;strong&gt;&lt;i&gt;GEO location&lt;/i&gt;&lt;/strong&gt; and TC Designated Worksite are in different regions. Please verify the accuracy of the inputted information..
+        ///   Looks up a localized string similar to Your position &lt;u&gt;GEO location&lt;/u&gt; and TC Designated Worksite are in different regions. Please verify the accuracy of the inputted information..
         /// </summary>
         public static string GeoLocationInfo {
             get {
@@ -1186,6 +1303,159 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Agreement Details.
+        /// </summary>
+        public static string LblAgreementDetails {
+            get {
+                return ResourceManager.GetString("LblAgreementDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Approve documentation &lt;span style=&quot;color:#DB2828&quot;&gt;&lt;strong&gt;*&lt;/strong&gt; &lt;/span&gt;(required for telework 20+ days per month).
+        /// </summary>
+        public static string LblApproveDoc {
+            get {
+                return ResourceManager.GetString("LblApproveDoc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Comments:.
+        /// </summary>
+        public static string LblComments {
+            get {
+                return ResourceManager.GetString("LblComments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm your approver.
+        /// </summary>
+        public static string LblConfirmManager {
+            get {
+                return ResourceManager.GetString("LblConfirmManager", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit My Agreement.
+        /// </summary>
+        public static string LblEditMyAgreement {
+            get {
+                return ResourceManager.GetString("LblEditMyAgreement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Employee:.
+        /// </summary>
+        public static string LblEmployee {
+            get {
+                return ResourceManager.GetString("LblEmployee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to My Agreement.
+        /// </summary>
+        public static string LblMyAgreements {
+            get {
+                return ResourceManager.GetString("LblMyAgreements", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to My Team&apos;s Agreements.
+        /// </summary>
+        public static string LblMyTeamAgreements {
+            get {
+                return ResourceManager.GetString("LblMyTeamAgreements", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recommended to.
+        /// </summary>
+        public static string LblRecommendedTo {
+            get {
+                return ResourceManager.GetString("LblRecommendedTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Review your Work Arrangement Agreement.
+        /// </summary>
+        public static string LblReviewMyAgreements {
+            get {
+                return ResourceManager.GetString("LblReviewMyAgreements", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to : Review your team&apos;s Work Arrangement Agreement.
+        /// </summary>
+        public static string LblReviewMyTeamAgreements {
+            get {
+                return ResourceManager.GetString("LblReviewMyTeamAgreements", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a new recommender.
+        /// </summary>
+        public static string LblSelectRecommender {
+            get {
+                return ResourceManager.GetString("LblSelectRecommender", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a file to upload -- Max size: 10Mb, allowed type: PDF..
+        /// </summary>
+        public static string LblUploadFile {
+            get {
+                return ResourceManager.GetString("LblUploadFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload files.
+        /// </summary>
+        public static string LblUploadFileTitle {
+            get {
+                return ResourceManager.GetString("LblUploadFileTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Returned to employee to update/renew.
+        /// </summary>
+        public static string LegendClock {
+            get {
+                return ResourceManager.GetString("LegendClock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Renewed (click to see renew details).
+        /// </summary>
+        public static string LegendPlus {
+            get {
+                return ResourceManager.GetString("LegendPlus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove employee’s name from my team list.
+        /// </summary>
+        public static string LegendRecycle {
+            get {
+                return ResourceManager.GetString("LegendRecycle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Located in.
         /// </summary>
         public static string LocatedIn {
@@ -1200,6 +1470,24 @@ namespace Resources {
         public static string LoggedInAs {
             get {
                 return ResourceManager.GetString("LoggedInAs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage admin.
+        /// </summary>
+        public static string ManageAdmin {
+            get {
+                return ResourceManager.GetString("ManageAdmin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage admin users.
+        /// </summary>
+        public static string ManageAdminUsers {
+            get {
+                return ResourceManager.GetString("ManageAdminUsers", resourceCulture);
             }
         }
         
@@ -1231,7 +1519,25 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An Email has been sent to the employee and the manager..
+        ///   Looks up a localized string similar to By approving this request, I confirm that it has been reviewed by the Full-time Remote review committee..
+        /// </summary>
+        public static string ManagerAttestFTR {
+            get {
+                return ResourceManager.GetString("ManagerAttestFTR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage TMX members.
+        /// </summary>
+        public static string ManageTMX {
+            get {
+                return ResourceManager.GetString("ManageTMX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An e-mail has been sent to the recipient..
         /// </summary>
         public static string Message_EmailSent {
             get {
@@ -1285,6 +1591,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to update the user..
+        /// </summary>
+        public static string Message_UpdateUserFail {
+            get {
+                return ResourceManager.GetString("Message_UpdateUserFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User was successfully updated..
+        /// </summary>
+        public static string Message_UpdateUserSuccess {
+            get {
+                return ResourceManager.GetString("Message_UpdateUserSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Manager comments.
         /// </summary>
         public static string MgrComments {
@@ -1308,6 +1632,168 @@ namespace Resources {
         public static string Monday {
             get {
                 return ResourceManager.GetString("Monday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is a gap between the start date of your proposed agreement and the end date of your active agreement. Please verify the accuracy of the inputted information..
+        /// </summary>
+        public static string MsgDateGap {
+            get {
+                return ResourceManager.GetString("MsgDateGap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The start date selected for your proposed agreement overlaps with the end date of your active agreement. The application will automatically overwrite the end date of your active agreement accordingly..
+        /// </summary>
+        public static string MsgDateOverlap {
+            get {
+                return ResourceManager.GetString("MsgDateOverlap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove this employee from your team?.
+        /// </summary>
+        public static string MsgDelEmployee {
+            get {
+                return ResourceManager.GetString("MsgDelEmployee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Any submitted, approved or recommended agreement will be returned to the employee..
+        /// </summary>
+        public static string MsgDelEmployeeInfo {
+            get {
+                return ResourceManager.GetString("MsgDelEmployeeInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This is a Full-time Remote agreement. Only TMX members can approve..
+        /// </summary>
+        public static string MsgFTR {
+            get {
+                return ResourceManager.GetString("MsgFTR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no agreements in progress..
+        /// </summary>
+        public static string MsgNoActiveAgreements {
+            get {
+                return ResourceManager.GetString("MsgNoActiveAgreements", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no recommended agreements..
+        /// </summary>
+        public static string MsgNoRecommAgreements {
+            get {
+                return ResourceManager.GetString("MsgNoRecommAgreements", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is no record of a Work Arrangement Agreement. Click on the &quot;Create&quot; button below to get started..
+        /// </summary>
+        public static string MsgNoWAAFound {
+            get {
+                return ResourceManager.GetString("MsgNoWAAFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Employee has been notified to renew their agreement..
+        /// </summary>
+        public static string MsgRenewNotified {
+            get {
+                return ResourceManager.GetString("MsgRenewNotified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your agreement needs to be renewed..
+        /// </summary>
+        public static string MsgRenewRequired {
+            get {
+                return ResourceManager.GetString("MsgRenewRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Employee has been notified to update their agreement..
+        /// </summary>
+        public static string MsgReturnNotified {
+            get {
+                return ResourceManager.GetString("MsgReturnNotified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select your manager to continue..
+        /// </summary>
+        public static string MsgSetupRecommder {
+            get {
+                return ResourceManager.GetString("MsgSetupRecommder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File size exceeds the limit..
+        /// </summary>
+        public static string MsgUploadErrFileSize {
+            get {
+                return ResourceManager.GetString("MsgUploadErrFileSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only PDF files are accepted..
+        /// </summary>
+        public static string MsgUploadErrFileType {
+            get {
+                return ResourceManager.GetString("MsgUploadErrFileType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error to upload the file, please try again..
+        /// </summary>
+        public static string MsgUploadErrSave {
+            get {
+                return ResourceManager.GetString("MsgUploadErrSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uploading....
+        /// </summary>
+        public static string MsgUploading {
+            get {
+                return ResourceManager.GetString("MsgUploading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View supporting documentation.
+        /// </summary>
+        public static string MsgViewApproveDoc {
+            get {
+                return ResourceManager.GetString("MsgViewApproveDoc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your agreement has been returned to you to update..
+        /// </summary>
+        public static string MsgWAAReturned {
+            get {
+                return ResourceManager.GetString("MsgWAAReturned", resourceCulture);
             }
         }
         
@@ -1402,6 +1888,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Review your team’s Work Arrangement Agreements by clicking on the link in the &quot;Version&quot; column..
+        /// </summary>
+        public static string NoteActiveAgreements {
+            get {
+                return ResourceManager.GetString("NoteActiveAgreements", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Review your team’s Work Arrangement Agreements by clicking on their names..
+        /// </summary>
+        public static string NoteAgreements {
+            get {
+                return ResourceManager.GetString("NoteAgreements", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not started.
         /// </summary>
         public static string NotStarted {
@@ -1484,11 +1988,38 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ON-SITE WORK.
+        /// </summary>
+        public static string OnSiteWork {
+            get {
+                return ResourceManager.GetString("OnSiteWork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On-site includes performing work at a TC designated worksite, conducting inspections, or participating in stakeholder activities off-site..
+        /// </summary>
+        public static string OnSiteWorkDesc {
+            get {
+                return ResourceManager.GetString("OnSiteWorkDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open to update.
         /// </summary>
         public static string OpenToUpdate {
             get {
                 return ResourceManager.GetString("OpenToUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you are employed on a part-time basis, indicate only the actual workdays where you will be teleworking. E.g., an employee working on a part-time three days a week schedule, teleworking all three days, would equate to a 10-14 days range..
+        /// </summary>
+        public static string PartTimeScheduleDesc {
+            get {
+                return ResourceManager.GetString("PartTimeScheduleDesc", resourceCulture);
             }
         }
         
@@ -1646,6 +2177,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remove.
+        /// </summary>
+        public static string Remove {
+            get {
+                return ResourceManager.GetString("Remove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reopened.
         /// </summary>
         public static string Reopened {
@@ -1764,7 +2304,25 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Note: Work Arrangement Agreements may only be approved by the &lt;a class=&quot;accessible-link&quot; href=&quot;https://mytc-montc.tc.gc.ca/rdims.php?id=14435629&quot; target=&quot;_blank&quot;&gt;delegated manager&lt;/a&gt;..
+        ///   Looks up a localized string similar to to have it returned to you.
+        /// </summary>
+        public static string RequestReviewedByEmail {
+            get {
+                return ResourceManager.GetString("RequestReviewedByEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you have submitted your Work Arrangement Agreement to the wrong supervisor by mistake, please send an e-mail to.
+        /// </summary>
+        public static string RequestReviewedByInfo {
+            get {
+                return ResourceManager.GetString("RequestReviewedByInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Note: Work Arrangement Agreements may only be approved by the &lt;a class=&quot;accessible-link&quot; href=&quot;https://hrdt.tc.gc.ca/?levelIds=&amp;areaIds=&amp;selectedAuthorityId=&amp;nonEx=true&amp;ex=true&amp;GoCTemplateCulture=en-CA&quot; target=&quot;_blank&quot;&gt;delegated manager&lt;/a&gt;..
         /// </summary>
         public static string RequestsOnlyForMgrs {
             get {
@@ -1773,11 +2331,20 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Return to.
+        ///   Looks up a localized string similar to Return to:.
         /// </summary>
         public static string ReturnTo {
             get {
                 return ResourceManager.GetString("ReturnTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Return to recommender.
+        /// </summary>
+        public static string ReturnToRecomm {
+            get {
+                return ResourceManager.GetString("ReturnToRecomm", resourceCulture);
             }
         }
         
@@ -1863,7 +2430,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;strong&gt;20 (and over) days&lt;/strong&gt; (exceptional basis only, senior management approval required).
+        ///   Looks up a localized string similar to &lt;strong&gt;20 (and over) days&lt;/strong&gt; (exceptional basis only, &lt;u&gt;TMX member&lt;/u&gt; approval is required).
         /// </summary>
         public static string ScheduleOption5 {
             get {
@@ -2025,6 +2592,33 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Renewed.
+        /// </summary>
+        public static string StatusRenewed {
+            get {
+                return ResourceManager.GetString("StatusRenewed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update/Renewal Required.
+        /// </summary>
+        public static string StatusRenewRequired {
+            get {
+                return ResourceManager.GetString("StatusRenewRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Returned for Updating.
+        /// </summary>
+        public static string StatusReturned {
+            get {
+                return ResourceManager.GetString("StatusReturned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Step 1.
         /// </summary>
         public static string Step2 {
@@ -2070,7 +2664,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Supervisor reviews details of request and recommends,approves or denies as appropriate..
+        ///   Looks up a localized string similar to Supervisor reviews details of request and recommends, approves or denies as appropriate..
         /// </summary>
         public static string Step3Desc {
             get {
@@ -2115,7 +2709,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reviews request for Approval.
+        ///   Looks up a localized string similar to Reviews request for approval.
         /// </summary>
         public static string Step4Title {
             get {
@@ -2174,6 +2768,51 @@ namespace Resources {
         public static string SupervisorNameHelp {
             get {
                 return ResourceManager.GetString("SupervisorNameHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Active Agreement.
+        /// </summary>
+        public static string TabActiveAgreement {
+            get {
+                return ResourceManager.GetString("TabActiveAgreement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Agreements in Effect.
+        /// </summary>
+        public static string TabActiveAgreements {
+            get {
+                return ResourceManager.GetString("TabActiveAgreements", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Agreements to Action.
+        /// </summary>
+        public static string TabProgressAgreements {
+            get {
+                return ResourceManager.GetString("TabProgressAgreements", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recommended Agreements.
+        /// </summary>
+        public static string TabRecommendedAgreements {
+            get {
+                return ResourceManager.GetString("TabRecommendedAgreements", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Proposed Agreement.
+        /// </summary>
+        public static string TabRenewAgreement {
+            get {
+                return ResourceManager.GetString("TabRenewAgreement", resourceCulture);
             }
         }
         
@@ -2430,7 +3069,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Assuming the costs of maintaining my personal telework workspace, such as insurance, heat, hydro, basic internet and telephone, etc., unless otherwise covered under a Government of Canada policy instrument..
+        ///   Looks up a localized string similar to Assuming the costs of maintaining my personal telework workspace, such as insurance, heat, hydro, reliable high-speed internet and telephone, etc., unless otherwise covered under a Government of Canada policy instrument..
         /// </summary>
         public static string TermGeneralConditionList1 {
             get {
@@ -2683,6 +3322,34 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You have not yet created a LEX account to access Transport Canada&apos;s &lt;a class=&quot;accessible-link&quot;   href=&quot;https://tcapps.tc.gc.ca/Corp-Serv-Gen/3/ess_lse/Portal/Home?culture=en-ca&quot; target=&quot;_blank&quot;&gt;HR Self-Service portal&lt;/a&gt;..
+        /// </summary>
+        public static string TIPSInfoNotFound {
+            get {
+                return ResourceManager.GetString("TIPSInfoNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;h5&gt;TMX Members:&lt;/h5&gt;
+        ///&lt;ul&gt;
+        ///    &lt;li&gt;Deputy Minister&lt;/li&gt;
+        ///    &lt;li&gt;Associate Deputy Minister&lt;/li&gt;
+        ///    &lt;li&gt;Assistant Deputy Minister, Corporate Services and Chief Financial Officer&lt;/li&gt;
+        ///    &lt;li&gt;Assistant Deputy Minister, Policy&lt;/li&gt;
+        ///    &lt;li&gt;Assistant Deputy Minister, Programs&lt;/li&gt;
+        ///    &lt;li&gt;Assistant Deputy Minister, Safety and Security&lt;/li&gt;
+        ///    &lt;li&gt;Associate Assistant Deputy Minister, Safety and Security&lt;/li&gt;
+        ///    &lt;li&gt;Assistant Deputy Minister, Transformation&lt;/li&gt;
+        ///    &lt;li&gt;Regional Director General, Atla [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string TooltipsTMX {
+            get {
+                return ResourceManager.GetString("TooltipsTMX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tuesday.
         /// </summary>
         public static string Tuesday {
@@ -2838,11 +3505,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User ID.
+        /// </summary>
+        public static string UserId {
+            get {
+                return ResourceManager.GetString("UserId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Username.
         /// </summary>
         public static string Username {
             get {
                 return ResourceManager.GetString("Username", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current.
+        /// </summary>
+        public static string VerCurrent {
+            get {
+                return ResourceManager.GetString("VerCurrent", resourceCulture);
             }
         }
         
@@ -2861,6 +3546,15 @@ namespace Resources {
         public static string VerifyYourInfoTxt {
             get {
                 return ResourceManager.GetString("VerifyYourInfoTxt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Renew.
+        /// </summary>
+        public static string VerRenew {
+            get {
+                return ResourceManager.GetString("VerRenew", resourceCulture);
             }
         }
         
@@ -2960,6 +3654,24 @@ namespace Resources {
         public static string WorkingAloneDescRdims {
             get {
                 return ResourceManager.GetString("WorkingAloneDescRdims", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If the employee is in a working alone situation, a manager-employee discussion is required..
+        /// </summary>
+        public static string WorkingAloneReminderDesc {
+            get {
+                return ResourceManager.GetString("WorkingAloneReminderDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Working Alone Reminder.
+        /// </summary>
+        public static string WorkingAloneReminderTitle {
+            get {
+                return ResourceManager.GetString("WorkingAloneReminderTitle", resourceCulture);
             }
         }
         

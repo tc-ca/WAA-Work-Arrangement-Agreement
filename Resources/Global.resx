@@ -133,7 +133,7 @@
     <value>Address</value>
   </data>
   <data name="ADInfoNotFound" xml:space="preserve">
-    <value>Your active directory information was not found. Please contact Service Desk to ensure your information is properly filled in prior to requesting a work agreement.</value>
+    <value>Your Transport Canada account information was not found. If you are a new employee to TC, your account may take 24 hours be active in HR Self-Service Portal. Please try logging back in tomorrow.</value>
   </data>
   <data name="Administration" xml:space="preserve">
     <value>Administration</value>
@@ -413,7 +413,7 @@
     <value>When completed, this work arrangement  will be sent to</value>
   </data>
   <data name="RequestsOnlyForMgrs" xml:space="preserve">
-    <value>Note: Work Arrangement Agreements may only be approved by the &lt;a class="accessible-link" href="https://mytc-montc.tc.gc.ca/rdims.php?id=14435629" target="_blank"&gt;delegated manager&lt;/a&gt;.</value>
+    <value>Note: Work Arrangement Agreements may only be approved by the &lt;a class="accessible-link" href="https://hrdt.tc.gc.ca/?levelIds=&amp;areaIds=&amp;selectedAuthorityId=&amp;nonEx=true&amp;ex=true&amp;GoCTemplateCulture=en-CA" target="_blank"&gt;delegated manager&lt;/a&gt;.</value>
   </data>
   <data name="TermGeneralConditionDesc" xml:space="preserve">
     <value>I agree to abide by and respect the &lt;a class="accessible-link" href="https://mytc-montc.tc.gc.ca/rdims.php?id=17475936" target="_blank"&gt;TC Guidelines for Telework Arrangements&lt;/a&gt; and more specifically</value>
@@ -466,7 +466,7 @@ Please go back to the main area or close the application.</value>
     <value>If incorrect, click &lt;a class="accessible-link" href="http://tcd/directory-annuaire/p002-eng.aspx" target="_blank"&gt;here&lt;/a&gt; for instructions on how to update your personal information.</value>
   </data>
   <data name="TermGeneralConditionList1" xml:space="preserve">
-    <value>Assuming the costs of maintaining my personal telework workspace, such as insurance, heat, hydro, basic internet and telephone, etc., unless otherwise covered under a Government of Canada policy instrument.</value>
+    <value>Assuming the costs of maintaining my personal telework workspace, such as insurance, heat, hydro, reliable high-speed internet and telephone, etc., unless otherwise covered under a Government of Canada policy instrument.</value>
   </data>
   <data name="TermGeneralConditionList2" xml:space="preserve">
     <value>Safeguarding Transport Canada’s equipment and assuming responsibility for the safe transportation of government equipment, and any associated costs incurred between worksites</value>
@@ -586,7 +586,7 @@ Please go back to the main area or close the application.</value>
     <value>Creates and submits request</value>
   </data>
   <data name="Step3Desc" xml:space="preserve">
-    <value>Supervisor reviews details of request and recommends,approves or denies as appropriate.</value>
+    <value>Supervisor reviews details of request and recommends, approves or denies as appropriate.</value>
   </data>
   <data name="Step3Title" xml:space="preserve">
     <value>Reviews request for recommendation</value>
@@ -595,13 +595,10 @@ Please go back to the main area or close the application.</value>
     <value>Delegated manager reviews details of request and approves or denies as appropriate.</value>
   </data>
   <data name="Step4Title" xml:space="preserve">
-    <value>Reviews request for Approval</value>
+    <value>Reviews request for approval</value>
   </data>
   <data name="EmployeeInfo" xml:space="preserve">
     <value>Employee Information</value>
-  </data>
-  <data name="EmpBranch" xml:space="preserve">
-    <value>Branch</value>
   </data>
   <data name="EmpClassification" xml:space="preserve">
     <value>Group and level</value>
@@ -891,7 +888,7 @@ Save to PDF or select your local printer.</value>
     <value>Submit</value>
   </data>
   <data name="Comment" xml:space="preserve">
-    <value>Comment</value>
+    <value>Comments</value>
   </data>
   <data name="PrivacyStatement" xml:space="preserve">
     <value>Privacy Notice Statement – For use by Transport Canada – Work Arrangement Agreement</value>
@@ -903,13 +900,13 @@ Save to PDF or select your local printer.</value>
     <value>To continue, please update your emergency contact information, find out how by clicking &lt;a class="accessible-link" href="https://mytc-montc.tc.gc.ca/rdims.php?id=18262184" target="_blank"&gt;here&lt;/a&gt;. Once the information is entered, you must either close or refresh your browser to continue.</value>
   </data>
   <data name="GeoLocationInfo" xml:space="preserve">
-    <value>Your position &lt;strong&gt;&lt;i&gt;GEO location&lt;/i&gt;&lt;/strong&gt; and TC Designated Worksite are in different regions. Please verify the accuracy of the inputted information.</value>
+    <value>Your position &lt;u&gt;GEO location&lt;/u&gt; and TC Designated Worksite are in different regions. Please verify the accuracy of the inputted information.</value>
   </data>
   <data name="AdHocInfo" xml:space="preserve">
     <value>Check here if requesting to telework on an ad hoc basis.</value>
   </data>
   <data name="ConsiderItem5" xml:space="preserve">
-    <value>The appropriate &lt;a class="accessible-link" href="https://mytc-montc.tc.gc.ca/rdims.php?id=14435629" target="_blank"&gt;delegated manager&lt;/a&gt; is aware of and will consider authorizing the change to the GEO code.</value>
+    <value>The appropriate &lt;a class="accessible-link" href="https://hrdt.tc.gc.ca/?levelIds=&amp;areaIds=&amp;selectedAuthorityId=&amp;nonEx=true&amp;ex=true&amp;GoCTemplateCulture=en-CA" target="_blank"&gt;delegated manager&lt;/a&gt; is aware of and will consider authorizing the change to the GEO code.</value>
   </data>
   <data name="ConsiderItem6" xml:space="preserve">
     <value>Arrangements have been made with the manager responsible for the TC worksite and with Facilities to provide a workspace for this employee.</value>
@@ -948,7 +945,7 @@ Save to PDF or select your local printer.</value>
     <value>Sunday</value>
   </data>
   <data name="CheckDelegatedAuthority" xml:space="preserve">
-    <value>Not sure if you have the delegated authority? Click &lt;a class="accessible-link" href="https://mytc-montc.tc.gc.ca/rdims.php?id=14435629" target="_blank"&gt;here&lt;/a&gt;.</value>
+    <value>Click &lt;a class="accessible-link" href="https://hrdt.tc.gc.ca/?levelIds=&amp;areaIds=&amp;selectedAuthorityId=&amp;nonEx=true&amp;ex=true&amp;GoCTemplateCulture=en-CA" target="_blank"&gt;here&lt;/a&gt; to verify your level. </value>
   </data>
   <data name="CreateInstruction" xml:space="preserve">
     <value>Instructions for creating your &lt;a class="accessible-link" href="https://mytc-montc.tc.gc.ca/rdims.php?id=18247946" target="_blank"&gt;Work Arrangement Agreement (WAA)&lt;/a&gt;.</value>
@@ -981,7 +978,7 @@ Save to PDF or select your local printer.</value>
     <value>Manage Agreements</value>
   </data>
   <data name="Message_EmailSent" xml:space="preserve">
-    <value>An Email has been sent to the employee and the manager.</value>
+    <value>An e-mail has been sent to the recipient.</value>
   </data>
   <data name="Message_NotFound" xml:space="preserve">
     <value>Agreement not found.</value>
@@ -1002,7 +999,7 @@ Save to PDF or select your local printer.</value>
     <value>Recommender</value>
   </data>
   <data name="ReturnTo" xml:space="preserve">
-    <value>Return to</value>
+    <value>Return to:</value>
   </data>
   <data name="Select" xml:space="preserve">
     <value>Select</value>
@@ -1077,7 +1074,7 @@ Save to PDF or select your local printer.</value>
     <value>15 to 19 days</value>
   </data>
   <data name="ScheduleOption5" xml:space="preserve">
-    <value>&lt;strong&gt;20 (and over) days&lt;/strong&gt; (exceptional basis only, senior management approval required)</value>
+    <value>&lt;strong&gt;20 (and over) days&lt;/strong&gt; (exceptional basis only, &lt;u&gt;TMX member&lt;/u&gt; approval is required)</value>
   </data>
   <data name="ScheduleCommentTitle" xml:space="preserve">
     <value>Describe in detail your proposed work arrangement schedule (Maximum 750 characters)</value>
@@ -1105,5 +1102,260 @@ Save to PDF or select your local printer.</value>
   </data>
   <data name="OpenToUpdate" xml:space="preserve">
     <value>Open to update</value>
+  </data>
+  <data name="AddUser" xml:space="preserve">
+    <value>Add user</value>
+  </data>
+  <data name="AdminUserList" xml:space="preserve">
+    <value>Admin user list</value>
+  </data>
+  <data name="ManageAdmin" xml:space="preserve">
+    <value>Manage admin</value>
+  </data>
+  <data name="ManageAdminUsers" xml:space="preserve">
+    <value>Manage admin users</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="UserId" xml:space="preserve">
+    <value>User ID</value>
+  </data>
+  <data name="RequestReviewedByEmail" xml:space="preserve">
+    <value>to have it returned to you</value>
+  </data>
+  <data name="RequestReviewedByInfo" xml:space="preserve">
+    <value>If you have submitted your Work Arrangement Agreement to the wrong supervisor by mistake, please send an e-mail to</value>
+  </data>
+  <data name="TooltipsTMX" xml:space="preserve">
+    <value>&lt;h5&gt;TMX Members:&lt;/h5&gt;
+&lt;ul&gt;
+    &lt;li&gt;Deputy Minister&lt;/li&gt;
+    &lt;li&gt;Associate Deputy Minister&lt;/li&gt;
+    &lt;li&gt;Assistant Deputy Minister, Corporate Services and Chief Financial Officer&lt;/li&gt;
+    &lt;li&gt;Assistant Deputy Minister, Policy&lt;/li&gt;
+    &lt;li&gt;Assistant Deputy Minister, Programs&lt;/li&gt;
+    &lt;li&gt;Assistant Deputy Minister, Safety and Security&lt;/li&gt;
+    &lt;li&gt;Associate Assistant Deputy Minister, Safety and Security&lt;/li&gt;
+    &lt;li&gt;Assistant Deputy Minister, Transformation&lt;/li&gt;
+    &lt;li&gt;Regional Director General, Atlantic Region&lt;/li&gt;
+    &lt;li&gt;Regional Director General, Quebec Region&lt;/li&gt;
+    &lt;li&gt;Regional Director General, Ontario Region&lt;/li&gt;
+    &lt;li&gt;Regional Director General, Prairie and Northern Region&lt;/li&gt;
+    &lt;li&gt;Assistant Deputy Minister, Pacific Region&lt;/li&gt;
+    &lt;li&gt;Senior General Counsel and Executive Director, Legal Services&lt;/li&gt;
+    &lt;li&gt;Director General, Communications and Marketing&lt;/li&gt;
+    &lt;li&gt;Chief Audit and Evaluation Executive&lt;/li&gt;
+&lt;/ul&gt;</value>
+  </data>
+  <data name="OnSiteWork" xml:space="preserve">
+    <value>ON-SITE WORK</value>
+  </data>
+  <data name="OnSiteWorkDesc" xml:space="preserve">
+    <value>On-site includes performing work at a TC designated worksite, conducting inspections, or participating in stakeholder activities off-site.</value>
+  </data>
+  <data name="WorkingAloneReminderDesc" xml:space="preserve">
+    <value>If the employee is in a working alone situation, a manager-employee discussion is required.</value>
+  </data>
+  <data name="WorkingAloneReminderTitle" xml:space="preserve">
+    <value>Working Alone Reminder</value>
+  </data>
+  <data name="DelegateAuthNote" xml:space="preserve">
+    <value>&lt;strong&gt;Note:&lt;/strong&gt; WAA authority levels are found in the Labour Relations section of the delegation instrument.</value>
+  </data>
+  <data name="ColEffectiveDate" xml:space="preserve">
+    <value>Effective Date</value>
+  </data>
+  <data name="ColExpiryDate" xml:space="preserve">
+    <value>Expiry Date</value>
+  </data>
+  <data name="ColOHS" xml:space="preserve">
+    <value>OHS Checklist</value>
+  </data>
+  <data name="ColTelework" xml:space="preserve">
+    <value>Telework</value>
+  </data>
+  <data name="ColWorkType" xml:space="preserve">
+    <value>WorkType</value>
+  </data>
+  <data name="LegendClock" xml:space="preserve">
+    <value>Returned to employee to update/renew</value>
+  </data>
+  <data name="LegendPlus" xml:space="preserve">
+    <value>Renewed (click to see renew details)</value>
+  </data>
+  <data name="LegendRecycle" xml:space="preserve">
+    <value>Remove employee’s name from my team list</value>
+  </data>
+  <data name="NoteActiveAgreements" xml:space="preserve">
+    <value>Review your team’s Work Arrangement Agreements by clicking on the link in the "Version" column.</value>
+  </data>
+  <data name="NoteAgreements" xml:space="preserve">
+    <value>Review your team’s Work Arrangement Agreements by clicking on their names.</value>
+  </data>
+  <data name="StatusRenewed" xml:space="preserve">
+    <value>Renewed</value>
+  </data>
+  <data name="StatusRenewRequired" xml:space="preserve">
+    <value>Update/Renewal Required</value>
+  </data>
+  <data name="StatusReturned" xml:space="preserve">
+    <value>Returned for Updating</value>
+  </data>
+  <data name="TabActiveAgreements" xml:space="preserve">
+    <value>Agreements in Effect</value>
+  </data>
+  <data name="TabProgressAgreements" xml:space="preserve">
+    <value>Agreements to Action</value>
+  </data>
+  <data name="TabRecommendedAgreements" xml:space="preserve">
+    <value>Recommended Agreements</value>
+  </data>
+  <data name="VerCurrent" xml:space="preserve">
+    <value>Current</value>
+  </data>
+  <data name="VerRenew" xml:space="preserve">
+    <value>Renew</value>
+  </data>
+  <data name="TIPSInfoNotFound" xml:space="preserve">
+    <value>You have not yet created a LEX account to access Transport Canada's &lt;a class="accessible-link"   href="https://tcapps.tc.gc.ca/Corp-Serv-Gen/3/ess_lse/Portal/Home?culture=en-ca" target="_blank"&gt;HR Self-Service portal&lt;/a&gt;.</value>
+  </data>
+  <data name="BtnChangeFile" xml:space="preserve">
+    <value>Change File</value>
+  </data>
+  <data name="BtnChangeRecommender" xml:space="preserve">
+    <value>Change Recommender</value>
+  </data>
+  <data name="BtnReturnForRenew" xml:space="preserve">
+    <value>Return to Employee</value>
+  </data>
+  <data name="BtnUpload" xml:space="preserve">
+    <value>Upload</value>
+  </data>
+  <data name="LblAgreementDetails" xml:space="preserve">
+    <value>Agreement Details</value>
+  </data>
+  <data name="LblApproveDoc" xml:space="preserve">
+    <value>Approve documentation &lt;span style="color:#DB2828"&gt;&lt;strong&gt;*&lt;/strong&gt; &lt;/span&gt;(required for telework 20+ days per month)</value>
+  </data>
+  <data name="LblComments" xml:space="preserve">
+    <value>Comments:</value>
+  </data>
+  <data name="LblConfirmManager" xml:space="preserve">
+    <value>Confirm your approver</value>
+  </data>
+  <data name="LblEditMyAgreement" xml:space="preserve">
+    <value>Edit My Agreement</value>
+  </data>
+  <data name="LblEmployee" xml:space="preserve">
+    <value>Employee:</value>
+  </data>
+  <data name="LblMyAgreements" xml:space="preserve">
+    <value>My Agreement</value>
+  </data>
+  <data name="LblMyTeamAgreements" xml:space="preserve">
+    <value>My Team's Agreements</value>
+  </data>
+  <data name="LblRecommendedTo" xml:space="preserve">
+    <value>Recommended to</value>
+  </data>
+  <data name="LblReviewMyAgreements" xml:space="preserve">
+    <value>Review your Work Arrangement Agreement</value>
+  </data>
+  <data name="LblReviewMyTeamAgreements" xml:space="preserve">
+    <value>: Review your team's Work Arrangement Agreement</value>
+  </data>
+  <data name="LblSelectRecommender" xml:space="preserve">
+    <value>Select a new recommender</value>
+  </data>
+  <data name="LblUploadFile" xml:space="preserve">
+    <value>Select a file to upload -- Max size: 10Mb, allowed type: PDF.</value>
+  </data>
+  <data name="LblUploadFileTitle" xml:space="preserve">
+    <value>Upload files</value>
+  </data>
+  <data name="MsgDelEmployee" xml:space="preserve">
+    <value>Remove this employee from your team?</value>
+  </data>
+  <data name="MsgDelEmployeeInfo" xml:space="preserve">
+    <value>Any submitted, approved or recommended agreement will be returned to the employee.</value>
+  </data>
+  <data name="MsgNoActiveAgreements" xml:space="preserve">
+    <value>There are no agreements in progress.</value>
+  </data>
+  <data name="MsgNoRecommAgreements" xml:space="preserve">
+    <value>There are no recommended agreements.</value>
+  </data>
+  <data name="MsgNoWAAFound" xml:space="preserve">
+    <value>There is no record of a Work Arrangement Agreement. Click on the "Create" button below to get started.</value>
+  </data>
+  <data name="MsgRenewNotified" xml:space="preserve">
+    <value>Employee has been notified to renew their agreement.</value>
+  </data>
+  <data name="MsgRenewRequired" xml:space="preserve">
+    <value>Your agreement needs to be renewed.</value>
+  </data>
+  <data name="MsgSetupRecommder" xml:space="preserve">
+    <value>Please select your manager to continue.</value>
+  </data>
+  <data name="MsgUploadErrFileSize" xml:space="preserve">
+    <value>File size exceeds the limit.</value>
+  </data>
+  <data name="MsgUploadErrFileType" xml:space="preserve">
+    <value>Only PDF files are accepted.</value>
+  </data>
+  <data name="MsgUploadErrSave" xml:space="preserve">
+    <value>Error to upload the file, please try again.</value>
+  </data>
+  <data name="MsgUploading" xml:space="preserve">
+    <value>Uploading...</value>
+  </data>
+  <data name="MsgViewApproveDoc" xml:space="preserve">
+    <value>View supporting documentation</value>
+  </data>
+  <data name="MsgWAAReturned" xml:space="preserve">
+    <value>Your agreement has been returned to you to update.</value>
+  </data>
+  <data name="TabActiveAgreement" xml:space="preserve">
+    <value>Active Agreement</value>
+  </data>
+  <data name="TabRenewAgreement" xml:space="preserve">
+    <value>Proposed Agreement</value>
+  </data>
+  <data name="MsgDateGap" xml:space="preserve">
+    <value>There is a gap between the start date of your proposed agreement and the end date of your active agreement. Please verify the accuracy of the inputted information.</value>
+  </data>
+  <data name="MsgDateOverlap" xml:space="preserve">
+    <value>The start date selected for your proposed agreement overlaps with the end date of your active agreement. The application will automatically overwrite the end date of your active agreement accordingly.</value>
+  </data>
+  <data name="MsgReturnNotified" xml:space="preserve">
+    <value>Employee has been notified to update their agreement.</value>
+  </data>
+  <data name="PartTimeScheduleDesc" xml:space="preserve">
+    <value>If you are employed on a part-time basis, indicate only the actual workdays where you will be teleworking. E.g., an employee working on a part-time three days a week schedule, teleworking all three days, would equate to a 10-14 days range.</value>
+  </data>
+  <data name="AdminTMX" xml:space="preserve">
+    <value>TMX members</value>
+  </data>
+  <data name="BtnChangeManager" xml:space="preserve">
+    <value>Change Manager</value>
+  </data>
+  <data name="ManagerAttestFTR" xml:space="preserve">
+    <value>By approving this request, I confirm that it has been reviewed by the Full-time Remote review committee.</value>
+  </data>
+  <data name="ManageTMX" xml:space="preserve">
+    <value>Manage TMX members</value>
+  </data>
+  <data name="MsgFTR" xml:space="preserve">
+    <value>This is a Full-time Remote agreement. Only TMX members can approve.</value>
+  </data>
+  <data name="ReturnToRecomm" xml:space="preserve">
+    <value>Return to recommender</value>
+  </data>
+  <data name="Message_UpdateUserFail" xml:space="preserve">
+    <value>Failed to update the user.</value>
+  </data>
+  <data name="Message_UpdateUserSuccess" xml:space="preserve">
+    <value>User was successfully updated.</value>
   </data>
 </root>

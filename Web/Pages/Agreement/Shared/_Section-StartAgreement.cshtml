@@ -1,6 +1,6 @@
-﻿@model Web.Pages.HomeModel
+﻿@model Web.Pages.EditModel
 @{ 
-    var status = Model.MyAgreement.AgreementId == 0 ? Model.ShowStartAgreement == true ? "0" : "1" : Model.MyAgreement.StatusCode;
+    var status = Model.MyAgreement.StatusCode;
 }
 <div id="content-1" data-testid="section-startagreement" class="ui transition">
     <div class="ui attached segment">
@@ -38,8 +38,8 @@
                 </div>
             </div>
         </div>
-        <div class="ui center aligned basic segment @(Model.ShowStartAgreement ? "" : "hidden")">
+        @*<div class="ui center aligned basic segment hidden @(Model.ShowStartAgreement ? "" : "hidden")">
             <button class="ui primary load-indicator button" type="button" id="start" data-testid="agreement-start-btn">@Global.ContinueBtn</button>
-        </div>
+        </div>*@
     </div>
 </div>

@@ -12,7 +12,8 @@
     else if (Model.Status == "1")
     {
         color = "yellow";
-        status = Model.IsMgr ? Global.Reopened: Global.InProgress;
+        //status = Model.IsMgr ? Global.Reopened: Global.InProgress;
+        status = Model.IsMgr ? Global.StatusReturned : Global.InProgress;
         icon = "pencil";
     }
     else if (Model.Status == "2")
@@ -33,11 +34,23 @@
         status = Global.Approved;
         icon = "check circle";
     }
-    else
+    else if (Model.Status == "5")
     {
-        color = "orange";
+        color = "red";
         status = Global.Denied;
-        icon = "ban";
+        icon = "tasks circle";
+    }
+    else if (Model.Status == "6")
+    {
+        color = "blue";
+        status = Global.StatusRenewRequired;
+        icon = "edit";
+    }
+    else if (Model.Status == "7")
+    {
+        color = "green";
+        status = Global.StatusRenewed;
+        icon = "check circle";
     }
 }
 

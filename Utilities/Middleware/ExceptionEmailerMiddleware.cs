@@ -15,7 +15,12 @@ namespace Utilities.Middleware
     {
         private readonly SecureSmtpClient _emailClient;
         private readonly IConfiguration _config;
+
+        private string sender;
+        private string recipient_to;
+        public string BaseURL;
         public bool isTesting;
+
         public ExceptionEmailerMiddleware(IConfiguration config)
         {
             _config = config;
@@ -25,7 +30,7 @@ namespace Utilities.Middleware
         public async Task Invoke(HttpContext context)
         {
             Exception e = context.Features.Get<IExceptionHandlerFeature>()?.Error;
-            isTesting = _config["EmailSettings:RedirectEmails"].ToString() == "True";
+            isTesting = (_config["EmailSettings:RedirectEmails"].ToString() == "True");
 
             if (e != null)
             {
@@ -61,30 +66,21 @@ namespace Utilities.Middleware
                         + "<li>Inner stack trace: " + (e.InnerException.StackTrace != null ? e.InnerException.StackTrace.Replace("\r\n", "<br />") : "") + "</li></ul>";
                 }
 
-                //include all form values in email contents (if applicable)
-                if (context.Request.HasFormContentType && context.Request.Form.Any())
-                {
-                    formDtls += SubHeading("Form Information") + "<table border=\"1\">";
-                    foreach (var form in context.Request.Form)
-                    {
-                        formDtls += $"<tr><td>{form.Key}</td><td>{form.Value}</td></tr>";
-                    }
-                    formDtls += "</table>";
-                }
-
                 message += innerExceptionDtls + formDtls;
                 builder.HtmlBody = message;
-               
+
 
                 var errorEmail = new MimeMessage()
                 {
                     Subject = isTesting ? "Testing--" + $"Error / Erreur: Work Arrangement Agreement" : $"Error / Erreur: Work Arrangement Agreement",
                     Body = builder.ToMessageBody()
                 };
-                string sender = _config["EmailSettings:ErrorTo"].ToString();
-                string receiver = _config["EmailSettings:ErrorTo"].ToString();
+
+                sender =  _config["EmailSettings:ErrorTo"].ToString();
+                recipient_to =  _config["EmailSettings:ErrorTo"].ToString();
+
                 errorEmail.From.Add(new MailboxAddress(sender, sender));
-                errorEmail.To.Add(new MailboxAddress(receiver, receiver));
+                errorEmail.To.Add(new MailboxAddress(recipient_to, recipient_to));
                 _emailClient.SendMimeMessage(errorEmail);
 
                 string culture = context.Request.Path.Value.Split('/')[1];

@@ -1,10 +1,26 @@
-﻿$(document).ready(function () {
+﻿var ccc;
+$(document).ready(function () {
+    var lang = $('#lang').val();
     var hostUrl = window.location.href;
     var baseurl = hostUrl.substr(0, hostUrl.indexOf('/en/') + hostUrl.indexOf('/fr/') + 2);
     var protocal = hostUrl.substr(0, hostUrl.indexOf(':'));
-
+    $('.ui.checkbox').checkbox();
+    $(".approveAttest").checkbox({
+        onChecked: function () {
+            if ($('.attest').not(':checked').length == 0) {
+                $('#sumbit-btn').removeAttr('disabled');
+            }            
+        },
+        onUnchecked: function () {
+            $('#sumbit-btn').attr('disabled', 'disabled');
+        }
+    });
     $('#virtual-work-div').popup(); //tooltips
+    $('#tmx').popup();
     //inputmask("A9A 9A9");
+    //$('#switch-language-btn').addClass('disabled');
+
+    //
     $(".postcode").keyup(function () {
         var pc = $(this).val();
         if (pc.length == 4) {
@@ -30,106 +46,200 @@
         }
         $(this).val(pc);
     });
-    var lang = $('#lang').val();
-    if (lang == "en") {
-        $('#rangestart').calendar({
-            type: 'date',
-            initialDate: null,
-            onChange: function (date, text) {
-                var edate = datePlusOneYear(date);
-                $('#rangeend').calendar('clear');
-                $('#rangeend').calendar('set maxDate', edate);
-                $('#rangeend').calendar('set minDate', date);
-            },
-            formatter: {
-                date: function (date, settings) {
-                    return dateFormat(date);
-                }
-            },
-            text: {
-                days: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
-                months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                today: 'Today',
-                now: 'Now',
-                am: 'AM',
-                pm: 'PM'
+    //$('#FileUploads').modal({
+    //    allowMultiple: true,
+    //    closable: false,
+    //    onApprove: function () {
+    //        var file = $('#upFile')[0].files[0];
+    //        if (file == null) return false;
+    //        if (file.size / 1024000 > 10) {
+
+    //            $("#msg-err-size").show();
+    //            return false;
+    //        }
+    //        if (file.type !== 'application/pdf') {
+    //            $("#msg-err-file-type").show();
+    //            return false;
+    //        }
+    //        var id = $('#EmpAgreement_AgreementId').val();
+    //        var files = new FormData();
+    //        files.append('id', id);
+    //        files.append('upFile', file);        
+    //        $('.ui.inverted.dimmer').addClass('active');
+    //        $.ajax({
+    //            url: baseurl + 'api/agreement/upload/',
+    //            type: 'POST',
+    //            enctype: 'multipart/form-data',
+    //            data: files,
+    //            processData: false,  
+    //            contentType: false,
+    //            timeout: 60000,
+    //            success: function (response) {                   
+    //                var id = response;
+    //                if (id > 0) {
+    //                    $('#approvalDoc').empty();
+    //                    var link = ("<a download='").concat(file.name, "' href='/en/agreement/viewdoc?id=", id, "' ><span>", file.name, "</span></a>");                       
+    //                    $('#approvalDoc').append(link);
+    //                    return true;
+    //                }
+    //                else {
+    //                    $("#msg-err-upload").show();
+    //                    $('.ui.inverted.dimmer').removeClass('active');
+    //                    return false;
+    //                }
+    //            },
+    //            error: function (jqXHR, textStatus, errorThrown) {
+    //                //alert(jqXHR.error);
+    //                $("#msg-err-upload").show();
+    //                $('.ui.inverted.dimmer').removeClass('active');
+    //                return false;
+    //            }
+    //        });
+    //        return false;
+    //    }
+    //}).modal('attach events', '#test-btn', 'show');
+    //$('#test-btn').click(function () {
+    //    $(".message").hide();
+    //    $('#upFile').val(null);
+    //    $("#fileName").val('');
+    //});
+    //$("#upFile").on('change', function () {
+    //    $(".message").hide();
+    //    $("#fileName").val(this.files[0].name);
+    //});
+
+    //$('#approvalDoc').one('DOMSubtreeModified', function () {
+    //    $('.ui.inverted.dimmer').removeClass('active');
+    //    $('.ui.negative.button').click();
+    //    var btn_txt = lang == "en" ? "Change File" : "Changer de Fichier";
+    //    $('#test-btn').text(btn_txt);
+    //    if ($("#approveAttest").checkbox('is checked')) {
+    //        $('#sumbit-btn').removeAttr('disabled');
+    //    }
+    //});
+
+
+    $('#manager-modal').modal({
+        allowMultiple: true,
+        closable: false,
+        onApprove: function () {
+            var recId = $("#hfUserId").val();
+            var action = $('#decisions').dropdown('get value');
+            $('#save-manager-btn').addClass('disabled');
+            if (action === "r") {
+                $.ajax({
+                    url: baseurl + 'api/agreement/updaterecommender',
+                    data: { "recommenderid": recId },
+                    type: "POST",
+                    dataType: "json",
+                    success: function (response) {
+                        if (response == true) {
+                            $('#recomm-name').text($("#txtUserName").val());
+                            $('#EmpAgreement_RecommenderId').val(recId);
+                            $('#RecommenderFullName').val($("#txtUserName").val());
+
+                            return true;
+                        } else {
+                            //error
+                            alert("Error to update the recommender. Please try again.");
+                            return false;
+                        }
+                        // $("#txtUserName").val('');
+                        // $("#hfUserId").val('');
+                    },
+                    error: function (response) {
+                        //alert(response.responseText);
+                        return false;
+                    },
+                    failure: function (response) {
+                        //alert(response.responseText);
+                        return false;
+                    }
+                })
+            } else {                
+                $('#return-to-name').text($("#txtUserName").val());
+                $('#EmpAgreement_RecommenderId').val(recId);
+                $('#RecommenderFullName').val($("#txtUserName").val());
             }
-        });
-        var iniStartDate = $('#rangestart').calendar('get date');
-        if (!iniStartDate.getMonth) {
-            iniStartDate = new Date();
+            //return false;
         }
-        $('#rangeend').calendar({
-            type: 'date',
-            minDate: iniStartDate,
-            maxDate: datePlusOneYear(iniStartDate),
-            formatter: {
-                date: function (date, settings) {
-                    return dateFormat(date);
-                }
-            },
-            text: {
-                days: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
-                months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                today: 'Today',
-                now: 'Now',
-                am: 'AM',
-                pm: 'PM'
-            }
-        });
-    } else {
-        $('#rangestart').calendar({
-            type: 'date',
-            initialDate: null,
-            onChange: function (date, text) {
-                var edate = datePlusOneYear(date);
-                $('#rangeend').calendar('clear');
-                $('#rangeend').calendar('set maxDate', edate);
-                $('#rangeend').calendar('set minDate', date);
-            },
-            formatter: {
-                date: function (date, settings) {
-                    return dateFormat(date);
-                }
-            },
-            text: {
-                days: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
-                months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Decembre'],
-                monthsShort: ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec'],
-                today: 'Aujourd\'hui',
-                now: 'Maintenant',
-                am: 'AM',
-                pm: 'PM'
-            }
-        });
-        var iniStartDate = $('#rangestart').calendar('get date');
-        if (!iniStartDate.getMonth) {
-            iniStartDate = new Date();
+    }).modal('attach events', '.select-recommender-btn', 'show');
+    var calText = {
+        days: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+        months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        today: 'Today',
+        now: 'Now',
+        am: 'AM',
+        pm: 'PM'
+    };
+    if (lang == "fr") {
+        calText = {
+            days: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+            months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Decembre'],
+            monthsShort: ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec'],
+            today: 'Aujourd\'hui',
+            now: 'Maintenant',
+            am: 'AM',
+            pm: 'PM'
         }
-        $('#rangeend').calendar({
-            type: 'date',
-            minDate: iniStartDate,
-            maxDate: datePlusOneYear(iniStartDate),
-            formatter: {
-                date: function (date, settings) {
-                    return dateFormat(date);
-                }
-            },
-            text: {
-                days: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
-                months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Decembre'],
-                monthsShort: ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec'],
-                today: 'Aujourd\'hui',
-                now: 'Maintenant',
-                am: 'AM',
-                pm: 'PM'
-            }
-        });
     }
 
-    //load a record intialize
+    $('#rangestart').calendar({
+        type: 'date',
+        initialDate: null,
+        onChange: function (date, text) {
+            var edate = datePlusOneYear(date);
+            $('#rangeend').calendar('clear');
+            $('#rangeend').calendar('set maxDate', edate);
+            $('#rangeend').calendar('set minDate', date);
+        },
+        formatter: {
+            date: function (date, settings) {
+                return dateFormat(date);
+            }
+        },
+        text: calText
+    });
+    var iniStartDate = $('#rangestart').calendar('get date');
+    if (!iniStartDate.getMonth) {
+        iniStartDate = new Date();
+    }
+    $('#rangeend').calendar({
+        type: 'date',
+        minDate: iniStartDate,
+        maxDate: datePlusOneYear(iniStartDate),
+        onSelect: function (cEnd, mode) {
+            if (mode == 'day') {
+                $('#msgDateOverlap').hide();
+                $('#msgDateGap').hide();
+                var sdate = $('#active-start-date').val();
+                var edate = $('#active-end-date').val();
+                if (sdate != null && edate != null) {
+                    var cStart = $('#rangestart').calendar('get date').toLocaleDateString();                    
+                    var aEnd = new Date(edate);
+                    aEnd.setDate(aEnd.getDate() + 1);
+                    var edate2 = aEnd.toLocaleDateString();
+                    var newStart = Date.parse(new Date(cStart));
+                    var oldEnd = Date.parse(edate2);
+                    if (newStart < oldEnd) {
+                        $('#msgDateOverlap').show();
+                    } else if (newStart > oldEnd) {
+                        $('#msgDateGap').show();
+                    }
+                }
+            }
+        },
+        formatter: {
+            date: function (date, settings) {
+                return dateFormat(date);
+            }
+        },
+        text: calText
+    });
+
+
+    //load a record intialize MyAgreement.HybridOptionId
     var workType_val = $("input[name='MyAgreement.WorkTypeId']:checked").val();
     $("#telework-addr-section").hide();
     $("#telework-addr-ctrl").hide();
@@ -139,6 +249,7 @@
         if ($("#adhoc-cbx").checkbox('is checked')) {
             $("#telework-addr-section").show();
         }
+        $(".hybrid_option").checkbox('uncheck');
     } else if (workType_val == "2") {
         $("#schedules-div").show();
         $("#fixed-schedules-div").show();
@@ -177,6 +288,7 @@
             $("#schedules-div").hide();
             $("#telework-addr-ctrl").show();
             clearTeleworkAddr();
+            $(".hybrid_option").checkbox('uncheck');
 
         } else if (radioValue == '2') {
 
@@ -243,7 +355,7 @@
     // Update manager
     $('#supervisor-update-btn').click(function () {
         $('#save-manager-btn').addClass('disabled');
-        $('#manager-modal')
+        $('#approver-modal')
             .modal('setting', 'transition', 'scale')
             .modal('show');
     });
@@ -251,7 +363,7 @@
     $('#manager-close-btn').on('click', function () {
         $("#manager-form").form('reset');
         $("#txtUserName").val("");
-        $('#manager-modal').modal('hide');
+        $('#approver-modal').modal('hide');
         setTimeout(function () { $("#manager-form > .error-summary-display").hide() }, 1000);
     });
 
@@ -313,7 +425,7 @@
             return false;
         },
         minLength: 4,
-        appendTo: "#addr_section"
+        appendTo: "#address_section"
     });
     function populateAddr(addrId, el) {
         $.ajax({
@@ -339,14 +451,13 @@
     // INITIALIZE FORM
     var currentStep = 1;
 
-    if (!$('#start').is(':visible')) {
+    if ($('#ShowStartAgreement').val() ==='False') {
         switchNext();
         currentStep += 1;
     }
 
     $('#previous').hide();
     $('#SelectedNeighborhoods').dropdown({ selectOnKeydown: false });
-    $('.ui.checkbox').checkbox();
 
 
     // CONTINUE BUTTON
@@ -359,6 +470,15 @@
             if (currentStep === 1) {
                 switchNext();
                 currentStep += 1;
+            } else if (currentStep == 2) {
+                $("#approverConfirm").modal({
+                    allowMultiple: true,
+                    closable: false,
+                    onApprove: function () {
+                        switchNext();
+                        currentStep += 1;
+                    }
+                }).modal('show');
             } else if (currentStep === 3) {
                 var inComplete = false;
                 var inComplete2 = false;
@@ -455,6 +575,7 @@
         // If returning to step 1, remove Previous button and re-enable the language button.
         if (step - 1 === 1) {
             $('#previous').hide();
+            $('#next').removeClass('disabled');
             $('#switch-language-btn').removeClass('disabled');
         }
 
@@ -471,22 +592,22 @@
 
     // START AGREEMENT BUTTON
 
-    $('#start').on('click', function () {
-        $.ajax({
-            url: baseurl + 'api/agreement/create',
-            type: 'POST',
-            success: function () {
-                window.location.reload();
-            }
-        });
-    });
+    //$('#start').on('click', function () {
+    //    $.ajax({
+    //        url: baseurl + 'api/agreement/create',
+    //        type: 'POST',
+    //        success: function () {
+    //            window.location.reload();
+    //        }
+    //    });
+    //});
 
 
     // WORK TYPE RADIO BUTTONS
 
-    $('input[name="MyAgreement.WorkTypeID"]').on('change', function () {
-        // setupFormBasedOnWorkType(); //No more need this page
-    });
+    //$('input[name="MyAgreement.WorkTypeID"]').on('change', function () {
+    //    // setupFormBasedOnWorkType(); //No more need this page
+    //});
 
 
     // DISALLOW ENTER KEYPRESS ON INPUTS TO SUBMIT FORM
@@ -542,10 +663,17 @@
                 document.querySelector('#my-agreement-form').scrollIntoView();
                 $('#my-agreement-form').focus();
                 $('#previous').show();
+                if (step == 1) {
+                    if ($('#disableNextBtn').val() === 'True') {
+                        $('#next').addClass('disabled');
 
+                    } else {
+                        $('#next').removeClass('disabled');
+                    }
+                } 
                 /* If moving into the Work Type Details screen, change the Continue button text to Submit and 
                  * initialize address list display. */
-                if (step == 5) {
+                else if (step == 5) {
                     document.getElementById('next-btn-txt').textContent = lang == 'en' ? 'Submit' : 'Soumettre';
                 }
             }

@@ -1,7 +1,13 @@
-﻿<div class="ui segments">
-    <div class="ui segment">
-        <h3 class="warning-text">@Global.UnableToStartRequest</h3>
-
-        <p data-testid="missing-ad-msg">@Global.ADInfoNotFound</p>
+﻿@model Web.Pages.HomeModel
+<div class="ui visible negative  message">
+    <div class="header">
+        <i class="inverted circular info red icon"></i> @Global.UnableToStartRequest
     </div>
+    @if (Model.TcDirInfo == null)
+    {
+        <p>@Global.ADInfoNotFound</p>
+    }else{
+        <p>@Html.Raw(string.Format(Global.TIPSInfoNotFound, @Model.AdminEmail, @Model.AdminEmail))</p>
+    }
+
 </div>

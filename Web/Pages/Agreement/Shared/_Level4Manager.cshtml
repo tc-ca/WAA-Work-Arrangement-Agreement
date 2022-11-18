@@ -1,21 +1,26 @@
-﻿<h4 class="ui header">@Global.AreYouMgr</h4>
-<p>@Html.Raw(Global.CheckDelegatedAuthority)</p>
-<div class="two fields level4-manager-radio-btns">
-    
-    <div class="field">
-        <div class="ui radio checkbox">
-            <input type="radio" name="managerGroup" id="managerGroup_1" value="1" data-testid="level4mgr-yes-radio" />
-            <label for="managerGroup_1">
-                <span class="a11y-label">@Global.Yes</span>
-            </label>
+﻿<h4 class="ui header">
+    @Global.AreYouMgr
+    <div class="sub header">@Html.Raw(Global.CheckDelegatedAuthority)</div>
+</h4>
+<p>@Html.Raw(Global.DelegateAuthNote)</p>
+<div class="ui form">
+    <div class="inline fields">
+        <label> </label>
+        <div class="field">
+            <div class="ui radio checkbox">
+                <input type="radio" name="managerGroup" id="managerGroup_1" value="1" data-testid="level4mgr-yes-radio" />
+                <label for="managerGroup_1">
+                    <span class="a11y-label">@Global.Yes</span>
+                </label>
+            </div>
         </div>
-    </div>
-    <div class="field">
-        <div class="ui radio checkbox">
-            <input type="radio" name="managerGroup" id="managerGroup_2" value="0" data-testid="level4mgr-no-radio" />
-            <label for="managerGroup_2">
-                <span class="a11y-label">@Global.No</span>
-            </label>
+        <div class="field">
+            <div class="ui radio checkbox">
+                <input type="radio" name="managerGroup" id="managerGroup_2" value="0" data-testid="level4mgr-no-radio" />
+                <label for="managerGroup_2">
+                    <span class="a11y-label">@Global.No</span>
+                </label>
+            </div>
         </div>
     </div>
 </div>

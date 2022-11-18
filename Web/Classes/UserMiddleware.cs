@@ -73,21 +73,25 @@ namespace Web.Classes
                         TesterEmail = testerUser?.Email;
                         identityName = impersonateName;
                     }
-                    var user = await empSvc.GetTcUserInfo(identityName);
-                    if (string.IsNullOrEmpty(TesterEmail)) TesterEmail = user?.Email;
-                    context.Session.SetString("Username", user?.UserId ?? "");
-                    context.Session.SetString("FirstName", user?.GivenName ?? "");
-                    context.Session.SetString("DisplayName", user?.GivenName + " " + user?.SurName ?? "");
-                    context.Session.SetString("Email", TesterEmail ?? "");
-                    context.Session.SetString("PhoneNumber", user?.Telephone ?? "");
-                    context.Session.SetInt32("ShowStartAgreement", 1);
+                    context.Session.SetString("Username", identityName);
+                    var user = await empSvc.GetTcDirUserInfo(identityName);
+                    if (user != null)
+                    {
+                        if (string.IsNullOrEmpty(TesterEmail)) TesterEmail = user.Email;
+                        context.Session.SetString("FirstName", user.GivenName ?? "");
+                        context.Session.SetString("DisplayName", user.GivenName + " " + user.SurName);
+                        context.Session.SetString("Email", TesterEmail ?? "");
+                        context.Session.SetString("PhoneNumber", user.Telephone ?? "");
+                        context.Session.SetInt32("ShowStartAgreement", 1);
 
-                    bool isAdmi = await empSvc.IsSuperUser(user?.UserId);
-                    context.Session.SetString("IsAdmin", isAdmi ? "Y" : "N");
-                    int myEmps = (await empSvc.GetMyEmployees(user?.UserId)).Count;
-                    context.Session.SetInt32("DirectReportsCount", myEmps);
+                        bool isAdmi = await empSvc.IsSuperUser(user.UserId);
+                        context.Session.SetString("IsAdmin", isAdmi ? "Y" : "N");
+                        int myEmps = (await empSvc.GetMyEmployees(user.UserId)).Count;
+                        context.Session.SetInt32("DirectReportsCount", myEmps);
+                    }                   
                 }
             }
+
             await _next(context);
         }
     }

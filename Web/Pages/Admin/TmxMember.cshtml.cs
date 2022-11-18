@@ -12,14 +12,14 @@ using Web.Pages.Components.Toast;
 
 namespace Web.Pages.Admin
 {
-    public class SuperuserModel : PageModel
+    public class TmxMember : PageModel
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private ISession Session => _httpContextAccessor.HttpContext.Session;
         private readonly EmployeeService _employeeService;
-        public List<SuperUser> SuperUsers;
+        public List<TMXMember> TmxUsers;
 
-        public SuperuserModel(IHttpContextAccessor httpContextAccessor, EmployeeService employeeService, AgreementService agreementService, Notifications notifications)
+        public TmxMember(IHttpContextAccessor httpContextAccessor, EmployeeService employeeService, AgreementService agreementService, Notifications notifications)
         {
             _httpContextAccessor = httpContextAccessor;
             _employeeService = employeeService;
@@ -29,11 +29,11 @@ namespace Web.Pages.Admin
         {
             //var username = Session.GetString("Username");
 
-            SuperUsers = await _employeeService.GetAllSuperUser();
+            TmxUsers = await _employeeService.GetAllTmxUser();
         }
-        public IActionResult OnPostAddUser(string UserName)
+        public IActionResult OnPostAddTMXUser(string UserName)
         {
-            if (_employeeService.AddSuperUser(UserName, Session.GetString("Username")))
+            if (_employeeService.AddTMXUser(UserName, Session.GetString("Username")))
             {
                 this.CreateToast(ToastStyles.Success, ToastMsgs.Success, ToastMsgs.UserAddSuccess);
             }
@@ -45,7 +45,7 @@ namespace Web.Pages.Admin
         }
         public IActionResult OnPostDeleteUser(string id)
         {
-            if (_employeeService.DeleteSuperUser(id))
+            if (_employeeService.DeleteTMXUser(id))
             {
                 this.CreateToast(ToastStyles.Success, ToastMsgs.Success, ToastMsgs.UserDelSuccess);
             }

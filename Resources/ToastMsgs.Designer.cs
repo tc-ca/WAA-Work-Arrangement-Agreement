@@ -61,7 +61,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The agreement was successfully reopened..
+        ///   Looks up a localized string similar to The agreement was successfully returned..
         /// </summary>
         public static string AgreementReopened {
             get {
@@ -106,6 +106,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Manager update failed.
+        /// </summary>
+        public static string ManagerUpdateFailed {
+            get {
+                return ResourceManager.GetString("ManagerUpdateFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manager updated successfully.
+        /// </summary>
+        public static string ManagerUpdateSuccess {
+            get {
+                return ResourceManager.GetString("ManagerUpdateSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You are not authorized to edit this agreement..
         /// </summary>
         public static string NotAuthorized {
@@ -138,6 +156,42 @@ namespace Resources {
         public static string Success {
             get {
                 return ResourceManager.GetString("Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User add failed.
+        /// </summary>
+        public static string UserAddFailed {
+            get {
+                return ResourceManager.GetString("UserAddFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User added successfully.
+        /// </summary>
+        public static string UserAddSuccess {
+            get {
+                return ResourceManager.GetString("UserAddSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User remove failed.
+        /// </summary>
+        public static string UserDelFailed {
+            get {
+                return ResourceManager.GetString("UserDelFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User removed successfully.
+        /// </summary>
+        public static string UserDelSuccess {
+            get {
+                return ResourceManager.GetString("UserDelSuccess", resourceCulture);
             }
         }
         

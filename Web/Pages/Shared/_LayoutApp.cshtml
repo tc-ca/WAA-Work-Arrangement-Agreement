@@ -5,7 +5,7 @@
 
 @section Menu {
     <div class="app-menu" data-testid="app-menu">
-        <div class="ui tiny borderless stackable menu">
+        <div class="ui borderless stackable menu">
             <div id="topNavBar" class="ui container grid">
                 <div class="header item">
                     <div class="ui header transition">
@@ -34,7 +34,7 @@
                         @if (employeesCount != null && employeesCount.Value > 0)
                         {
                             <li>
-                                <a asp-route="@routeMap.GetRouteName("/MyEmployees")" data-testid="navMyEmployees" class="item @(routeMap.IsCurrentPage(Context, "/MyEmployees", "/Agreement/Edit") ? "active" : "")">
+                                <a asp-route="@routeMap.GetRouteName("/MyEmployees")" data-testid="navMyEmployees" class="item @(routeMap.IsCurrentPage(Context, "/MyEmployees", "/Agreement/Approve") ? "active" : "")">
                                     <i class="large users icon"></i> @Global.MyTeamAgreement
                                 </a>
                             </li>

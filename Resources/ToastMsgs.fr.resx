@@ -139,12 +139,30 @@
     <value>Avertissement</value>
   </data>
   <data name="AgreementReopened" xml:space="preserve">
-    <value>L’entente a été rouverte avec succès.</value>
+    <value>L’entente a été retournée avec succès</value>
   </data>
   <data name="InvalidID" xml:space="preserve">
     <value>ID transmis non valide. Veuillez essayer de nouveau.</value>
   </data>
   <data name="NotAuthorized" xml:space="preserve">
     <value>Vous n’avez pas l’autorisation de modifier cette entente.</value>
+  </data>
+  <data name="ManagerUpdateFailed" xml:space="preserve">
+    <value>Échec de la mise à jour du gestionnaire</value>
+  </data>
+  <data name="ManagerUpdateSuccess" xml:space="preserve">
+    <value>Gestionnaire mis à jour avec succès</value>
+  </data>
+  <data name="UserAddFailed" xml:space="preserve">
+    <value>L'ajout de l'utilisateur a échoué</value>
+  </data>
+  <data name="UserAddSuccess" xml:space="preserve">
+    <value>Utilisateur ajouté avec succès</value>
+  </data>
+  <data name="UserDelFailed" xml:space="preserve">
+    <value>Échec de la suppression de l'utilisateur</value>
+  </data>
+  <data name="UserDelSuccess" xml:space="preserve">
+    <value>Utilisateur supprimé avec succès</value>
   </data>
 </root>

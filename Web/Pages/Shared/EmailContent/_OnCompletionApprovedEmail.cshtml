@@ -10,10 +10,12 @@
         font-weight: bold;
         text-decoration: underline;
     }
+
     table, th, td {
         border: 1px solid black;
         border-collapse: collapse;
     }
+
     th, td {
         padding: 5px;
     }
@@ -24,6 +26,10 @@
 <p>
     Your Work Arrangement Agreement (WAA) has been reviewed and approved by @Model.ManagerFullName.
 </p>
+@if (!string.IsNullOrWhiteSpace(@Model.Agreement.Comments))
+{
+    <p>Comments: @Model.Agreement.Comments</p>
+}
 <p>
     “Click” on the link below to access it. To log into this app, you must be connected to the VPN.
 </p>
@@ -91,8 +97,10 @@
 </p>
 
 <p>
-    <strong>You must advise your immediate supervisor if the conditions outlined in the above approved arrangements change either temporarily or permanently. You may be required to submit a revised WAA.
-    To request changes to an approved WAA, contact your immediate supervisor</strong>.
+    <strong>
+        You must advise your immediate supervisor if the conditions outlined in the above approved arrangements change either temporarily or permanently. You may be required to submit a revised WAA.
+        To request changes to an approved WAA, contact your immediate supervisor
+    </strong>.
     In all cases, prompt and open communication between you and your supervisor is essential.
 </p>
 
@@ -103,6 +111,10 @@
 <p>
     Votre entente d’aménagement de travail (EAT) a été revue et approuvée par @Model.ManagerFullName.
 </p>
+@if (!string.IsNullOrWhiteSpace(@Model.Agreement.Comments))
+{
+<p>Commentaires : @Model.Agreement.Comments</p>
+}
 <p>
     «Cliquez» sur le lien ci-dessous pour y accéder. Pour vous brancher à cette application, vous devez être connecté au RPV.
 </p>
